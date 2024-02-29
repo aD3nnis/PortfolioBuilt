@@ -1,0 +1,101 @@
+CSS for the menu at the top of every screen
+:root{
+    --menu-padding-width: 40px;
+    --menu-padding-height: 10px;
+}
+
+nav img {
+    z-index: 9;
+    position: absolute;
+    top:-.5%;
+    right:1%;
+}
+
+nav li, nav ul {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+nav {
+    justify-content: center;
+    display: flex;
+}
+
+nav ul {
+    background-color: #090e13;
+    list-style: none;
+    flex-basis: 100%;
+    z-index: 9;
+}
+
+
+nav ul ul {
+    display: none;
+}
+
+nav ul li {
+    float: left;
+    position: relative;
+    background: none;
+}
+
+nav ul li a {
+    display: flex;
+    padding: var(--menu-padding-height) var(--menu-padding-width);
+    color: #ffc937;
+    text-decoration: none;
+}
+
+nav ul li:hover a {
+    color: #fff;
+}
+
+nav ul li:hover ul li a{
+    color: #ffc937;
+}
+
+nav ul li ul li:hover a {
+    color: #fff;
+}
+
+nav ul li:hover>ul {
+    display: block;
+}
+    
+nav ul ul li {
+    float: none;
+    position: relative;
+}
+
+nav ul ul {
+    background: #090e13;
+    border-radius: 0px;
+    position: absolute;
+}
+
+.form-container {
+    display: grid;
+    place-items: center;
+}
+
+.textbox{
+    width: 500px;
+    padding-bottom: 100px;
+}
+
+.email{
+    width: 500px;
+}
+
+.input-container{
+    display: grid;
+    place-items: center;
+    padding-right: 450px;
+}
