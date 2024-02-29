@@ -1,0 +1,84 @@
+.menuback{
+    /* background-image: linear-gradient(rgb(255, 255, 255), #C8E0FE); */
+    /* height: 95px;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    margin-top: 100px;
+    padding-bottom: 10px;
+    margin: 0;
+    z-index: -1;
+    right: 0;
+    background-color: pink; */
+}
+.menuwidth{
+    width: 100vw;
+}
+section{
+    background-color: #C8E0FE;
+    height: 100vh;
+    top: 0;
+    margin-top: 100px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -2;
+}
+.wix{
+    background-color: #0c2760;
+    max-width: 60%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    border-radius: 15px;
+}
+p{
+    color: #C8E0FE;
+    margin: 40px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.4rem;
+    position: relative;
+
+}
+button{
+    max-width: 30%;
+    background-color: #C8E0FE;
+    border-radius: 15px;
+    width: 200px;
+    height: 70px;
+    position: relative;
+    font-size: 30px;
+    border-color: #4c331f;
+    
+}
+button a {
+    text-decoration: none;
+    color: #0c2760;
+    font-family: 'Times New Roman', Times, serif;
+}
+button:hover{
+    background-color: #A5907E;
+}
+button:hover a{
+    color: #4c331f;
+}
+@media screen and (max-width: 768px) {
+    p {
+        font-size: 1.2rem; /* Adjust the font size as needed */
+    }
+    button {
+        font-size: 25px;
+    }
+}
+@media screen and (max-width: 568px) {
+    p {
+        font-size: 1rem; /* Adjust the font size as needed */
+    }
+    button {
+        font-size: 20px;
+    }
+}

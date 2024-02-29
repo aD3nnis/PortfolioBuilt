@@ -1,0 +1,166 @@
+.game{
+    width: 40%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+#dino_game{
+    width: 100vw;
+    height: 100vh;
+    top: 110px;
+    position: absolute;
+    z-index: -1;
+}
+h1{
+    text-align: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 100;
+    font-size: 48px; 
+    position: relative;
+    z-index: -1;
+}
+p{
+    text-align: center;
+}
+div#GameDesc {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    z-index: 100;
+}
+div#Background {
+    position: absolute;
+    width: 3000px;
+    height: 540px;
+    margin: auto;
+    background-image: url(../img/Background.png);
+    z-index: -3;
+}
+div#Midground {
+    position: absolute;
+    width: 3000px;
+    height: 540px;
+    margin: auto;
+    background-image: url(../img/hill_mid_ground.png);
+    z-index: -2;
+}
+div#Foreground {
+    position: absolute;
+    width: 3000px;
+    height: 540px;
+    margin: auto;
+    background-image: url(../img/grass\ walk-1.png.png);
+    z-index: -1;
+}
+.container4Dino{
+    width: 3000px;
+    height: 540px;
+    display: flex;
+    align-items: end;
+    
+}
+.containertrack{
+    width: 3000px;
+    height: 340px;
+    display: flex;
+    margin-left: 200px;
+}
+div#Dinosaur {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    /* top: 54%; */
+	/* left: 120px;
+    margin:auto; */
+    content: url(../img/dino\ walk.gif);
+    display: none;
+}
+div#DinosaurPic {
+    position: relative;
+    width: 175px;
+    height: 160px;
+    /* top: 420px; */
+    content: url(../img/dinoDNAPic.png);
+}
+div#Rock {
+    position: relative;
+    /* top: 535px; */
+    top: 100px;
+	left: 400px;
+    /* margin:auto; */
+    height: 60px;
+    width: 120px;
+    content: url(../img/rock2.png);
+}
+div#Bigrock {
+    position: relative;
+    top: 0px;
+    /* top: 425px; */
+	left: 1800px;
+    height: 170px;
+    width: 100px;
+    /* margin:auto; */
+    content: url(../img/Bigrock.png);
+}
+div#Gameover{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    font-size: 100px; 
+    color: #01091c;
+    display: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+div#play{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    top: 12%;
+    text-align: center;
+    align-items: center;
+}
+#buttPlay{
+    font-size: 50px;  
+    height: 80px;
+    width: 300px;
+    background-color: #01091c;
+    color: #ffc937;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border-color: #01091c;
+    border-radius: 15px;
+    position: relative;
+    z-index: 10;
+}
+#buttPlay:hover{
+    background-color: #0f2e76;
+    color: #ffd666;
+}
+#test{
+    margin-top: -17px;
+    font-size: 30px;
+    color: #1AE412;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+#test2{
+    margin-top: -17px;
+    font-size: 30px;
+    color: #1AE412;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#container4{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#test4{
+    margin-top: -17px;
+    font-size: 20px;
+
+    color: #ffc937;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
+}
