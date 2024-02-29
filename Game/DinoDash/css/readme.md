@@ -1,1 +1,0 @@
-This folder will contain CSS assets for the app.
