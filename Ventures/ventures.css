@@ -14,9 +14,9 @@
 .menuwidth{
     width: 100vw;
 }
-section{
+.section1{
     background-color: #C8E0FE;
-    height: 100vh;
+    height: 550px;
     top: 0;
     margin-top: 100px;
     position: absolute;
@@ -27,7 +27,7 @@ section{
 }
 .wix{
     background-color: #0c2760;
-    max-width: 60%;
+    width: 60%;
     height: 300px;
     display: flex;
     flex-direction: column;
@@ -58,6 +58,9 @@ button{
 button a {
     text-decoration: none;
     color: #0c2760;
+    padding: 10px 15px;
+    position: relative;
+    width: 100%;
     font-family: 'Times New Roman', Times, serif;
 }
 button:hover{
@@ -66,6 +69,25 @@ button:hover{
 button:hover a{
     color: #4c331f;
 }
+.section2{
+    background-color: #C8E0FE;
+    width: 100%;
+    height: 750px;
+    position: absolute;
+    display: flex;
+    top: 550px;
+    justify-content: center;
+}
+
+#biggerButton{
+    width: 200px;
+    max-width: 100%;
+}
+#tropicalA{
+    max-width: 100%;
+    text-wrap: nowrap;
+}
+
 @media screen and (max-width: 768px) {
     p {
         font-size: 1.2rem; /* Adjust the font size as needed */
