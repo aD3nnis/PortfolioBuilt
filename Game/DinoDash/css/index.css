@@ -121,6 +121,7 @@ div#play{
     top: 12%;
     text-align: center;
     align-items: center;
+    text-wrap: nowrap;
 }
 #buttPlay{
     font-size: 50px;  
