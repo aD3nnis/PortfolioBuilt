@@ -44,6 +44,7 @@
 
 #menuItems li:hover ul {
     display: flex;
+    position: relative;
 }
 
 #menuItems>li:hover {
@@ -57,7 +58,8 @@
 
 #menuItems li ul li:hover a {
     color: #C8E0FE;
-
+    text-align: left;
+    width: 100%;
 }
 
 #menuItems li ul {
@@ -74,11 +76,12 @@
     position: relative;
     display: flex;
     text-align: center;
-    padding: 10px 20px 10px 10px;
+    /* padding: 10px 20px 10px 10px; */
     font-size: 23px;
 }
 
-a {
+a {    
+    padding: 10px 20px 10px 10px;
     text-decoration: none;
     color: #0c2760;
 }
