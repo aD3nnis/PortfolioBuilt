@@ -52,13 +52,16 @@ button{
     height: 70px;
     position: relative;
     font-size: 30px;
+    display: flex;
     border-color: #4c331f;
+    justify-content: center;
+    align-items: center;
     
 }
 button a {
     text-decoration: none;
     color: #0c2760;
-    padding: 10px 15px;
+    padding: 10px 10px;
     position: relative;
     width: 100%;
     font-family: 'Times New Roman', Times, serif;

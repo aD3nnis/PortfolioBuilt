@@ -48,7 +48,6 @@
 }
 
 #menuItems>li:hover {
-    /* background-color: #C8E0FE; */
     background-image: linear-gradient(rgb(255, 255, 255), #ffffff);
 }
 
