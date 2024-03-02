@@ -166,3 +166,8 @@ div#play{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     
 }
+@media screen and (max-width: 568px) {
+    #buttPlay{
+        font-size: 40px;
+    }
+}
