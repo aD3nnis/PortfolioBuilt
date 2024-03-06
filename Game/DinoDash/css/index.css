@@ -110,7 +110,7 @@ div#Gameover{
     text-align: center;
     align-items: center;
     font-size: 100px; 
-    color: #01091c;
+    color: #093756;
     display: none;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -127,8 +127,8 @@ div#play{
     font-size: 50px;  
     height: 80px;
     width: 300px;
-    background-color: #01091c;
-    color: #ffc937;
+    background-color: #093756;
+    color: #C8E0FE;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     border-color: #01091c;
     border-radius: 15px;
@@ -138,18 +138,18 @@ div#play{
 }
 #buttPlay:hover{
     background-color: #0f2e76;
-    color: #ffd666;
+    color: #C8E0FE;
 }
 #test{
     margin-top: -17px;
     font-size: 30px;
-    color: #1AE412;
+    color: #b5957b;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 #test2{
     margin-top: -17px;
     font-size: 30px;
-    color: #1AE412;
+    color: #b5957b;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -161,7 +161,7 @@ div#play{
 #test4{
     margin-top: -17px;
     font-size: 20px;
-    color: #ffc937;
+    color: #C8E0FE;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     
 }
