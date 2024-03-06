@@ -10,7 +10,7 @@ h1{
 }
 h2{
     text-align: center; 
-    color: #A5907E;  
+    color: #C8E0FE;  
     font-size: 50px; 
     font-family:  Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
@@ -22,7 +22,10 @@ p{
     font-size: 30px;
     margin-left: 100px;
     margin-right: 100px;
-    color: #A5907E;
+    color: #778ca9;
+    background-color: #2e1806;
+    padding: 10px;
+    border-radius: 10px;
 }
 .menuback{
     background-image: linear-gradient(rgb(255, 255, 255), #C8E0FE);
@@ -34,7 +37,7 @@ p{
     z-index: -1;
 }
 .container{
-    background-color: #4c331f;
+    background-color: #093756;
     height: auto;
     width: 100%;
     position: absolute;

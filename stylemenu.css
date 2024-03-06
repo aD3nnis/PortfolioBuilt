@@ -52,7 +52,7 @@
 }
 
 #menuItems li ul li:hover {
-    background-color: #0c2760;
+    background-color: #093757;
 }
 
 #menuItems li ul li:hover a {
@@ -82,6 +82,6 @@
 a {    
     padding: 10px 20px 10px 10px;
     text-decoration: none;
-    color: #0c2760;
+    color: #093757;
 }
 
