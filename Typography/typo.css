@@ -4,8 +4,9 @@ img{
 }
 h1{
     text-align: center;
-    font-size: 70px;
+    font-size: 65px;
     color: #C8E0FE;
+    letter-spacing: 20px;
     font-family:  Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 h2{
