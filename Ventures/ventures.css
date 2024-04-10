@@ -100,39 +100,44 @@
  .sectitle2{
    color:#C8E0FE;
    white-space: nowrap;
-   font-size: 40px;
+   font-size: 2rem;
    position: relative;
    display: flex;
    height: 100%;
    margin-top: 300px;
    justify-content: center;
    width: 100%;
+   /* background-color: aqua; */
 
  }
  .descriptPar{
    color: #b5957b;
    /* margin: 10px 20px; */
-   padding-left: 45%;
-   width: 50%;
+   padding-left: 535px;
+   width: 100% - 535px;
    margin-bottom: 20px;
    text-align: center;
    font-size: 1.5rem;
    position: relative;
    max-height: 300px;
+   padding-right: 40px;
+   /* background-color: pink; */
  }
  .descriptParDiv{
    width: 100%;
    flex-direction: column;
    height: 50%;
+   /* 1130 */
    /* background-color: aqua; */
    display: flex;
    position: absolute;
+   /* background-color: greenyellow; */
  }
  p{
     color: #b5957b;
     /* margin: 10px 20px; */
-    padding-left: 40%;
-    width: 50%;
+    padding-left: 38%;
+    width: 60%;
     margin-bottom: 20px;
     text-align: center;
     font-size: 1.5rem;
@@ -187,7 +192,21 @@
     text-wrap: nowrap;
  }
  
- 
+ @media screen and (max-width: 1300px) {
+   p {
+       font-size: 1.2rem; /* Adjust the font size as needed */
+   }
+   }
+   @media screen and (max-width: 1150px) {
+      p {
+          font-size: 1rem; /* Adjust the font size as needed */
+      }
+      .descriptPar{
+      padding-left: 50%;
+      width: 50%;         
+      }
+
+   }
  @media screen and (max-width: 768px) {
     p {
         font-size: 1.2rem; /* Adjust the font size as needed */
