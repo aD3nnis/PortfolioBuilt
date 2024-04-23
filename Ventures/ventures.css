@@ -117,9 +117,10 @@
  }
  .sectitle2{
    color:#C8E0FE;
-   white-space: nowrap;
+   white-space: wrap;
    font-size: 2rem;
    position: relative;
+   text-align: center;
    display: flex;
    height: 100%;
    margin-top: 300px;
@@ -233,6 +234,9 @@
    }
    }
  @media screen and (max-width: 1050px) {
+   #webProcessText{
+      display: none;
+   }
    #processType{
 
       width: 70%;
@@ -245,6 +249,9 @@
       position: absolute;
       right: 0;
       /* max-height: 745px; */
+   }
+   #stylewPassion{
+      margin-left: 25%;
    }
    p{
       font-size: 1.3rem;
