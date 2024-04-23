@@ -27,6 +27,7 @@
     z-index: -2;
     flex-direction: column;
  }
+
  .theProcess{
     background-color: #093756;
     width: 90%;
@@ -36,13 +37,32 @@
     align-items: center;
     position: relative;
     margin-top: -50px;
+
  }
+ .theProcess2{
+   background-color: #093756;
+   width: 90%;
+   height: auto;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   position: relative;
+   margin-top: -50px;
+
+}
  .manos{
     position: relative;
     width: 50%;
     max-height: 800px;
     max-width: 535px;
     padding: 40px 0;
+ }
+ .manos2{
+   position: relative;
+   width: 50%;
+   max-height: 800px;
+   max-width: 535px;
+   padding: 40px 0;
  }
  #processType{
     right: 0;
@@ -61,8 +81,8 @@
     z-index: -1;
    
  }
- .processImg{
-   margin-right: 200px;
+ #processImg{
+   margin-right: 10px;
  }
  .descript{
     top: 0;
@@ -84,18 +104,16 @@
     display: flex;
     background-color: #093756;
     width: 90%;  
-    justify-content: space-between;
+    justify-content: space-around;
     height: auto;
     top: 0;
     z-index: 10;
  }
  .sectitle{
     color:#C8E0FE;
-    margin: 30px 200px;
     white-space: nowrap;
     font-size: 40px;
-    /* overflow: hidden;
-    text-overflow: ellipsis; */
+
  }
  .sectitle2{
    color:#C8E0FE;
@@ -191,36 +209,105 @@
     max-width: 100%;
     text-wrap: nowrap;
  }
+ .secProcessPhone{
+   background-color: #093756;
+   position: absolute;
+   display: flex;
+   justify-content: center;
+   align-items: start;
+   height: 130%;
+   width: 100%;
+   margin-top: 1800px;
+   z-index: -1;
+ }
+ #processTextPhone{
+   margin-top: 20px;
+   background-color: #093756;
+   z-index: 20;
+
+ }
  
  @media screen and (max-width: 1300px) {
    p {
        font-size: 1.2rem; /* Adjust the font size as needed */
    }
    }
+ @media screen and (max-width: 1050px) {
+   #processType{
+
+      width: 70%;
+      height: auto;
+      max-height: 800px;
+      max-width: 535px;
+      padding: 40px 0;
+      margin-top: 1800px;
+      background-color: #093756;
+      position: absolute;
+      right: 0;
+      /* max-height: 745px; */
+   }
+   p{
+      font-size: 1.3rem;
+   }
+   #processImg{
+      margin-right: 10px;
+      position: absolute;
+      margin-top: 1800px;
+      background-color: #093756;
+    }
+    .theProcess{
+      z-index: -2;
+   }
+
+    .section1{
+      padding-bottom: 600px;
+      z-index: -2;
+
+    }
+    .section2{
+      top: 2200px;
+      padding-top: 200px;
+    }
+    .manos2{
+      position: relative;
+      width: 50%;
+      max-height: 700px;
+      padding:  0;
+    }
+
+ }
    @media screen and (max-width: 1150px) {
-      p {
-          font-size: 1rem; /* Adjust the font size as needed */
-      }
+
       .descriptPar{
       padding-left: 50%;
       width: 50%;         
       }
 
    }
- @media screen and (max-width: 768px) {
-    p {
-        font-size: 1.2rem; /* Adjust the font size as needed */
+ @media screen and (max-width: 800px) {
+    /* p {
+        font-size: 1.2rem; Adjust the font size as needed
+    } */
+    .secProcessPhone{
+      padding-top: 250px;
     }
-    button {
-        font-size: 25px;
+    #processTextPhone{
+      margin-top: -230px;
+   
     }
+
+
  }
  @media screen and (max-width: 568px) {
-    p {
-        font-size: 1rem; /* Adjust the font size as needed */
+    /* p {
+        font-size: 1rem; 
+    } */
+    .secProcessPhone{
+      padding-top: 450px;
     }
-    button {
-        font-size: 20px;
+    #processTextPhone{
+      margin-top: -430px;
+   
     }
  }
  
