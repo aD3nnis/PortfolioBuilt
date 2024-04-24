@@ -20,7 +20,19 @@
     align-items: center;
     z-index: 2; /* Set z-index here */
 }
-
+.logoMenu{
+    height: 100px;
+    position: absolute;
+    left: 0;
+    margin-left: 2.5%;
+    margin-top: -40px;
+    display: flex;
+    justify-content: center;
+}
+.hyperlink{
+    width: 20px;
+    height: 10px;
+}
 #menuItems {
     list-style: none;
     position: relative;
@@ -95,4 +107,9 @@ a {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis; /* Or other appropriate value */
+}
+@media screen and (max-width: 768px) {
+    .logoMenu{
+        height: 70px;
+    }
 }
