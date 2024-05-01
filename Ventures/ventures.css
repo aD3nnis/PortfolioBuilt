@@ -98,6 +98,8 @@
     z-index: -1;
     margin-left: 0;
     font-weight: 600;
+    text-align: center;
+    
  }
  .sectitleContainer{
     position: relative;
@@ -301,6 +303,13 @@
     #processTextPhone{
       margin-top: -230px;
    
+    }
+    .descript{
+      margin-top: 390px;
+      max-width: 750px;
+    }
+    .title{
+      margin-top: 250px;
     }
 
 
