@@ -7,6 +7,7 @@ h1{
     font-size: 65px;
     color: #C8E0FE;
     letter-spacing: 20px;
+    opacity: 0;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 p{
