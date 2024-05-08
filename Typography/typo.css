@@ -11,7 +11,7 @@ h1{
 }
 h2{
     text-align: center; 
-    color: #C8E0FE;  
+    color: #b5957b;  
     font-size: 50px; 
     font-family:  Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
@@ -24,7 +24,7 @@ p{
     margin-left: 100px;
     margin-right: 100px;
     color: #778ca9;
-    background-color: #2e1806;
+    /* background-color: #2e1806; */
     padding: 10px;
     border-radius: 10px;
 }
@@ -63,22 +63,32 @@ p{
     justify-content: space-around;
 }
 .row2{
+    background-color: #b5957b;
     display: flex;
     justify-content: space-around;
-    margin: 50px;
+    width: 100%;
+    padding: 60px 0;
 }
 .row2 img {
     width: 45%;
     height: auto;
+    background-color: #4c331f;
+    padding: 3px;
 }
 .description{
     margin: 10px;
     font-size: 17px;
     min-width: 45%;
-    color: #2e1806; 
-    background-color: #b5957b;
+    color: #4c331f;
+    /* background-color: #b5957b; */
     padding: 10px;
     border-radius: 10px;
+    
+}
+#box4description{
+    width: 100%;
+    margin: 0;
+    background-color: #b5957b;
 }
 .description2{
     font-size: 25px;
