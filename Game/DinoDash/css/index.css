@@ -125,7 +125,8 @@ div#play{
     text-wrap: nowrap;
 }
 #buttPlay{
-    font-size: 50px;  
+    font-size: 40px;
+    letter-spacing: 7px;  
     height: 80px;
     width: 300px;
     background-color: #093756;

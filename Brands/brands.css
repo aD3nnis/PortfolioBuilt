@@ -27,11 +27,16 @@ p{
     z-index: -1;
 }
 .mainLogo {
-    height: auto;
+    height: 30%;
     width: 100vw;
     position: relative;
     display: flex;
     z-index: 0;
+}
+#overMainLogo{
+    
+    margin-top: -27%;
+    
 }
 .logo_container{
     z-index: -2;
