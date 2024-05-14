@@ -27,16 +27,13 @@ p{
     z-index: -1;
 }
 .mainLogo {
-    height: 30%;
+    height: 29vw;
     width: 100vw;
-    position: relative;
-    display: flex;
+    position: absolute;
     z-index: 0;
 }
 #overMainLogo{
-    
-    margin-top: -27%;
-    
+    z-index: 1;
 }
 .logo_container{
     z-index: -2;
@@ -45,10 +42,14 @@ p{
     background-image: linear-gradient(rgb(0, 0, 0), #778ca9);
     position: absolute;
     top: 100px;
+    margin-bottom: 1000px;
 }
 .firstline {
     height: auto;
     width: 28%;
+}
+#marginBelowLogo{
+    margin-top: 500px;
 }
 .row1 {
     display: flex;
