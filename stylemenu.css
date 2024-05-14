@@ -21,10 +21,14 @@
     z-index: 2; /* Set z-index here */
 }
 .logoMenu{
-    height: 90px;
+    height: 70px;
     position: relative;
     display: flex;
     
+
+}
+.logoMenu:hover{
+    height: 80px;
 
 }
 .hyperlink{
@@ -106,6 +110,9 @@
         height: 60px;
         margin-left: -10px;
         top: 0;
+    }
+    .logoMenu:hover{
+        height: 70px;
     }
     .hyperlink{
         width: 30px;
