@@ -11,6 +11,9 @@
     right: 0;
     background-color: pink; */
  }
+ h1{
+   opacity: 0;
+ }
  .menuwidth{
     width: 100vw;
  }
