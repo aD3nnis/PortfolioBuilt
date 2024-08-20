@@ -9,10 +9,10 @@ document.addEventListener("DOMContentLoaded", function() {
 function flickerLogo() {
     // Randomly generate the opacity values
     const opacity1 = Math.random();
-    const opacity2 = Math.random();
+    const opacity2 = 0
 
     // Duration of the flicker animation
-    const duration = gsap.utils.random(0.2, 0.6); // Random duration between 0.1 and 0.5 seconds
+    const duration = gsap.utils.random(0.6, 3); // Random duration between 0.1 and 0.5 seconds
 
     // Animate the opacity back and forth
     gsap.to("#overMainLogo", { opacity: opacity1, duration: duration, yoyo: true, repeat: 1, onComplete: flickerLogo });
