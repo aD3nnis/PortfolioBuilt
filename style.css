@@ -38,7 +38,7 @@ body{
         color: #133670;/*  01416f 133670*/
         width: 8vw;
         font-weight: 800;
-        opacity: 0;
+        opacity: 1; /* when gsap use opacity: 0*/
         
     }
     .over_image{
