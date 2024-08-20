@@ -8,6 +8,7 @@ body{
     height: auto;
     position: absolute;
     display: block;
+    z-index: -1; 
 
 }
 #hero {
@@ -16,9 +17,7 @@ body{
     display: flex;
     justify-content: center;
     /* top: 0;*/
-    z-index: -1; 
     width: 100vw;
-    margin-top: -205px;
     padding: 55px 0 55px 0;
     
     }
