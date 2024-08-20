@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request
+from flask_cors import CORS  # Import CORS
 import subprocess
 
 app = Flask(__name__)
-
+CORS(app)  # Enable CORS for all routes
 
 @app.route('/')
 def index():
@@ -10,7 +11,6 @@ def index():
 
 @app.route('/run_script', methods=['POST'])
 def run_script():
-    # Replace 'main.py' with the path to your script
     try:
         result = subprocess.run(['python3', 'main.py'], capture_output=True, text=True, check=True)
         return result.stdout
