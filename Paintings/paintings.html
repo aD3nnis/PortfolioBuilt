@@ -3,16 +3,43 @@
 
 <head>
     <meta charset="utf-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/ScrollToPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/ScrollTrigger.min.js"></script>
     <link rel="stylesheet" href="paintings.css">
     <link rel="stylesheet" href="../globalstyles.css">
+    <script src="paintings.js" defer></script>
     <title>
         The Gallery
     </title>
 </head>
 
 <body>
-    <iframe id="iframeId " src="../../menu.html" frameborder="0" width="100%" height="300" scrolling="no"
-        border-width="0px"></iframe>
+    
+        <div class="pinned-elements"> 
+            <iframe id="iframeId " src="../../menu.html" frameborder="0" width="100%" height="300" scrolling="no" border-width="0px"></iframe>
+            <div class="main">            
+            <div class="header-paintings">
+                <h1>
+                    The Gallery
+                </h1>
+            </div>
+                <div class="horizontal-sliders">
+                <div class="slide">
+                    <img src="img/frame1.png" alt="frame">
+                    <img src="img/children-of-forest.png" alt="children of the forest painting">
+                    <img src="img/frame2.png" alt="frame">
+                </div>
+                <div class="slide">Blue</div>
+                <div class="slide">green</div>
+                <div class="slide">yellow</div>
+                <div class="slide">brown</div>
+                </div>
+                <div class="next-block">
+                this is next block
+                </div>
+            </div>
+        </div>
 
 </body>
 
