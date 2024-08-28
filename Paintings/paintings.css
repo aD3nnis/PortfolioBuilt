@@ -24,17 +24,21 @@
   .slide{
     height:65vh;
     width:80vw;
+    max-width: 950px;
     display: flex;
     justify-content: center;
   }
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 1000px) {
     .slide{
         height:65vh;
         width:100vw;
         display: flex;
       }
   }
-  
+
+.max-width-setter{
+    max-width: 450px;
+}
   /* .slide-container{
     background-color: rgb(118, 58, 68);
     height: 100%;
@@ -47,10 +51,6 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-  }
-
-  .slide:nth-child(2n){
-    background-color:aqua;
   }
   .next-block{
     height:100vh;
@@ -74,10 +74,13 @@
     height: 350px;
   }
   .first-and-last-drawing{
-    height: 210px;
+    height: 214px;
   }
   .tarpon-fly-stack{
-    height: 30%;
+    height: 130px;
+  }
+  .set-img-height{
+    height: 270px;
   }
   /* .needs-full-space{
     background-color: purple;
