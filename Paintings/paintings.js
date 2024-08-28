@@ -13,12 +13,10 @@ gsap.to(sections, {
     start: 'top top',
     pinSpacing: false,
     scrub: 1,
-    end: `+=${totalWidth} bottom` ,
+    end: `+=${totalWidth} bottom-=100px`,
     markers: {
-        startColor: "green",
-        endColor: "red",
-        fontSize: "12px",
-        fontWeight: "bold",
+        startColor: "transparent",
+        endColor: "transparent",
     },
     onUpdate: (self) => {
         // Remove any unexpected top adjustments

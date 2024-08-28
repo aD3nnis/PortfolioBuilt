@@ -7,6 +7,7 @@
     position: absolute;
     z-index: -1;
     background-color: #093756;
+    height: 100vh;
   }
   .header-paintings{
     display: flex;
@@ -23,18 +24,12 @@
   }
   .slide{
     height:65vh;
-    width:80vw;
-    max-width: 950px;
+    width: 950px;
     display: flex;
+
     justify-content: center;
   }
-  @media screen and (max-width: 1000px) {
-    .slide{
-        height:65vh;
-        width:100vw;
-        display: flex;
-      }
-  }
+
 
 .max-width-setter{
     max-width: 450px;
@@ -60,14 +55,14 @@
     margin: 10px;
   }
   .tarpon-in-water-image{
-    width: 400px;
+    width: 410px;
   }
   .tarpon-fly{
     width: 190px;
     height: 155px;
   }
   .mask-off-girl-framed{
-    height: 270px;
+    height: 400px;
     width: auto;
   }
   .aligator-eye-framed{
