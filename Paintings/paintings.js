@@ -1,11 +1,14 @@
 gsap.registerPlugin(ScrollTrigger);
 let sections = gsap.utils.toArray(".slide");
-const totalWidth = sections.reduce((acc, section) => {
-    return acc + section.getBoundingClientRect().width;
-  }, 0);
-    
+// const totalWidth = sections.reduce((acc, section) => {
+//     return acc + section.getBoundingClientRect().width;
+//   }, 0);
+let viewportWidth = window.innerWidth;
+console.log("Number of sections:", sections.length);
+console.log("inner",viewportWidth )
+console.log("math", viewportWidth/1000)
 gsap.to(sections, {
-  xPercent: -100 * (sections.length - 1),
+  xPercent: -100 * (sections.length) + ((viewportWidth/1000) * 100),
   ease: "none",
   scrollTrigger: {
     trigger: "#iframeId",
@@ -13,11 +16,12 @@ gsap.to(sections, {
     start: 'top top',
     pinSpacing: false,
     scrub: 1,
-    end: `+=${totalWidth} bottom-=100px`,
-    markers: {
-        startColor: "transparent",
-        endColor: "transparent",
-    },
+    end: `bottom+=2050px bottom`,
+    // markers: {
+    //     startColor: "transparent",
+    //     endColor: "transparent",
+    // },
+    markers:{},
     onUpdate: (self) => {
         // Remove any unexpected top adjustments
         if (self.pin) {
