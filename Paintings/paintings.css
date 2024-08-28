@@ -57,8 +57,6 @@
     background:blue;
   }
   img{
-    width: 300px;
-    height: auto;
     margin: 10px;
   }
   .tarpon-in-water-image{
@@ -71,6 +69,15 @@
   .mask-off-girl-framed{
     height: 270px;
     width: auto;
+  }
+  .aligator-eye-framed{
+    height: 350px;
+  }
+  .first-and-last-drawing{
+    height: 210px;
+  }
+  .tarpon-fly-stack{
+    height: 30%;
   }
   /* .needs-full-space{
     background-color: purple;
