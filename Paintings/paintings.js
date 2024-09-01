@@ -16,12 +16,11 @@ gsap.to(sections, {
     start: 'top top',
     pinSpacing: false,
     scrub: 1,
-    end: `bottom+=2050px bottom`,
-    // markers: {
-    //     startColor: "transparent",
-    //     endColor: "transparent",
-    // },
-    markers:{},
+    end: `+=3000px bottom`,
+    markers: {
+        startColor: "transparent",
+        endColor: "transparent",
+    },
     onUpdate: (self) => {
         // Remove any unexpected top adjustments
         if (self.pin) {
