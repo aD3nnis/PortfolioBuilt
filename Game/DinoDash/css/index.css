@@ -115,7 +115,7 @@ div#Gameover{
     display: none;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-div#play{
+.button-container{
     position: relative;
     display: flex;
     justify-content: center;
@@ -124,7 +124,7 @@ div#play{
     align-items: center;
     text-wrap: nowrap;
 }
-#buttPlay{
+.butt-play{
     font-size: 40px;
     letter-spacing: 7px;  
     height: 80px;
@@ -138,7 +138,13 @@ div#play{
     z-index: 10;
     text-wrap: nowrap;
 }
-#buttPlay:hover{
+.position-jump{
+    position: absolute;
+    margin-top: 650px;
+    display: none;
+
+}
+.butt-play:hover{
     background-color: #2e1806;
     color: #b5957b;
 }

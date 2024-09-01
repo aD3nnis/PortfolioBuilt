@@ -12,8 +12,10 @@ document.addEventListener("DOMContentLoaded", function() {
   var DinoGame = {
     points: 0,
     display: function () {
-      var myImage = document.getElementById('play');
+      var myImage = document.getElementById('buttPlay');
       myImage.style.display = 'none';
+      var myImage = document.getElementById('jumpbutton');
+      myImage.style.display = 'block';
       myImage = document.getElementById('Dinosaur');
       myImage.style.display = 'block';
       myImage = document.getElementById('DinosaurPic');
@@ -31,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  document.getElementById('play').addEventListener('click', function () {
+  document.getElementById('buttPlay').addEventListener('click', function () {
 
     var position = 0;
     var speed = 6;
@@ -61,11 +63,15 @@ document.addEventListener("DOMContentLoaded", function() {
     ///////////////////////////////
 
     let canClick = true;
-    document.addEventListener('keydown', function (event) {
+
       // Check if the pressed key is the space bar (keyCode 32 or key ' ')
+
+      document.getElementById('jumpbutton').addEventListener('click', function() {      
       const img = document.getElementById("Dinosaur");
       img.style.top = 0 + "px"; // DINO POSITION // 53%, 53 + "%"
-      if (event.key === 'j') {
+        // Your code here
+        console.log('Button was clicked');
+   
         // Set canClick to true when the space bar is pressed 
         if (canClick) {
 
@@ -82,7 +88,6 @@ document.addEventListener("DOMContentLoaded", function() {
             // Allow clicks again after the cool-down period
             canClick = true;
           }, 600); // 500ms delay
-        }
       }
     });
     // document.addEventListener("click", function() {
@@ -137,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (crashRock(otherobj)) {
           myImage = document.getElementById('Gameover');
           myImage.style.display = 'block';
-          var myImage = document.getElementById('play');
+          var myImage = document.getElementById('buttPlay');
           myImage.style.display = 'block';
           const img = document.getElementById("Dinosaur");
           img.style.display = 'none';
@@ -148,6 +153,8 @@ document.addEventListener("DOMContentLoaded", function() {
           myImage.style.top = 0 + "px";
           var myImage = document.getElementById('Bigrock');
           myImage.style.top = -110 + "px";
+          var myImage = document.getElementById('jumpbutton');
+          myImage.style.display = 'none';
           clearInterval(moveInterval);
           speed = 0;
           crashed = true;
