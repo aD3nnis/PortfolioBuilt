@@ -52,12 +52,13 @@ body{
     background-color: #C8E0FE;
     position: relative;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
 }
 .me{
     height: auto;
     width: 100%;
     border-radius: 15px;
+    margin: 10px;
     
 }
 h3{
