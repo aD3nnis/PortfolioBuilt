@@ -1,7 +1,28 @@
 body{
-    background-color: cornflowerblue;
     margin: 0;
+    height: 100vh;
 }
-.title-area{
-    max-width: 100%;
+.page-area-container{
+    width: 100%;
+    background:#C8E0FE; 
+    height: 100%;
+    position: relative;
+    z-index: -1;
+    top: 100px;
+
+}
+.page-edit-area{
+    width: 90vw;
+    background-color: #778ca9;
+    margin: 0 auto;
+    height: 100%;
+    padding: 30px;
+    box-sizing: border-box; 
+}
+
+h1, h2{
+    color: #093756;
+}
+.fix-position{
+    position: absolute;
 }
