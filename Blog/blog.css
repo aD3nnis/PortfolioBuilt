@@ -26,6 +26,11 @@ iframe:hover{
     box-sizing: border-box; 
     border-radius: 15px;
 }
+.post-section{
+    border: 2px solid #6a7c96;
+    border-radius: 15px;
+    padding: 10px;
+}
 
  h2, li, h3, a, p{
     color: #093756;
