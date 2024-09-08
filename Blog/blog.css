@@ -31,6 +31,9 @@ iframe:hover{
 h1, h2, li, h3, a, p{
     color: #093756;
 }
+h1{
+    text-align: center;
+}
 p{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
