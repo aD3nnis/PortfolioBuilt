@@ -26,7 +26,7 @@ iframe:hover{
     box-sizing: border-box; 
     border-radius: 15px;
 }
-.post-section{
+.post-section-outline{
     border: 2px solid #6a7c96;
     border-radius: 15px;
     padding: 10px;
