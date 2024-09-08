@@ -12,7 +12,6 @@ iframe:hover{
 .page-area-container{
     width: 100%;
     background:#C8E0FE; 
-    height: 100%;
     position: relative;
     z-index: 0;
     top: 100px;
@@ -28,10 +27,20 @@ iframe:hover{
     border-radius: 15px;
 }
 
-h1, h2, li, h3, a, p{
+ h2, li, h3, a, p{
     color: #093756;
 }
+img{
+    height: 300px;
+    border-radius: 15px;
+}
+.position-img{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 h1{
+    color: #C8E0FE;
     text-align: center;
 }
 p{
@@ -48,20 +57,20 @@ li{
 
 }
 
-.college-roi-link{
+.animated-link{
     color: #285893;
     text-decoration: none;
     position: relative;
     box-shadow: inset 0 -2px 0 0 #285893;
 
 }
-.college-roi-link:hover{
+.animated-link:hover{
     box-shadow: none;
 }
 
 
 /* asked Chatgpt for text underline animation */
-.college-roi-link::after {
+.animated-link::after {
     content: ""; /* Creates an empty element after the link */
     position: absolute;
     left: 0;
@@ -74,7 +83,7 @@ li{
     transition: transform 0.4s ease; /* Animation for the hover effect */
 }
 
-.college-roi-link:hover::after {
+.animated-link:hover::after {
     transform: scaleX(1); /* Fully extend the underline on hover */
     transform-origin: left; /* Animate from left to right */
 }
