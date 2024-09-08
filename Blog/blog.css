@@ -2,6 +2,13 @@ body{
     margin: 0;
     height: 100vh;
 }
+iframe{
+    height: 100px;
+   
+}
+iframe:hover{
+    height: 300px;
+}
 .page-area-container{
     width: 100%;
     background:#C8E0FE; 
@@ -21,33 +28,47 @@ body{
     border-radius: 15px;
 }
 
-h1, h2, li, h3, a{
+h1, h2, li, h3, a, p{
     color: #093756;
 }
+p{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+li{
+    font-weight: 600;
+    font-size: 17px;
+}
+
 .fix-position{
     z-index: 1;
     position: absolute;
 
 }
-h1:hover{
-    color: #e9d8d8;
-}
+
 .college-roi-link{
     color: #285893;
     text-decoration: none;
     position: relative;
+    box-shadow: inset 0 -2px 0 0 #285893;
+
 }
+.college-roi-link:hover{
+    box-shadow: none;
+}
+
+
+/* asked Chatgpt for text underline animation */
 .college-roi-link::after {
     content: ""; /* Creates an empty element after the link */
     position: absolute;
     left: 0;
     right: 0;
-    bottom: -2px; /* Position the underline just below the text */
+    bottom: 0px; /* Position the underline just below the text */
     height: 2px; /* Set the thickness of the underline */
     background-color: #285893; /* Color of the underline */
     transform: scaleX(0); /* Initially, hide the underline */
     transform-origin: right; /* Start the animation from the right */
-    transition: transform 0.3s ease; /* Animation for the hover effect */
+    transition: transform 0.4s ease; /* Animation for the hover effect */
 }
 
 .college-roi-link:hover::after {
