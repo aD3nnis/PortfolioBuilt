@@ -25,11 +25,16 @@ iframe:hover{
     padding: 30px;
     box-sizing: border-box; 
     border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 .post-section-outline{
     border: 2px solid #6a7c96;
     border-radius: 15px;
     padding: 10px;
+    max-width: 600px;
 }
 
  h2, li, h3, a, p{
