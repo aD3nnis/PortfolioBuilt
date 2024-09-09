@@ -35,13 +35,15 @@ iframe:hover{
     border-radius: 15px;
     padding: 10px;
     max-width: 600px;
+    width: 75vw;
 }
 
- h2, li, h3, a, p{
+ h2, li, h3, h4, a, p{
     color: #093756;
 }
 img{
-    height: 300px;
+    width: 50vw;
+    height: auto;
     border-radius: 15px;
 }
 .position-img{
@@ -58,7 +60,7 @@ p{
 }
 li{
     font-weight: 600;
-    font-size: 17px;
+    font-size: 16px;
 }
 
 .fix-position{
