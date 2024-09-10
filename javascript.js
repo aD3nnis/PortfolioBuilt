@@ -1,4 +1,7 @@
 
+
+  
+  app.mount('#app');
 console.log("in it ")
 document.addEventListener("DOMContentLoaded", function() {
     // Your JavaScript code goes here
@@ -26,3 +29,5 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Form element not found');
     }
 });
+
+
