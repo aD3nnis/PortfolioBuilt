@@ -120,6 +120,7 @@ li{
     font-size: clamp(16px, 14vw, 140px);
     margin: 5px;
     position: absolute;
+
 }
 .halo-text-outline{
     font-family: 'Halo Outline';
@@ -168,4 +169,5 @@ li{
     display: flex;
     justify-content: center;
     position: relative;
+    padding-bottom: 100px;
 }
