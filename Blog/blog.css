@@ -117,15 +117,14 @@ li{
 }
 @font-face {
     font-family: 'Halo';
-    src: url('fonts/fontfile.woff2') format('woff2'),
-         url('fonts/fontfile.woff') format('woff');
+    src: url('font/Halo.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
   }
+  
   @font-face {
     font-family: 'Halo Outline';
-    src: url('fonts/fontfile.woff2') format('woff2'),
-         url('fonts/fontfile.woff') format('woff');
+    src: url('font/Halo-Outline.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
   }
