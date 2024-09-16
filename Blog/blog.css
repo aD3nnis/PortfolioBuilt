@@ -115,6 +115,22 @@ li{
     flex-direction: column;
     position: relative;
 }
+@font-face {
+    font-family: 'Halo';
+    src: url('fonts/fontfile.woff2') format('woff2'),
+         url('fonts/fontfile.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Halo Outline';
+    src: url('fonts/fontfile.woff2') format('woff2'),
+         url('fonts/fontfile.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  
 .halo-text{
     font-family: 'Halo';
     font-size: clamp(16px, 14vw, 140px);
