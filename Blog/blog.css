@@ -184,7 +184,6 @@ li{
     display: flex;
     position: relative;
     width: 100%;
-    height: 30vw;/* need to change */
     justify-content: end;
 
 }
