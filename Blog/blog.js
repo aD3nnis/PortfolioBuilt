@@ -154,15 +154,15 @@
         );
         gsap.fromTo(".music-text", 
             {
-                y: 200,
-                opacity: 0
+                y: 120,
+                opacity: 0.3
             }, 
             {
                 y: 0,
                 opacity: 1,
                 scrollTrigger: {
                     trigger: ".halo-journey-img",
-                    start: "top top",
+                    start: "top+=150px top",
                     endTrigger: ".halo-atmosphere-img",
                     end: "bottom top",
                     scrub: true, // Adjust animation based on scroll position

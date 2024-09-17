@@ -330,8 +330,10 @@ li{
     -webkit-text-fill-color: transparent; 
 }
 .music-text{
-    font-size: clamp(16px, 12vw, 150px);;
+    font-size: clamp(16px, 12vw, 150px);
     background: linear-gradient(to bottom, #C8E0FE 30%, #6488af 90%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent; 
+    display: inline-block; /* Ensures transform applies correctly */
+    transform: scaleY(1.5); /
 }
