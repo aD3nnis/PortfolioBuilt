@@ -148,7 +148,7 @@
                     endTrigger: ".halo-journey-img",
                     end: "center top",
                     scrub: true, // Adjust animation based on scroll position
-                     markers: true // Remove this line in production
+                    // markers: true // Remove this line in production
                 }
             }
         );
