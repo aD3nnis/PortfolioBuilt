@@ -47,7 +47,7 @@
                     trigger: ".halo-text",
                     start: "top-=600px top",
                     endTrigger: ".halo-text",
-                    end: "bottom top",
+                    end: "center top",
                     scrub: true, // Adjust animation based on scroll position
                     // markers: true // Remove this line in production
                 }
