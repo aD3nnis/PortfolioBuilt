@@ -17,7 +17,7 @@
                 }
             }
         );
-        gsap.fromTo(".halo-text", 
+        gsap.fromTo([".halo-text", ".answering-questions"],
             {
                 opacity: 0
             }, 
@@ -45,7 +45,7 @@
                     trigger: ".halo-text",
                     start: "top top",
                     endTrigger: ".halo-journey-img",
-                    end: "top top",
+                    end: "top-=100px top",
                     scrub: true, // Adjust animation based on scroll position
                     // markers: true // Remove this line in production
                 }
@@ -69,7 +69,7 @@
                 trigger: '.halo-experience-img',
                 start: 'center top',
                 endTrigger: ".halo-journey-img",
-                end: "center top",// Adjust the end point based on when you want the animation to end
+                end: "top top",// Adjust the end point based on when you want the animation to end
                 scrub: true, // Link animation progress to scroll position
                 onUpdate: self => {
                   // Calculate opacity based on scroll progress
