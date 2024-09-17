@@ -155,7 +155,7 @@
         gsap.fromTo(".music-text", 
             {
                 y: 120,
-                opacity: 0.3
+                opacity: 0
             }, 
             {
                 y: 0,
