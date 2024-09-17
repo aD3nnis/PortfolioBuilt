@@ -17,6 +17,7 @@
                     // markers: true // Remove this line in production
                 }
             }
+            
         );
         gsap.fromTo(".experience-text", 
             {
@@ -36,3 +37,20 @@
                 }
             }
         );
+
+
+        gsap.fromTo(".testing-container", 
+            {
+                opacity: 0, // Start fully outside the view
+            },
+            {
+                opacity: 1,  // End fully inside the view
+                scrollTrigger: {
+                trigger: ".halo-experience-img",
+                start: "top top", // Start animation when .halo-experience-img reaches the top of the viewport
+                endTrigger: ".halo-atmosphere-img",
+                end: "top top", // End animation when .halo-atmosphere-img reaches the top of the center of the viewport
+                scrub: true, // Smoothly syncs the animation progress with the scrollbar
+            }
+            }
+          );

@@ -197,16 +197,60 @@ li{
     background: linear-gradient(to right, #C8E0FE 35%, #093756 110%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent; 
+    border-radius: 50%;
+    transform: scaleX(2); 
+
+}
+.halo-atmosphere-img{
+    display: flex;
+    position: relative;
+    justify-content: end;
+}
+.halo-atmosphere-img img{
+    width: 100%;
 }
 .absolute-atmosphere-text{
     position: absolute;
 }
+.testing{
+    align-items: center;
+    align-self: center;
+    display: flex;
+    background-color: aqua;
+    width: 300px;
+    height: 100px;
+    
+}
+.text {
+    z-index: 1;
+    font-size: 30px;
+  }
+  .text-path{
+    background: linear-gradient(to right, #C8E0FE 35%, #093756 110%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+  }
+  #arc{
+    color: chocolate;
+  }
+  
 .mr-halo{
     position: absolute;
     z-index: 1;
 }
 .halo-div-section{
     position: relative;
+}
+.testing-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    margin-top: 160px;
+
 }
 
 .fix-halo-absolute-alignment{
@@ -217,3 +261,7 @@ li{
     position: relative;
     padding-bottom: 100px;
 }
+
+  
+
+  
