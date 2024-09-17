@@ -149,13 +149,11 @@ li{
     width: 75vw;
     height: auto;
     max-width: 600px;
-    position: absolute;
 }
 .halo-journey-img{
     display: flex;
     position: relative;
     width: 100%;
-    height: 53vw;
 }
 .absolute-journey-text{
     position: absolute;    
@@ -261,7 +259,10 @@ li{
     position: relative;
     padding-bottom: 100px;
 }
-
+.answering-questions{
+    align-self: center;
+    padding-bottom: 20px;
+}
   
 
   
