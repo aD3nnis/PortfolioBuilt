@@ -206,12 +206,12 @@ li{
     position: relative;
     width: 85%;
     justify-content: end;
+ 
 
 }
 .experience-halo-img img{
     width: 100%;
-    margin-top: -25px;
-    border-radius: 0;
+    margin-top: -25px;    
 }
 .atmosphere-text{
     font-size: clamp(16px, 6vw, 30px);;
@@ -233,7 +233,6 @@ li{
 }
 .halo-atmosphere-img img{
     width: 85%;
-    border-radius: 0;
     margin-bottom: 300px;
 }
 .absolute-atmosphere-text{
@@ -296,10 +295,11 @@ li{
 }
 .answering-questions{
     align-self: center;
-    padding-bottom: 20px;
-    margin-top: -100px;
+    padding-bottom: 60px;
+    margin-top: -150px;
     z-index: 1;
     color: #6488af;
+    font-size: 40px;
 }
   
 
