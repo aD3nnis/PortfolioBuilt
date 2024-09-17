@@ -115,6 +115,18 @@ li{
     flex-direction: column;
     position: relative;
 }
+
+.stary-night-background{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    z-index: 0;
+
+}
+
 @font-face {
     font-family: 'Halo';
     src: url('font/Halo.ttf') format('truetype');
@@ -136,19 +148,26 @@ li{
     margin: 5px;
     position: absolute;
     color: #6488af;
+    background: linear-gradient( #C8E0FE 30%, #6488af 90%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
 
 }
 .halo-text-outline{
     font-family: 'Halo Outline';
     font-size: clamp(16px, 14.2vw, 142px);
-    color: #093756;
+    color: #C8E0FE;
     position: absolute;
+    background: linear-gradient( #093756 35%, #C8E0FE 200%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
     margin: 5px;
 }
 .halo-journey-img img{
     width: 75vw;
     height: auto;
     max-width: 600px;
+    border-radius: 0;
 }
 .halo-journey-img{
     display: flex;
@@ -189,6 +208,7 @@ li{
 .experience-halo-img img{
     width: 100%;
     margin-top: -25px;
+    border-radius: 0;
 }
 .atmosphere-text{
     font-size: clamp(16px, 6vw, 30px);;
@@ -206,6 +226,7 @@ li{
 }
 .halo-atmosphere-img img{
     width: 100%;
+    border-radius: 0;
 }
 .absolute-atmosphere-text{
     position: absolute;
@@ -247,7 +268,7 @@ li{
     width: 100%;
     height: 100%;
     position: absolute;
-    margin-top: 160px;
+    margin-top: 125px;
 
 }
 
@@ -262,6 +283,9 @@ li{
 .answering-questions{
     align-self: center;
     padding-bottom: 20px;
+    margin-top: -100px;
+    z-index: 1;
+    color: #6488af;
 }
   
 
