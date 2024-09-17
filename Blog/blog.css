@@ -113,12 +113,13 @@ li{
     display: flex;
     justify-content: center;
     flex-direction: column;
+    align-items: center;
     position: relative;
 }
 
 .stary-night-background{
     position: absolute;
-    width: 100%;
+    width: 85vw;
     height: 100%;
     margin: 0;
     padding: 0;
@@ -227,6 +228,7 @@ li{
 .halo-atmosphere-img img{
     width: 100%;
     border-radius: 0;
+    margin-bottom: 50px;
 }
 .absolute-atmosphere-text{
     position: absolute;
