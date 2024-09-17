@@ -169,7 +169,6 @@ li{
 .halo-journey-img img{
     width: 85%;
     height: auto;
-    border-radius: 0;
 }
 .halo-journey-img{
     display: flex;
@@ -234,7 +233,6 @@ li{
 .halo-atmosphere-img img{
     width: 85%;
     margin-bottom: 20px;
-    border-radius: 0;
 }
 .absolute-atmosphere-text{
     position: absolute;
