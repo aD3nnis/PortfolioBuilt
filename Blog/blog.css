@@ -181,13 +181,13 @@ li{
     position: absolute;    
 }
 .journey-text span{
-    background: linear-gradient(to right, #093756 35%, #C8E0FE 200%);
+    background: linear-gradient(to right, #0a2f48 35%, #C8E0FE 250%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent; 
 }
 .journey-text{
     font-size: clamp(16px, 8.5vw, 80px);;
-    background: linear-gradient(to right, #093756 35%, #C8E0FE 110%);
+    background: linear-gradient(to right, #0a2f48 35%, #C8E0FE 150%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent; 
 }

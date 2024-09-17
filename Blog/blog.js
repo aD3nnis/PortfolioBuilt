@@ -72,17 +72,17 @@
         );
         gsap.fromTo(".journey-text", 
             {
-                y: 200,
-                opacity: 0
+                y: -50,
+                opacity: 0.3
             }, 
             {
                 y: 0,
                 opacity: 1,
                 scrollTrigger: {
                     trigger: ".halo-text",
-                    start: "top top",
-                    endTrigger: ".halo-journey-img",
-                    end: "top-=100px top",
+                    start: "top-=100px top",
+                    endTrigger: ".halo-experience-img",
+                    end: "center top",
                     scrub: true, // Adjust animation based on scroll position
                     // markers: true // Remove this line in production
                 }
