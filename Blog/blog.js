@@ -64,12 +64,12 @@
                 opacity: 0, // Start fully outside the view
             },
                  {
-            pacity:1,
+            opacity:1,
               scrollTrigger: {
                 trigger: '.halo-experience-img',
                 start: 'center top',
                 endTrigger: ".halo-journey-img",
-                end: "top top",// Adjust the end point based on when you want the animation to end
+                end: "center top",// Adjust the end point based on when you want the animation to end
                 scrub: true, // Link animation progress to scroll position
                 onUpdate: self => {
                   // Calculate opacity based on scroll progress
