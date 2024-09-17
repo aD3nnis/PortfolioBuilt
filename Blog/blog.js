@@ -2,7 +2,7 @@
         gsap.fromTo(".experience-text", 
             {
                 x: -100,
-                opacity: 0
+                opacity: 0,
             }, 
             {
                 x: 0,
@@ -17,9 +17,46 @@
                 }
             }
         );
-        gsap.fromTo([".halo-text", ".answering-questions"],
+        //halo-experience-img
+        gsap.fromTo(".halo-experience-img", 
+            {
+                opacity: 0,
+            }, 
+            {
+                y: -30,
+                opacity: 1,
+                scrollTrigger: {
+                    trigger: ".halo-text",
+                    start: "top-=400px top",
+                    endTrigger: ".halo-text",
+                    end: "top top",
+                    scrub: true, // Adjust animation based on scroll position
+                    // markers: true // Remove this line in production
+                }
+            }
+        );
+        gsap.fromTo(".halo-text",
             {
                 opacity: 0
+                
+            }, 
+            {
+                opacity: 1,
+                scale:1.2,
+                scrollTrigger: {
+                    trigger: ".halo-text",
+                    start: "top-=600px top",
+                    endTrigger: ".halo-text",
+                    end: "bottom top",
+                    scrub: true, // Adjust animation based on scroll position
+                    // markers: true // Remove this line in production
+                }
+            }
+        );
+        gsap.fromTo(".answering-questions",
+            {
+                opacity: 0
+                
             }, 
             {
                 opacity: 1,
@@ -52,6 +89,24 @@
             }
             
         );
+        gsap.fromTo(".halo-journey-img", 
+            {
+                opacity: 0.3,
+                
+            }, 
+            {
+                y: -20,
+                opacity: 1,
+                scrollTrigger: {
+                    trigger: ".halo-text",
+                    start: "top-=100px top",
+                    endTrigger: ".halo-text",
+                    end: "center top",
+                    scrub: true, // Adjust animation based on scroll position
+                    // markers: true // Remove this line in production
+                }
+            }
+        );
 
 
           // GSAP animation setup
@@ -79,6 +134,24 @@
               },
             });
           });
+          gsap.fromTo(".halo-atmosphere-img", 
+            {
+                opacity: 0.5,
+                y: 20,
+            }, 
+            {
+                y: 0,
+                opacity: 1,
+                scrollTrigger: {
+                    trigger: '.halo-experience-img',
+                    start: 'center top',
+                    endTrigger: ".halo-journey-img",
+                    end: "center top",
+                    scrub: true, // Adjust animation based on scroll position
+                     markers: true // Remove this line in production
+                }
+            }
+        );
           
           
           
