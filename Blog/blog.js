@@ -107,7 +107,7 @@
                 }
             }
         );
-        // gsap.ticker.fps(30);
+        gsap.ticker.fps(30);
 
           // GSAP animation setup
           gsap.utils.toArray('.letter').forEach((letter, index) => {
