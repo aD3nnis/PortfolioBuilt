@@ -20,7 +20,7 @@
         //halo-experience-img
         gsap.fromTo(".halo-experience-img", 
             {
-                opacity: 0,
+                opacity: 0.3,
             }, 
             {
                 y: -30,
@@ -107,7 +107,7 @@
                 }
             }
         );
-
+        gsap.ticker.fps(30);
 
           // GSAP animation setup
           gsap.utils.toArray('.letter').forEach((letter, index) => {
@@ -137,7 +137,7 @@
           });
           gsap.fromTo(".halo-atmosphere-img", 
             {
-                opacity: 0.5,
+                opacity: 0.3,
                 y: 20,
             }, 
             {
