@@ -40,7 +40,7 @@ iframe:hover{
     align-items: center;
 }
 .post-section-outline{
-    border: 2px solid #6a7c96;
+    border: 3px solid #6a7c96;
     border-radius: 15px;
     padding: 10px;
     max-width: 900px;
@@ -205,7 +205,7 @@ li{
     -webkit-text-fill-color: transparent; 
 }
 .experience-text{
-    font-size: clamp(16px, 6vw, 30px);;
+    font-size: clamp(16px, 5vw, 30px);
     background: linear-gradient(to right, #C8E0FE 35%, #fff 110%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent; 
@@ -227,7 +227,7 @@ li{
     margin-top: -25px;    
 }
 .atmosphere-text{
-    font-size: clamp(16px, 6vw, 30px);;
+    font-size: clamp(16px, 6vw, 30px);
     background: linear-gradient(to right, #C8E0FE 35%, #093756 110%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent; 
@@ -316,7 +316,7 @@ li{
     margin-top: -150px;
     z-index: 1;
     color: #6488af;
-    font-size: 40px;
+    font-size: clamp(16px, 7vw, 40px);
 }
   
 .halo-music-img{

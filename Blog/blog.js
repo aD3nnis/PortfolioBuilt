@@ -131,7 +131,7 @@
                   // Calculate opacity based on scroll progress
                   const scrollProgress = (self.progress - staggerDelay) / (1 - staggerDelay);
                   const clampedProgress = Math.min(1, Math.max(0, scrollProgress));
-                  gsap.set(letter, { opacity: clampedProgress });     },
+                  gsap.set(letter, { opacity: clampedProgress });},
               },
             });
           });
@@ -155,7 +155,7 @@
         );
         gsap.fromTo(".music-text", 
             {
-                y: 120,
+                y: 75,
                 opacity: 0
             }, 
             {
