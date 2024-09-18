@@ -199,7 +199,7 @@ li{
     -webkit-text-fill-color: transparent; 
 }
 .journey-text{
-    font-size: clamp(16px, 8.5vw, 80px);;
+    font-size: clamp(16px, 8.5vw, 80px);
     background: linear-gradient(to right, #0a2f48 35%, #C8E0FE 150%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent; 
@@ -318,7 +318,7 @@ li{
     color: #6488af;
     font-size: clamp(16px, 6vw, 40px);
 }
-  
+
 .halo-music-img{
     display: flex;
     position: relative;
