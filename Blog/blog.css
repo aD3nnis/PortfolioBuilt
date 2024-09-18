@@ -113,7 +113,7 @@ li{
     right: 0;
     bottom: 0px; /* Position the underline just below the text */
     height: 2px; /* Set the thickness of the underline */
-    background-color: #285893; /* Color of the underline */
+    background-color: #b4cae5; /* Color of the underline */
     transform: scaleX(0); /* Initially, hide the underline */
     transform-origin: right; /* Start the animation from the right */
     transition: transform 0.4s ease; /* Animation for the hover effect */
