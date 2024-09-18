@@ -13,7 +13,7 @@
                     endTrigger: ".halo-experience-img",
                     end: "top top",
                     scrub: true, // Adjust animation based on scroll position
-                    // markers: true // Remove this line in production
+                    lazy: true,// markers: true // Remove this line in production
                 }
             }
         );
@@ -31,7 +31,7 @@
                     endTrigger: ".halo-text",
                     end: "top top",
                     scrub: true, // Adjust animation based on scroll position
-                    // markers: true // Remove this line in production
+                    lazy: true,// markers: true // Remove this line in production
                 }
             }
         );
@@ -49,7 +49,7 @@
                     endTrigger: ".halo-text",
                     end: "center top",
                     scrub: true, // Adjust animation based on scroll position
-                    // markers: true // Remove this line in production
+                    lazy: true,// markers: true // Remove this line in production
                 }
             }
         );
@@ -66,7 +66,7 @@
                     endTrigger: ".halo-text",
                     end: "bottom top",
                     scrub: true, // Adjust animation based on scroll position
-                    // markers: true // Remove this line in production
+                    lazy: true,// markers: true // Remove this line in production
                 }
             }
         );
@@ -84,7 +84,7 @@
                     endTrigger: ".halo-experience-img",
                     end: "center top",
                     scrub: true, // Adjust animation based on scroll position
-                    // markers: true // Remove this line in production
+                    lazy: true,// markers: true // Remove this line in production
                 }
             }
             
@@ -103,7 +103,7 @@
                     endTrigger: ".halo-text",
                     end: "center top",
                     scrub: true, // Adjust animation based on scroll position
-                    // markers: true // Remove this line in production
+                    lazy: true,// markers: true // Remove this line in production
                 }
             }
         );
@@ -126,6 +126,7 @@
                 endTrigger: ".halo-journey-img",
                 end: "center top",// Adjust the end point based on when you want the animation to end
                 scrub: true, // Link animation progress to scroll position
+                lazy: true,
                 onUpdate: self => {
                   // Calculate opacity based on scroll progress
                   const scrollProgress = (self.progress - staggerDelay) / (1 - staggerDelay);
@@ -148,7 +149,7 @@
                     endTrigger: ".halo-journey-img",
                     end: "center top",
                     scrub: true, // Adjust animation based on scroll position
-                    // markers: true // Remove this line in production
+                    lazy: true,// markers: true // Remove this line in production
                 }
             }
         );
@@ -166,7 +167,7 @@
                     endTrigger: ".halo-atmosphere-img",
                     end: "bottom top",
                     scrub: true, // Adjust animation based on scroll position
-                    // markers: true // Remove this line in production
+                    lazy: true,// markers: true // Remove this line in production
                 }
             }
             
