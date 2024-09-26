@@ -1,4 +1,11 @@
-        gsap.registerPlugin(ScrollTrigger);
+        
+document.querySelector('.x-shape').addEventListener('click', function() {
+    document.querySelector('.dark-modal-section').classList.add('hide');
+    document.querySelector('.modal').classList.add('hidden');
+});
+
+document.querySelector('.dark-modal-section').style.border = 'none';
+gsap.registerPlugin(ScrollTrigger);
         gsap.fromTo(".experience-text", 
             {
                 x: -100,

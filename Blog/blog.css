@@ -17,6 +17,65 @@ iframe:hover{
     top: 100px;
 
 }
+
+.dark-modal-section::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.149); 
+    z-index: 1;
+    backdrop-filter: blur(10px); 
+}
+.hide::before {
+    background-color: transparent; /* Hide background */
+    backdrop-filter: none; /* Remove blur */
+    display: none;
+}
+.modal{
+    top: 0;
+    background-color: #093756;
+    z-index: 2;
+    position: absolute;
+    height: 150px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
+.hidden {
+    display: none; /* Hides the element */
+}
+.modal h1{
+    padding: 0%;
+    margin: 0;
+}
+.x-shape {
+    position: relative;
+    width: 25px;
+    height: 50px;
+    cursor: pointer;
+  }
+  
+  .x-shape::before,
+  .x-shape::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 50%;
+    background-color: #C8E0FE;
+  }
+  
+  .x-shape::before {
+    transform: rotate(45deg);
+  }
+  
+  .x-shape::after {
+    transform: rotate(-45deg);
+  }
+  
+
 #table-of-contents{
     display: flex;
     flex-direction: column;
