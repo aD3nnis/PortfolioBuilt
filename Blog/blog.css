@@ -24,12 +24,12 @@ iframe:hover{
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.149); 
-    z-index: 1;
+    z-index: 2; 
     backdrop-filter: blur(10px); 
 }
 .hide::before {
-    background-color: transparent; /* Hide background */
-    backdrop-filter: none; /* Remove blur */
+    background-color: transparent; 
+    backdrop-filter: none; 
     display: none;
 }
 .modal{
@@ -408,3 +408,44 @@ li{
     display: inline-block; /* Ensures transform applies correctly */
     transform: scaleY(1.5); /
 }
+
+.drop-down-button {
+    background-color: #c8e0fe7c;  /* Green background */
+    color: #0a2f48;  
+    width: 100%;
+    height: 20px;                /* Padding for the button */
+    font-size: 16px;             /* Text size */
+    border: none;                /* Remove borders */
+    border-radius: 5px;          /* Rounded corners */
+    cursor: pointer;             /* Pointer on hover */
+    position: relative;          /* For positioning the triangle */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+    display: flex;               /* To center the text and triangle */
+    justify-content: center;     /* Center content horizontally */
+    align-items: center;         /* Center content vertically */
+    font-family: serif;
+    font-size: 1.5em;
+    font-weight: 600;
+    padding: 15px;
+    border: 2px solid #093756;
+}
+
+
+.drop-down-button::after {
+    content: ''; /* No text content, just the triangle */
+    border-left: 8px solid transparent; /* Left side of triangle */
+    border-right: 8px solid transparent; /* Right side of triangle */
+    border-top: 6px solid #0a2f48; /* Top side of triangle, creating the down arrow */
+    margin-left: 10px; /* Space between text and triangle */
+    transition: transform 0.3s; /* Smooth transition for the arrow */
+}
+
+/* Active state for the dropdown button (show up arrow) */
+.drop-down-button.active::after {
+    transform: rotate(180deg); /* Rotate the arrow */
+}
+
+  .drop-down-button:hover {
+    background-color: #b4cae5;    /* Darker green on hover */
+  }
+  

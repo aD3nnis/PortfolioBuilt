@@ -11,6 +11,30 @@
     <title>
         Blog
     </title>
+    <script>
+        let contentVisible = false; // Track the visibility of the content
+        function loadContent() {
+            const contentDiv = document.getElementById('content-for-reflection-4');
+            const dropdownButton = document.querySelector('.drop-down-button');
+
+            if (contentVisible) {
+                // If content is visible, hide it
+                contentDiv.innerHTML = ''; // Clear the content
+                dropdownButton.classList.remove('active'); // Remove the active class
+                contentVisible = false; // Update visibility state
+            } else {
+                // If content is not visible, fetch and show it
+                fetch('reflection4.html') // Adjust the path as needed
+                    .then(response => response.text())
+                    .then(data => {
+                        contentDiv.innerHTML = data; // Insert fetched content
+                        dropdownButton.classList.add('active'); // Add the active class
+                        contentVisible = true; // Update visibility state
+                    })
+                    .catch(error => console.error('Error loading content:', error));
+            }
+        }
+    </script>
 </head>
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
@@ -41,6 +65,7 @@
             <a href="#Blog-Post-2" class="animated-link">Blog Post 2</a>
             <a href="#relfection-2" class="animated-link">Reflection 2</a>
             <a href="#relfection-3" class="animated-link">Reflection 3</a>
+            <a href="#relfection-4" class="animated-link">Reflection 4</a>
             </section>
         
             <section class="post-section-outline" id="Blog-Post-1"> 
@@ -529,9 +554,17 @@
                 aware of the tech that gets shoved in my face from the world.
                 </p>
     
-            </p>       </section>
+            </p>       
+        </section>
+        <section class="post-section-outline" id="relfection-4">
 
+            <button class="drop-down-button " onclick="loadContent(); return false; "> 
+                Reflection 4
+            </button>
 
+            <div id="content-for-reflection-4" style="margin-top: 20px;"></div>
+
+        </section>
             </div>
         </div>
     </div>
