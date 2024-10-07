@@ -24,7 +24,7 @@ iframe:hover{
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.149); 
-    z-index: -1;/*  CHANGE BACK TO 2 */
+    z-index: 2;/*  CHANGE BACK TO 2 */
     backdrop-filter: blur(10px); 
 }
 .hide::before {
@@ -35,7 +35,7 @@ iframe:hover{
 .modal{
     top: 0;
     background-color: #093756;
-    z-index: -2;
+    z-index: 2;
     position: absolute;
     height: 150px;
     width: 100%;
@@ -134,13 +134,18 @@ h3{
     font-size: 26px;
 }
 h4{
-    font-size: 25px;
+    font-size: 23px;
 }
+h5{
+    color: #070247;
+    font-size: 20px;
+  }
 
 p{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 24px;
 }
+
 li{
     font-weight: 600;
     font-size: 24px;
