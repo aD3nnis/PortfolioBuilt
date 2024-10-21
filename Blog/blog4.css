@@ -1,7 +1,13 @@
 img{
-    max-width: 350px;
+    max-width: 450px;
 }
 #content-for-homework-4{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#content-for-homework-5{
     display: flex;
     justify-content: center;
     align-items: center;
