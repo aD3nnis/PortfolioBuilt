@@ -202,7 +202,6 @@ gsap.registerPlugin(ScrollTrigger);
                     end: "bottom top",
                     scrub: true, // Adjust animation based on scroll position
                     lazy: true,// 
-                    markers: true // Remove this line in production
                 }
             }
             
