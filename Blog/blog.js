@@ -1,9 +1,36 @@
         
+console.log("in blog blaug ")
 document.querySelector('.x-shape').addEventListener('click', function() {
     document.querySelector('.dark-modal-section').classList.add('hide');
     document.querySelector('.modal').classList.add('hidden');
 });
+function loadContent(button, contentId, filePath) {
+    const contentDiv = document.getElementById(contentId);
 
+    if (!contentDiv) {
+        console.error(`Element with id "${contentId}" not found.`);
+        return;
+    }
+
+    const contentVisible = contentDiv.classList.contains('visible'); // Check if content is visible
+
+    if (contentVisible) {
+        // If content is visible, hide it
+        contentDiv.innerHTML = ''; // Clear the content
+        button.classList.remove('active'); // Remove the active class
+        contentDiv.classList.remove('visible'); // Mark content as hidden
+    } else {
+        // If content is not visible, fetch and show it
+        fetch(filePath) // Fetch the content from the provided file path
+            .then(response => response.text())
+            .then(data => {
+                contentDiv.innerHTML = data; // Insert fetched content
+                button.classList.add('active'); // Add the active class
+                contentDiv.classList.add('visible'); // Mark content as visible
+            })
+            .catch(error => console.error('Error loading content:', error));
+    }
+}
 document.querySelector('.dark-modal-section').style.border = 'none';
 gsap.registerPlugin(ScrollTrigger);
         gsap.fromTo(".experience-text", 
@@ -174,7 +201,8 @@ gsap.registerPlugin(ScrollTrigger);
                     endTrigger: ".halo-atmosphere-img",
                     end: "bottom top",
                     scrub: true, // Adjust animation based on scroll position
-                    lazy: true,// markers: true // Remove this line in production
+                    lazy: true,// 
+                    markers: true // Remove this line in production
                 }
             }
             
