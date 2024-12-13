@@ -1,9 +1,9 @@
         
 console.log("in blog blaug ")
-document.querySelector('.x-shape').addEventListener('click', function() {
-    document.querySelector('.dark-modal-section').classList.add('hide');
-    document.querySelector('.modal').classList.add('hidden');
-});
+// document.querySelector('.x-shape').addEventListener('click', function() {
+//     document.querySelector('.dark-modal-section').classList.add('hide');
+//     document.querySelector('.modal').classList.add('hidden');
+// });
 function loadContent(button, contentId, filePath) {
     const contentDiv = document.getElementById(contentId);
 
