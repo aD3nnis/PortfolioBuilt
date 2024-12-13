@@ -1,0 +1,21 @@
+.image-container{
+    position: relative;
+    display: grid;
+    grid-template-rows: 1fr 1fr; /* Two equal-height rows */
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px;
+}
+.image-container img{
+    width: 100%;
+    height: auto;
+}
+.final-img {
+    width: 70%;
+    height: auto;
+}
+.container-final-img{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+}
