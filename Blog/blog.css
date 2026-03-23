@@ -4,6 +4,8 @@ body{
 }
 iframe{
     height: 100px;
+    position: relative; /* or absolute/fixed depending on layout */
+    z-index: 2;
    
 }
 iframe:hover{

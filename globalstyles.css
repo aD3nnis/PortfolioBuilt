@@ -7,3 +7,6 @@ h1{
     letter-spacing: 20px;
     font-family:  Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
+iframe{
+    z-index: 2;
+}

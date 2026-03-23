@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="stylemenu.css">
-    <script src="../node_modules/gsap/dist/gsap.min.js"></script>
-    <script src="../node_modules/gsap/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/ScrollTrigger.min.js"></script>
     <script src="javascript.js" defer></script>
     <title>
         Ava Portfolio
@@ -15,9 +15,9 @@
 <body>
     <section id="menu">
         <div id="fixMenu">
-            <a class="hyperlink" href="index.html" target="_top"><img class="logoMenu" src="../logo1.png"></a>
+            <a class="hyperlink" href="About/index.html" target="_top"><img class="logoMenu" src="assets/images/logo1.png"></a>
             <ul id="menuItems">
-                <li class="aboutLi">
+                <li class="menu-list">
                     <a id="about" href="#">About</a>
                     <ul id="homeclicklist">
                         <li>
@@ -26,8 +26,8 @@
                         </li>
                     </ul>
                 </li>
-                <li class="projectsLi">
-                    <a id="projects" href="#">Projects</a>
+                <li class="menu-list">
+                    <a id="projects" href="#">Frontend</a>
                     <ul id="projectclicklist">
                         <!-- <li>
                             <a href="#">Xbox Remake</a>
@@ -42,20 +42,22 @@
                             <a href="https://ava-dennis-fe-dev-resource-library.netlify.app" target="_blank">FE Site Library</a>
                         </li>
                         <li>
-                            <a href="https://stonkstracker.netlify.app/" target="_blank">Current Project</a>
-                        </li>
-                        <li>
                             <a href="Game/DinoDash/index.html" id="gamemenu" target="_top">Javascript Game</a>
                         </li>
-                        <li>
-                            <a href="Blog/blog.html" target="_top">Blog</a>
-                        </li>
-                        <!-- <li>
-                            <a href="PythonSnake/templates/pythonSnake.html" id="runPython" target="_blank">Run Python</a>    
-                        </li> -->
                     </ul>
                 </li>
-                <li class="designLi">
+                <li class="menu-list">
+                    <a id="softwareProjects" href="#">Software</a>
+                    <ul id="softwareclicklist">
+                        <li>
+                            <a href="PythonSnake/showcase.html" id="pythonSnakeMenu" target="_top">Python Game</a>
+                        </li>
+                        <li>
+                            <a href="https://stonkstracker.netlify.app/" target="_blank">Bitcoin Tracker</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu-list">
                     <a href="#" class="design">2D Design</a>
                     <ul>
                         <li>

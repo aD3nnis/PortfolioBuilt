@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Snake | Ava Portfolio</title>
+    <link rel="icon" type="image/png" href="../assets/images/logo1.png">
+    <link rel="apple-touch-icon" href="../assets/images/logo1.png">
+    <link rel="stylesheet" href="../About/style.css">
+    <link rel="stylesheet" href="../stylemenu.css">
+    <link rel="stylesheet" href="../globalstyles.css">
+    <style>
+        .showcase-backdrop { top: 100px;position: absolute;width: 100%;height: 100%; background-color: #C8E0FE;}
+        .showcase-content { max-width: 720px; margin: 0 auto; }
+        .showcase-content h1 { color: #133670; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+        .showcase-lead { font-size: 1.1rem; color: #212c3e; margin-bottom: 2rem; }
+        .showcase-content code { background: rgba(0,0,0,.06); padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.95em; }
+        .showcase-section { margin-bottom: 2rem; }
+        .showcase-section h2 { color: #212c3e; font-size: 1.35rem; margin-bottom: 0.5rem; padding: 0; background: transparent; }
+        .showcase-section p, .showcase-section ul { color: #212c3e; text-align: left; padding: 0 0 0.5rem; margin: 0; background: transparent; }
+        .showcase-section ul { padding-left: 1.5rem; }
+        .showcase-code { background: #212c3e; color: #e8e8e8; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 0.75rem 0; }
+        .showcase-code code { background: transparent; padding: 0; color: inherit; }
+        .showcase-media-note { font-size: 0.95rem; margin-bottom: 0.75rem; }
+        .showcase-media-image {
+            width: 50%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid rgba(19,54,112,0.2);
+            display: flex;
+            justify-self: center;
+        }
+    </style>
+</head>
+
+<body>
+    <iframe id="iframeId" src="../menu.html" frameborder="0" width="100%" height="300" scrolling="no"></iframe>
+    <div class="showcase-backdrop">
+        <main class="showcase-content">
+            <h1>Python Snake</h1>
+            <p class="showcase-lead">
+                A classic Snake game built with Python and the <code>turtle</code> graphics module. This was an AI class project with difficulty selection, enemy snakes, and search-based AI behaviors.
+            </p>
+
+            <section class="showcase-section">
+                <h2>About the game</h2>
+                <p>
+                    You control the snake with <strong>W, A, S, D</strong>. Eat food to grow and avoid walls and other snakes. Choose your difficulty at the start. The game uses a grid-based board and includes simple reflex and search-based AI for enemy behavior (see the code for details).
+                </p>
+            </section>
+
+            <section class="showcase-section">
+                <h2>Tech stack</h2>
+                <ul>
+                    <li>Python 3</li>
+                    <li><code>turtle</code> (graphics and game window)</li>
+                    <li>Search / AI logic for enemy movement (e.g. avoiding walls and collisions)</li>
+                </ul>
+            </section>
+
+            <section class="showcase-section showcase-media">
+                <h2>Gameplay</h2>
+                <p class="showcase-media-note">
+                    Gameplay screenshot from the Python Snake project.
+                </p>
+                <img
+                    class="showcase-media-image"
+                    src="../assets/images/snake-fight.png"
+                    alt="Snake Fight gameplay showing difficulty options and enemy count"
+                >
+            </section>
+
+            <section class="showcase-section">
+                <h2>How to run locally</h2>
+                <p>
+                    The game runs in a desktop window, not in the browser. From the project root:
+                </p>
+                <pre class="showcase-code"><code>cd PythonSnake
+python3 main.py</code></pre>
+                <p>
+                    Use <strong>W</strong> (up), <strong>A</strong> (left), <strong>S</strong> (down), and <strong>D</strong> (right) to move. Select difficulty when the game starts.
+                </p>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>
