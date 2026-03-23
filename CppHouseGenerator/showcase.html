@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ House Generator | Ava Portfolio</title>
+    <link rel="icon" type="image/png" href="../assets/images/logo1.png">
+    <link rel="apple-touch-icon" href="../assets/images/logo1.png">
+    <link rel="stylesheet" href="../About/style.css">
+    <link rel="stylesheet" href="../stylemenu.css">
+    <link rel="stylesheet" href="../globalstyles.css">
+    <style>
+        .showcase-backdrop { top: 100px;position: absolute;width: 100%;height: auto; background-color: #C8E0FE;}
+        .showcase-content {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+        .showcase-content h1 {
+            color: #133670;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+        .showcase-lead { font-size: 1.1rem; color: #212c3e; margin-bottom: 2rem; }
+        /* Override global About/style.css `p` (1.2rem serif) so body text + inline code read correctly */
+        .showcase-content code { background: rgba(0,0,0,.06); padding: 0.15em 0.4em; border-radius: 4px; }
+        .showcase-section { margin-bottom: 2rem; }
+        .showcase-section h2 { color: #212c3e; font-size: 1.35rem; margin-bottom: 0.5rem; padding: 0; background: transparent; }
+        .showcase-section p, .showcase-section ul { color: #212c3e; text-align: left; padding: 0 0 0.5rem; margin: 0; background: transparent; }
+        .showcase-section p code,
+        .showcase-section li code { font-size: 0.875rem; }
+        .showcase-section ul { padding-left: 1.5rem; }
+        .showcase-code {
+            background: #212c3e;
+            color: #e8e8e8;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 0.75rem 0;
+            font-size: 0.9rem;
+        }
+        .showcase-code code { background: transparent; padding: 0; color: inherit; font-size: inherit; }
+        .showcase-media-note { margin-bottom: 0.75rem; }
+        .showcase-media-image {
+            width: 80%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid rgba(19,54,112,0.2);
+            display: flex;
+            justify-self: center;
+        }
+    </style>
+</head>
+
+<body>
+    <iframe id="iframeId" src="../menu.html" frameborder="0" width="100%" height="300" scrolling="no"></iframe>
+    <div class="showcase-backdrop">
+        <main class="showcase-content">
+            <h1>C++ House Generator</h1>
+            <p class="showcase-lead">
+                A C++ console project that procedurally generates ASCII house floor plans from user input: bedroom count, bathroom count, and total square footage.
+            </p>
+
+            <section class="showcase-section">
+                <h2>What it does</h2>
+                <p>
+                    The app turns high-level requirements into a randomized floor plan layout on a 2D grid. Given the number of bedrooms and bathrooms plus target square footage, it computes room sizes, places rooms based on adjacency rules, and prints a complete ASCII map of the house.
+                </p>
+            </section>
+
+            <section class="showcase-section">
+                <h2>Core architecture</h2>
+                <ul>
+                    <li><code>Room</code>: abstract base class where each room type overrides <code>pick_anchor()</code> and <code>get_default_size_ratio()</code> for custom placement and sizing behavior.</li>
+                    <li><code>House</code>: owns room objects and applies the percentage-based "how much space does each room get?" logic.</li>
+                    <li><code>DimensionGenerator</code>: converts square footage into integer grid dimensions and randomly splits category percentages across individual rooms.</li>
+                    <li><code>Grid</code> + <code>Position</code>: <code>Grid</code> stores the map as <code>map&lt;(x,y), char&gt;</code> and renders ASCII; <code>Position</code> handles attaching rooms by checking which sides are free.</li>
+                </ul>
+            </section>
+
+            <section class="showcase-section">
+                <h2>Design decisions</h2>
+                <ul>
+                    <li>Polymorphism keeps placement logic clean, because room-specific anchor rules live in each room class instead of a giant conditional block.</li>
+                    <li>Separation of concerns keeps the system maintainable: sizing, placement, and logic per room are decoupled into different classes.</li>
+                    <li>Procedural variety comes from randomized per-room percentages and random free-side selection, so each generated house is different.</li>
+                </ul>
+            </section>
+
+            <section class="showcase-section">
+                <h2>Extensibility</h2>
+                <p>
+                    Adding a new room type is straightforward: create a new <code>Room</code> subclass and implement <code>pick_anchor()</code> (plus the default size ratio). The rest of the generation pipeline continues to work without restructuring existing logic.
+                </p>
+            </section>
+
+            <section class="showcase-section showcase-media">
+                <h2>Sample output</h2>
+                <p class="showcase-media-note">
+                    Console output showing room allocation plus a generated ASCII floor plan.
+                </p>
+                <img
+                    class="showcase-media-image"
+                    src="../assets/images/house-generator.png"
+                    alt="C++ house generator console output with room table and ASCII floor plan"
+                >
+            </section>
+
+            <section class="showcase-section">
+                <h2>How to run locally</h2>
+                <p>
+                    Build with CMake from the <code>CppHouseGenerator</code> project directory:
+                </p>
+                <pre class="showcase-code"><code>mkdir -p build
+cd build
+cmake ..
+cmake --build .</code></pre>
+                <p>
+                    Run the built executable from <code>build</code>, then enter bedrooms, bathrooms, and square footage when prompted to generate a new ASCII floor plan.
+                </p>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>
