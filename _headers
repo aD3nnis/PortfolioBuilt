@@ -1,0 +1,6 @@
+# Fallback if you deploy without netlify.toml processing; must live in the publish directory.
+/assets/images/*.pdf
+  Content-Disposition: inline
+
+/*.pdf
+  Content-Disposition: inline

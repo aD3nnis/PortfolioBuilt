@@ -1,0 +1,12 @@
+# PDFs must be served with Content-Disposition: inline so browsers can render them
+# inside <iframe> / <object>. Without this, Netlify (or the CDN) may treat them as
+# downloads and the embedded viewer stays blank in production.
+[[headers]]
+  for = "/assets/images/*.pdf"
+  [headers.values]
+    Content-Disposition = "inline"
+
+[[headers]]
+  for = "/*.pdf"
+  [headers.values]
+    Content-Disposition = "inline"

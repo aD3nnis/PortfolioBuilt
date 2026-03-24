@@ -139,3 +139,6 @@ p{
     border: none;
     display: block;
 }
+#resume_page .resume-actions-sep {
+    user-select: none;
+}
