@@ -104,9 +104,11 @@ p{
     background-color: #C8E0FE;
     padding: 0 0 48px 0;
     box-sizing: border-box;
-    position: absolute;
+    position: relative;
+    z-index: 0;
     top: 100px;
-    height: 100%;
+    position: absolute;
+    padding-top: 200px;
 }
 #resume_page .resume-header {
     text-align: center;

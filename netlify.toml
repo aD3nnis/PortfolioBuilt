@@ -1,8 +1,7 @@
-# PDFs must be served with Content-Disposition: inline so browsers can render them
-# inside <iframe> / <object>. Without this, Netlify (or the CDN) may treat them as
-# downloads and the embedded viewer stays blank in production.
+# Inline so the resume PDF can render inside an <iframe>. (Attachment would
+# fight the embed.) Download still works via the link’s download attribute / new tab.
 [[headers]]
-  for = "/assets/images/*.pdf"
+  for = "/assets/images/a_dennis_Resume_current.pdf"
   [headers.values]
     Content-Disposition = "inline"
 
