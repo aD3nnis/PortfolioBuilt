@@ -98,3 +98,44 @@ p{
     padding:0 10px 150px 10px;
     font-family:  Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
+
+#resume_page {
+    width: 100%;
+    background-color: #C8E0FE;
+    padding: 0 0 48px 0;
+    box-sizing: border-box;
+    position: absolute;
+    top: 100px;
+    height: 100%;
+}
+#resume_page .resume-header {
+    text-align: center;
+    padding: 24px 16px 16px;
+    margin: 0;
+}
+#resume_page .resume-actions {
+    text-align: center;
+    margin-bottom: 16px;
+    padding: 0 16px 12px;
+}
+#resume_page .resume-actions a {
+    color: #1b46a3;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 1.05rem;
+}
+#resume_page .resume-frame-wrap {
+    width: min(920px, 96vw);
+    margin: 0 auto;
+    min-height: 75vh;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(19, 54, 112, 0.12);
+}
+#resume_page .resume-pdf {
+    width: 100%;
+    height: 80vh;
+    min-height: 560px;
+    border: none;
+    display: block;
+}
