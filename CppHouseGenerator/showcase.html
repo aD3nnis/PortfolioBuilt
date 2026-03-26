@@ -21,7 +21,25 @@
             letter-spacing: 0.05em;
             margin-bottom: 0.5rem;
         }
-        .showcase-lead { font-size: 1.1rem; color: #212c3e; margin-bottom: 2rem; }
+        .showcase-lead { font-size: 1.1rem; color: #212c3e; margin-bottom: 2rem; padding-bottom: 10px;}
+        .showcase-link-button {
+            display: inline-block;
+            background-color: #212c3e;
+            color: #e3e8f1;
+            padding: 0.65rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+            width: 40%;
+            display: flex;
+            justify-content: center;
+            justify-self: anchor-center;
+        }
+        .showcase-link-button:hover {
+            background-color: #0f2b59;
+        }
         /* Override global About/style.css `p` (1.2rem serif) so body text + inline code read correctly */
         .showcase-content code { background: rgba(0,0,0,.06); padding: 0.15em 0.4em; border-radius: 4px; }
         .showcase-section { margin-bottom: 2rem; }
@@ -49,6 +67,9 @@
             display: flex;
             justify-self: center;
         }
+        .showcase-links {
+            margin-top: 1.25rem;
+        }
     </style>
 </head>
 
@@ -60,6 +81,16 @@
             <p class="showcase-lead">
                 A C++ console project that procedurally generates ASCII house floor plans from user input: bedroom count, bathroom count, and total square footage.
             </p>
+            <section class="showcase-section showcase-links">
+                <a
+                    class="showcase-link-button"
+                    href="https://github.com/aD3nnis/house-generator"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    View Project on GitHub
+                </a>
+            </section>
 
             <section class="showcase-section">
                 <h2>What it does</h2>
