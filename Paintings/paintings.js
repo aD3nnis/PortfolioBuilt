@@ -5,7 +5,7 @@ gsap.to(sections, {
   xPercent: -100 * (sections.length) + ((viewportWidth/1000) * 100),
   ease: "none",
   scrollTrigger: {
-    trigger: "#iframeId",
+    trigger: "#site-menu",
     pin: ".pinned-elements",
     start: 'top top',
     pinSpacing: false,
