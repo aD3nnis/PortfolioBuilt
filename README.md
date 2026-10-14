@@ -1,17 +1,22 @@
 # PortfolioBuilt
-From your PortfolioBuilt folder, run:
 
+Static portfolio site for Ava Dennis.
+
+## Local development
+
+```bash
 npm run dev
-Then open:
+```
 
-http://localhost:5173
-That serves your portfolio site locally (including CppHouseGenerator/showcase.html).
+Then open http://localhost:5173.
 
-If you want the production build flow:
+## Production build
 
+```bash
 npm run build
 npm run preview
-Then open:
+```
 
-http://localhost:4173
-If you meant running the separate C++ repo itself, use the steps in your repo README here: aD3nnis/house-generator.
+Then open http://localhost:4173.
+
+The C++ House Generator source lives in its own repo: [aD3nnis/house-generator](https://github.com/aD3nnis/house-generator).

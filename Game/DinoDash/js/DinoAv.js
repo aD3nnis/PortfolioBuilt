@@ -69,9 +69,6 @@ document.addEventListener("DOMContentLoaded", function() {
       document.getElementById('jumpbutton').addEventListener('click', function() {      
       const img = document.getElementById("Dinosaur");
       img.style.top = 0 + "px"; // DINO POSITION // 53%, 53 + "%"
-        // Your code here
-        console.log('Button was clicked');
-   
         // Set canClick to true when the space bar is pressed 
         if (canClick) {
 
