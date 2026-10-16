@@ -7,7 +7,7 @@
     height: 300px;
     z-index: 1000;
     pointer-events: none;
-    font-family: initial;
+    font-family: "Adelle Sans", "Avenir Next", "Segoe UI", sans-serif;
     font-size: 16px;
     font-weight: normal;
     line-height: normal;
@@ -103,7 +103,7 @@
     background-image: linear-gradient(rgb(255, 255, 255), #ffffff);
 }
 #site-menu #menuItems li ul li:hover {
-    background-color: #093757;
+    background-color: #212c3e;
 }
 #site-menu #menuItems li ul li:hover a {
     color: #C8E0FE;
@@ -128,7 +128,7 @@
 #site-menu a {
     padding: 10px 20px 10px 10px;
     text-decoration: none;
-    color: #093756;
+    color: #212c3e;
     width: 100%;
 }
 #site-menu .design {

@@ -1,130 +1,623 @@
-body{
+/* Adelle Sans — drop licensed files into ../assets/fonts/ */
+@font-face {
+    font-family: "Adelle Sans";
+    src:
+        local("Adelle Sans"),
+        local("AdelleSans-Regular"),
+        url("../assets/fonts/AdelleSans-Regular.woff2") format("woff2"),
+        url("../assets/fonts/AdelleSans-Regular.woff") format("woff"),
+        url("../assets/fonts/AdelleSans-Regular.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* —— Shared page base —— */
+body {
     width: 100%;
+    margin: 0;
     display: flex;
     flex-direction: column;
-    margin: 0;
+    background: #ffffff;
 }
-#hero_page {
-    width: 100vw;
-    height: auto;
-    position: absolute;
-    display: block;
-    z-index: -1; 
 
-}
-#hero {
-    position: relative;
-    background-color: #C8E0FE;
-    display: flex;
-    justify-content: center;
-    /* top: 0;*/
-    width: 100vw;
-    padding: 55px 0 55px 0;
-    
-    }
-#us{
-    position: relative;
-    display: flex;
-    justify-content: center;
-    width: 75%;
-    /* background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%); */
+/* —— About page —— */
+.about-page {
+    --ink: #212c3e;
+    --cream: #eff4f8;
+    --gutter: 15px;
+    --row-gap: 15px;
+    --panel-pad: 15px;
 
-    }
-#portfolio {
-        position: absolute;
-        font-size: 9vw;
-        margin: 9% 0px 0px -16%;
-        border-radius: 10px;
-        color: #133670;/*  01416f 133670*/
-        width: 8vw;
-        font-weight: 800;
-        opacity: 0; /* when gsap use opacity: 0*/
-        
-    }
-    .over_image{
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        /* background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%); */
-        /* background: linear-gradient(to bottom, #C8E0FE 0%, transparent 10%, #C8E0FE 200%); */
-    }
-#about{
-    background-color: #C8E0FE;
     position: relative;
-    display: flex;
-    justify-content: center;
-}
-.me{
-    height: auto;
+    z-index: 0;
+    margin-top: -200px;
     width: 100%;
-    border-radius: 15px;
-    margin: 10px;
-    
-}
-h3{
-    text-align: center;
-    color: #0c2760;
-    font-size: 1.1em;
-    font-family:  Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-}
-.split{
-    width: 30%;
-    height: 0%;
-    display: flex;
-    justify-content: center;
-    position: relative;
-}
-#badPhoto{
-    width: 80%;
-}
-h2{
-    text-align: center;
-    color: #212c3e;
-    background-color: #C8E0FE;
-    padding: 50px 0 20px 0;
-    margin: 0;
-}
-h3 span{
-    font-size: 1.2em;
-    color: #1b46a3;
-}
-p{
-    text-align: center;
-    color: #212c3e;
-    background-color: #C8E0FE;
-    margin: 0;
-    padding-bottom: 100px;
-    font-size: 1.2rem;
-    padding:0 10px 150px 10px;
-    font-family:  Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: "Adelle Sans", "Avenir Next", "Segoe UI", sans-serif;
+    font-weight: 400;
+    color: var(--ink);
+    box-sizing: border-box;
+    background: #C8E0FE;
 }
 
+.about-page *,
+.about-page *::before,
+.about-page *::after {
+    box-sizing: border-box;
+}
+
+.about-intro {
+    background: #C8E0FE;
+    text-align: center;
+    padding: 28px 24px 40px;
+}
+
+.about-intro h1 {
+    margin: 0;
+    font-size: clamp(2rem, 4.5vw, 3.1rem);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    font-family: inherit;
+}
+
+.about-subtitle {
+    margin: 12px auto 0;
+    max-width: 36rem;
+    font-size: clamp(1rem, 1.7vw, 1.15rem);
+    font-weight: 400;
+    line-height: 1.45;
+    color: var(--ink);
+    opacity: 0.85;
+}
+
+/* Rows sit on white; panels carry the color */
+.impact-row {
+    width: 100%;
+    margin: 0 0 var(--row-gap);
+    padding: 0;
+    background: transparent;
+}
+
+.impact-row:last-child {
+    margin-bottom: 0;
+}
+
+.impact-inner {
+    /* Edge-to-edge below 1600; capped and centered above */
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    container-type: inline-size;
+}
+
+.impact-split {
+    display: grid;
+    align-items: stretch; /* image panel matches text panel height */
+    column-gap: var(--gutter);
+    grid-template-rows: auto; /* height from text content */
+}
+
+.impact-panel {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
+    padding: var(--panel-pad);
+}
+
+.panel-dark {
+    background: var(--ink);
+    color: var(--cream);
+}
+
+.panel-light {
+    background: var(--cream);
+    color: var(--ink);
+}
+
+.impact-media {
+    margin: 0;
+    width: 100%;
+    flex: 1 1 auto;
+    position: relative;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Fully visible images; panels set the box size from design ratios */
+.impact-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: center;
+    position: absolute;
+    inset: 0;
+}
+
+.impact-copy {
+    justify-content: flex-start;
+}
+
+.impact-copy h2 {
+    margin: 0 0 clamp(6px, calc(14 / 1440 * 100cqw), 14px);
+    /* Scales with section width; floors low enough to fit fixed boxes */
+    font-size: clamp(0.8rem, calc(28 / 1440 * 100cqw), 1.75rem);
+    font-weight: 400;
+    line-height: 1.25;
+    text-align: center;
+    background: none;
+    padding: 0;
+    color: inherit;
+    font-family: inherit;
+}
+
+.impact-copy p {
+    margin: 0 0 clamp(6px, calc(12 / 1440 * 100cqw), 14px);
+    font-size: clamp(0.62rem, calc(16 / 1440 * 100cqw), 1.08rem);
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: left;
+    background: none;
+    padding: 0;
+    color: inherit;
+    font-family: inherit;
+}
+
+.impact-copy p:last-child {
+    margin-bottom: 0;
+}
+
+.impact-link-line {
+    margin-top: 18px !important;
+}
+
+.panel-dark .impact-copy a,
+.panel-dark a {
+    color: var(--cream);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 400;
+}
+
+.panel-dark a:hover {
+    opacity: 0.85;
+}
+
+.impact-copy-centered {
+    text-align: center;
+    align-items: center;
+}
+
+.impact-copy-centered h2,
+.impact-copy-centered p {
+    text-align: center;
+}
+
+/*
+  Per-section sizes from mockup PNG, scaled to a 1440-wide design.
+  Text box width/height use cqw so ratios hold as the window shrinks.
+  Image column takes the remaining width; images use object-fit: contain.
+  (PNG is low-res — dimensions are best-effort; send exact px to refine.)
+*/
+
+.band-basketball {
+    --row-gap: 15px;
+}
+
+.band-basketball .impact-split {
+    /* mockup @1440: text width ~851, gutter ~21 — height follows text */
+    --gutter: min(21px, calc(21 / 1440 * 100cqw));
+    --text-w: min(851px, calc(851 / 1440 * 100cqw));
+    grid-template-columns: minmax(0, 1fr) minmax(0, var(--text-w));
+}
+
+.band-academics {
+    --row-gap: 15px;
+}
+
+/* One continuous panel — no adjacent boxes, so no subpixel hairline */
+.band-academics .academics-pair {
+    /* mockup @1440: text width ~928, no gutter — height follows text */
+    --text-w: min(928px, calc(928 / 1440 * 100cqw));
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, var(--text-w));
+    column-gap: 0;
+    align-items: stretch;
+    height: auto;
+    min-height: 0;
+    padding: var(--panel-pad);
+}
+
+.band-academics .academics-pair .impact-media,
+.band-academics .academics-pair .impact-copy {
+    min-width: 0;
+    min-height: 0;
+}
+
+.band-academics .academics-pair .impact-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-left: var(--panel-pad);
+}
+
+.band-community {
+    --row-gap: 15px;
+}
+
+.band-community .impact-split {
+    /* mockup @1440: text width ~853 (left), gutter ~17 — height follows text */
+    --gutter: min(17px, calc(17 / 1440 * 100cqw));
+    --text-w: min(853px, calc(853 / 1440 * 100cqw));
+    grid-template-columns: minmax(0, var(--text-w)) minmax(0, 1fr);
+}
+
+.band-workplace {
+    --row-gap: 15px;
+}
+
+/*
+  Design reference @ 1440 wide: text panels 790×580, gutter 15, image pad 40.
+  Everything scales from that ratio as the container shrinks.
+*/
+.band-workplace .impact-inner {
+    container-type: inline-size;
+    container-name: workplace;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/*
+  Image column: one cream panel spanning both rows (no white gap between shots).
+  Text column: width capped at 790; row heights follow each text block.
+  Images are taken out of flow so they cannot inflate the rows.
+*/
+.workplace-grid {
+    --gutter: min(15px, calc(15 / 1440 * 100cqw));
+    --workplace-img-pad: min(40px, calc(40 / 1440 * 100cqw));
+    --workplace-text-width: min(790px, calc(790 / 1440 * 100cqw));
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, var(--workplace-text-width));
+    grid-template-rows: max-content max-content;
+    column-gap: var(--gutter);
+    row-gap: var(--gutter);
+    align-items: stretch;
+}
+
+.workplace-images {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    display: grid;
+    grid-template-rows: subgrid;
+    align-items: stretch;
+    min-width: 0;
+    min-height: 0;
+    /* Continuous cream panel — white row-gap only appears between the text panels */
+}
+
+.workplace-shot {
+    margin: 0;
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    position: relative;
+    box-sizing: border-box;
+    /* Clip so photos cannot spill into the neighboring row */
+    overflow: hidden;
+}
+
+.workplace-shot img {
+    /* Sized to this row only; out of flow so rows stay text-sized */
+    position: absolute;
+    top: var(--workplace-img-pad);
+    left: var(--workplace-img-pad);
+    right: var(--workplace-img-pad);
+    bottom: var(--workplace-img-pad);
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    object-fit: contain;
+    object-position: center;
+}
+
+.workplace-shot:first-child img {
+    bottom: calc(var(--workplace-img-pad) / 2);
+}
+
+.workplace-shot:last-child img {
+    top: calc(var(--workplace-img-pad) / 2);
+}
+
+.workplace-copy-1,
+.workplace-copy-2 {
+    grid-column: 2;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow: visible;
+    box-sizing: border-box;
+    padding: min(30px, calc(30 / 1440 * 100cqw));
+    /* Text is the only in-flow height source for each row */
+    align-self: start;
+}
+
+.workplace-copy-1 h2 {
+    font-size: clamp(0.8rem, calc(26 / 1440 * 100cqw), 1.75rem);
+    margin-bottom: clamp(6px, calc(12 / 1440 * 100cqw), 14px);
+}
+
+.workplace-copy-1 {
+    grid-row: 1;
+}
+
+.workplace-copy-2 {
+    grid-row: 2;
+}
+
+.band-holidays {
+    --row-gap: 15px;
+    /* Cap image-row height (not driven by text). Tweak this to make the row shorter/taller. */
+    --holidays-img-h: min(400px, calc(400 / 1440 * 100cqw));
+}
+
+.holidays-grid {
+    /* mockup @1440: imgs ~907 + 484, gutter ~21 */
+    --gutter: min(21px, calc(21 / 1440 * 100cqw));
+
+    display: grid;
+    grid-template-columns: minmax(0, 907fr) minmax(0, 484fr);
+    grid-template-rows: var(--holidays-img-h) auto;
+    grid-template-areas:
+        "img1  img2"
+        "body  body";
+    column-gap: var(--gutter);
+    row-gap: var(--gutter);
+    align-items: stretch;
+}
+
+.holidays-img-1,
+.holidays-img-2 {
+    height: var(--holidays-img-h);
+    max-height: var(--holidays-img-h);
+    overflow: hidden;
+}
+
+.holidays-img-1 { grid-area: img1; }
+.holidays-img-2 { grid-area: img2; }
+
+.band-holidays .impact-media {
+    height: 100%;
+    min-height: 0;
+}
+
+.band-holidays .impact-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+
+.holidays-body { grid-area: body; }
+
+.holidays-body h2 {
+    text-align: center;
+    margin-bottom: clamp(10px, calc(18 / 1440 * 100cqw), 18px);
+}
+
+.holidays-body p {
+    text-align: left;
+    max-width: none;
+}
+
+.holidays-body p + p {
+    margin-top: 14px;
+}
+
+.band-now {
+    --row-gap: 0;
+}
+
+.band-now .impact-split {
+    /* mockup @1440: text width ~824 (left), gutter ~23 — height follows text */
+    --gutter: min(23px, calc(23 / 1440 * 100cqw));
+    --text-w: min(824px, calc(824 / 1440 * 100cqw));
+    grid-template-columns: minmax(0, var(--text-w)) minmax(0, 1fr);
+}
+
+@media screen and (max-width: 860px) {
+    .about-page {
+        margin-top: -220px;
+        --gutter: 15px;
+        --row-gap: 15px;
+        --panel-pad: 20px;
+    }
+
+    .about-intro {
+        padding: 16px 20px 28px;
+    }
+
+    .band-basketball .impact-split,
+    .band-community .impact-split,
+    .band-now .impact-split {
+        --gutter: 15px;
+        --text-w: 100%;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        row-gap: var(--gutter);
+    }
+
+    .band-academics .academics-pair {
+        --text-w: 100%;
+        height: auto;
+        min-height: 0;
+        grid-template-columns: 1fr;
+        row-gap: 16px;
+    }
+
+    .band-academics .academics-pair .impact-copy {
+        padding-left: 0;
+    }
+
+    .band-academics .academics-pair .impact-media {
+        min-height: 220px;
+    }
+
+    .band-academics .academics-pair .impact-media img {
+        position: static;
+        height: auto;
+        max-height: none;
+    }
+
+    .band-community .impact-split-reverse .impact-copy,
+    .band-now .impact-split-reverse .impact-copy {
+        order: 2;
+    }
+
+    .band-community .impact-split-reverse .impact-panel:last-child,
+    .band-now .impact-split-reverse .impact-panel:last-child {
+        order: 1;
+    }
+
+    .impact-media {
+        min-height: 220px;
+    }
+
+    .impact-media img {
+        position: static;
+        height: auto;
+        max-height: none;
+    }
+
+    .workplace-grid {
+        --gutter: 15px;
+        --workplace-img-pad: 24px;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+
+    .workplace-images {
+        grid-column: 1;
+        grid-row: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .workplace-shot {
+        flex: 0 0 auto;
+        height: auto;
+        position: relative;
+        padding: var(--workplace-img-pad, 24px);
+    }
+
+    .workplace-shot img {
+        position: static;
+        inset: auto;
+        width: 100%;
+        height: auto;
+        max-height: none;
+        margin: 0;
+    }
+
+    .workplace-copy-1,
+    .workplace-copy-2 {
+        grid-column: 1;
+        grid-row: auto;
+        width: 100%;
+        height: auto;
+        overflow: visible;
+    }
+
+    .impact-copy h2 {
+        font-size: clamp(1.05rem, 4.5vw, 1.5rem);
+    }
+
+    .impact-copy p {
+        font-size: clamp(0.85rem, 3.6vw, 1.05rem);
+        line-height: 1.55;
+    }
+
+    .holidays-grid {
+        --gutter: 15px;
+        --holidays-img-h: auto;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        grid-template-areas:
+            "img1"
+            "img2"
+            "body";
+    }
+
+    .holidays-img-1,
+    .holidays-img-2 {
+        height: auto;
+        max-height: none;
+    }
+
+    .band-holidays .impact-media img {
+        position: static;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .about-page {
+        margin-top: -230px;
+        --panel-pad: 16px;
+    }
+}
+
+/* —— Resume page (shared stylesheet) —— */
 #resume_page {
     width: 100%;
     background-color: #C8E0FE;
     padding: 0 0 48px 0;
     box-sizing: border-box;
-    position: relative;
     z-index: 0;
     top: 100px;
     position: absolute;
     padding-top: 200px;
 }
+
 #resume_page .resume-header {
     text-align: center;
     padding: 24px 16px 16px;
     margin: 0;
+    color: #212c3e;
+    background: none;
+    font-family: "Adelle Sans", "Avenir Next", "Segoe UI", sans-serif;
 }
+
 #resume_page .resume-actions {
     text-align: center;
     margin-bottom: 16px;
     padding: 0 16px 12px;
+    background: none;
+    color: #212c3e;
+    font-family: "Adelle Sans", "Avenir Next", "Segoe UI", sans-serif;
 }
+
 #resume_page .resume-actions a {
     color: #1b46a3;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: "Adelle Sans", "Avenir Next", "Segoe UI", sans-serif;
     font-size: 1.05rem;
 }
+
 #resume_page .resume-frame-wrap {
     width: min(920px, 96vw);
     margin: 0 auto;
@@ -134,6 +627,7 @@ p{
     overflow: hidden;
     box-shadow: 0 8px 24px rgba(19, 54, 112, 0.12);
 }
+
 #resume_page .resume-pdf {
     width: 100%;
     height: 80vh;
@@ -141,6 +635,7 @@ p{
     border: none;
     display: block;
 }
+
 #resume_page .resume-actions-sep {
     user-select: none;
 }

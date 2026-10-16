@@ -17,7 +17,7 @@
  }
 
  .theProcess{
-    background-color: #093756;
+    background-color: #212c3e;
     width: 90%;
     height: auto;
     display: flex;
@@ -28,7 +28,7 @@
 
  }
  .theProcess2{
-   background-color: #093756;
+   background-color: #212c3e;
    width: 90%;
    height: auto;
    display: flex;
@@ -79,7 +79,7 @@
     display: flex;
     position: absolute;
     margin-right: 0;
-    color: #093756;
+    color: #212c3e;
     letter-spacing: 1px;
     justify-content: center;
     width: 100%;
@@ -93,7 +93,7 @@
  .sectitleContainer{
     position: relative;
     display: flex;
-    background-color: #093756;
+    background-color: #212c3e;
     width: 90%;  
     justify-content: space-around;
     height: auto;
@@ -174,7 +174,7 @@
     padding: 10px 10px;
     position: relative;
     width: 100%;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: "Adelle Sans", "Avenir Next", "Segoe UI", sans-serif;
  }
  button:hover{
     background-color: #A5907E;
@@ -202,7 +202,7 @@
     text-wrap: nowrap;
  }
  .secProcessPhone{
-   background-color: #093756;
+   background-color: #212c3e;
    position: absolute;
    display: flex;
    justify-content: center;
@@ -214,7 +214,7 @@
  }
  #processTextPhone{
    margin-top: 20px;
-   background-color: #093756;
+   background-color: #212c3e;
    z-index: 20;
 
  }
@@ -236,7 +236,7 @@
       max-width: 535px;
       padding: 40px 0;
       margin-top: 1800px;
-      background-color: #093756;
+      background-color: #212c3e;
       position: absolute;
       right: 0;
       /* max-height: 745px; */
@@ -251,7 +251,7 @@
       margin-right: 10px;
       position: absolute;
       margin-top: 1800px;
-      background-color: #093756;
+      background-color: #212c3e;
     }
     .theProcess{
       z-index: -2;

@@ -14,7 +14,7 @@
 }
 h1{
     text-align: center;
-    font-family:  Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: "Adelle Sans", "Avenir Next", "Segoe UI", sans-serif;
     font-weight: 100;
     font-size: 48px; 
     position: relative;
@@ -111,7 +111,7 @@ div#Gameover{
     text-align: center;
     align-items: center;
     font-size: 100px; 
-    color: #093756;
+    color: #212c3e;
     display: none;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -129,7 +129,7 @@ div#Gameover{
     letter-spacing: 7px;  
     height: 80px;
     width: 300px;
-    background-color: #093756;
+    background-color: #212c3e;
     color: #C8E0FE;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     border-color: #01091c;
@@ -170,7 +170,7 @@ div#Gameover{
     margin-top: -17px;
     font-size: 21px;
     color: #C8E0FE;
-    font-family:  Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: "Adelle Sans", "Avenir Next", "Segoe UI", sans-serif;
     
 }
 @media screen and (max-width: 568px) {
