@@ -8,7 +8,7 @@
     menu.setAttribute("role", "navigation");
     menu.innerHTML = `
         <div id="fixMenu">
-            <a class="hyperlink" href="${link("About/index.html")}"><img class="logoMenu" src="${link("assets/images/logo1.png")}" alt="Home"></a>
+            <a class="hyperlink" href="${link("index.html")}"><img class="logoMenu" src="${link("assets/images/logo1.png")}" alt="Home"></a>
             <ul id="menuItems">
                 <li class="menu-list">
                     <a href="#">About</a>

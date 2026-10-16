@@ -1,3 +1,19 @@
+# Old About homepage URLs → clean site root.
+[[redirects]]
+  from = "/About"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/About/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/About/index.html"
+  to = "/"
+  status = 301
+
 # Inline so the resume PDF can render inside an <iframe>. (Attachment would
 # fight the embed.) Download still works via the link’s download attribute / new tab.
 [[headers]]
