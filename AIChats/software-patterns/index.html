@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Patterns in Practice | AI Chats | Ava Portfolio</title>
+    <link rel="icon" type="image/png" href="../../assets/images/logo1.png">
+    <link rel="apple-touch-icon" href="../../assets/images/logo1.png">
+    <link rel="stylesheet" href="../../stylemenu.css">
+    <link rel="stylesheet" href="../../globalstyles.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+    <script src="patterns.js" defer></script>
+    <script src="scenarios.js" defer></script>
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+    <script src="../../menu.js"></script>
+    <div class="patterns-backdrop">
+        <main class="patterns-page">
+            <p class="patterns-back"><a href="../system-design.html">← System Design</a></p>
+            <h1>Software Patterns in Practice</h1>
+            <p class="patterns-lead">
+                Pick a request a client or manager might bring you, then step through the architecture that fits it.
+            </p>
+
+            <nav id="scenario-picker" class="scenario-picker" aria-label="Scenarios"></nav>
+
+            <div class="scenario">
+                <section id="brief" class="brief" aria-label="The request"></section>
+
+                <section class="walkthrough" aria-label="Architecture walkthrough">
+                    <div class="diagram-wrap">
+                        <svg id="diagram" class="diagram" role="img"></svg>
+                    </div>
+
+                    <div class="step-panel">
+                        <p id="step-count" class="step-count"></p>
+                        <div aria-live="polite">
+                            <h2 id="step-title" class="step-title"></h2>
+                            <p id="step-text" class="step-text"></p>
+                            <p id="step-book" class="step-book" hidden></p>
+                        </div>
+                        <div class="step-nav">
+                            <button id="step-prev" type="button" class="step-button">← Back</button>
+                            <ol id="step-dots" class="step-dots"></ol>
+                            <button id="step-next" type="button" class="step-button">Next →</button>
+                        </div>
+                        <p class="step-hint">Tip: use the ← and → keys.</p>
+                    </div>
+
+                    <details id="why-not" class="why-not"></details>
+                </section>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
