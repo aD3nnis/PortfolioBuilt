@@ -216,7 +216,9 @@
         els.text.textContent = step.text;
         els.book.hidden = !step.book;
         if (step.book) {
-            els.book.innerHTML = `<span class="book-label">From the book · ${step.book.chapter}</span>${step.book.text}`;
+            const num = (/Ch\. (\d+)/.exec(step.book.chapter) || [])[1];
+            const label = `From the book · ${step.book.chapter}`;
+            els.book.innerHTML = `<span class="book-label">${num ? `<a href="../design-philosophy/index.html#ch-${num}">${label} →</a>` : label}</span>${step.book.text}`;
         }
 
         els.prev.disabled = i === 0;
@@ -279,5 +281,6 @@
 
     renderPicker();
     renderMatrix();
-    selectScenario(0);
+    // #scenario-id deep links come from the design-philosophy chapter pages.
+    selectScenario(Math.max(0, SCENARIOS.findIndex((s) => `#${s.id}` === location.hash)));
 })();

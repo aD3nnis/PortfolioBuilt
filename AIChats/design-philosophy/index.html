@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Philosophy of Software Design, Visualized | AI Chats | Ava Portfolio</title>
+    <link rel="icon" type="image/png" href="../../assets/images/logo1.png">
+    <link rel="apple-touch-icon" href="../../assets/images/logo1.png">
+    <link rel="stylesheet" href="../../stylemenu.css">
+    <link rel="stylesheet" href="../../globalstyles.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="chapters.js" defer></script>
+    <script src="../software-patterns/scenarios.js" defer></script>
+    <script src="visuals.js" defer></script>
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+    <script src="../../menu.js"></script>
+    <div class="book-backdrop">
+        <main class="book-page">
+            <p class="book-back"><a href="../system-design.html">← System Design</a></p>
+            <h1>A Philosophy of Software Design, Visualized</h1>
+            <p class="book-lead">
+                One interactive visual for each chapter of John Ousterhout's book, with a note on how each idea shows up when you design whole systems.
+            </p>
+
+            <nav id="chapter-picker" class="chapter-picker" aria-label="Chapters"></nav>
+
+            <article id="chapter" class="chapter" aria-live="polite">
+                <header class="chapter-head">
+                    <p id="chapter-eyebrow" class="chapter-eyebrow"></p>
+                    <h2 id="chapter-title" class="chapter-title"></h2>
+                    <p id="chapter-takeaway" class="chapter-takeaway"></p>
+                </header>
+
+                <div class="chapter-body">
+                    <section id="viz" class="viz" aria-label="Interactive visual"></section>
+                    <aside id="chapter-notes" class="chapter-notes"></aside>
+                </div>
+
+                <nav class="chapter-nav" aria-label="Previous and next chapter">
+                    <a id="chapter-prev" class="chapter-nav-link"></a>
+                    <a id="chapter-next" class="chapter-nav-link chapter-nav-next"></a>
+                </nav>
+            </article>
+        </main>
+    </div>
+</body>
+
+</html>

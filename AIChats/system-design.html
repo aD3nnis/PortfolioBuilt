@@ -70,6 +70,45 @@
         .showcase-links {
             margin-top: 1.25rem;
         }
+        .chapter-grid {
+            list-style: none;
+            margin: 1rem 0 1.25rem;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 10px;
+        }
+        .chapter-card {
+            display: flex;
+            gap: 10px;
+            height: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            border-radius: 10px;
+            background: #ffffff;
+            color: #212c3e;
+            text-decoration: none;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .chapter-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(19,54,112,0.15);
+        }
+        .chapter-card:focus-visible { outline: 3px solid #f29f05; outline-offset: 2px; }
+        .chapter-num {
+            flex: none;
+            display: grid;
+            place-items: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #133670;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        .chapter-card-title { display: block; font-weight: 700; line-height: 1.25; }
+        .chapter-card-takeaway { display: block; margin-top: 4px; font-size: 0.85rem; line-height: 1.35; color: #3c4a60; }
     </style>
 </head>
 
@@ -91,13 +130,26 @@
             </section>
 
             <section class="showcase-section">
-                <h2>Chats</h2>
+                <h2>A Philosophy of Software Design, Visualized</h2>
                 <p>
-                    Coming soon.
+                    The patterns above lean on John Ousterhout's book again and again. Here's one interactive visual per chapter, each tied back to system design: service boundaries, APIs, queues and the trade-offs between them.
                 </p>
+                <ol id="chapter-grid" class="chapter-grid"></ol>
+                <a class="showcase-link-button" href="design-philosophy/index.html">Explore the chapters</a>
             </section>
+
         </main>
     </div>
+    <script src="design-philosophy/chapters.js"></script>
+    <script>
+        // Chapter cards link straight to each chapter's visual.
+        document.getElementById("chapter-grid").innerHTML = CHAPTERS.map((c) => `
+            <li><a class="chapter-card" href="design-philosophy/index.html#ch-${c.num}">
+                <span class="chapter-num">${c.num}</span>
+                <span><span class="chapter-card-title">${c.shortTitle || c.title}</span>
+                <span class="chapter-card-takeaway">${c.card}</span></span>
+            </a></li>`).join("");
+    </script>
 </body>
 
 </html>
