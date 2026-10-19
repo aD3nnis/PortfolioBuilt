@@ -9,6 +9,8 @@
     const $ = (id) => document.getElementById(id);
     const els = {
         picker: $("scenario-picker"),
+        matrix: $("matrix-table"),
+        scenario: document.querySelector(".scenario"),
         brief: $("brief"),
         svg: $("diagram"),
         count: $("step-count"),
@@ -56,6 +58,44 @@
         });
     }
 
+    // Scenarios down the side, patterns across the top grouped by category.
+    function renderMatrix() {
+        const groups = Object.entries(PATTERN_CATEGORIES).map(([category, label]) => ({
+            label,
+            ids: Object.keys(PATTERNS).filter((id) => PATTERNS[id].category === category),
+        }));
+
+        const groupRow = groups.map((g) => `<th scope="colgroup" colspan="${g.ids.length}" class="group-start">${g.label}</th>`).join("");
+        const patternRow = groups.map((g) => g.ids.map((id, j) => {
+            const p = PATTERNS[id];
+            return `<th scope="col"${j === 0 ? ' class="group-start"' : ""}${p.short ? ` title="${p.name}"` : ""}>${p.short || p.name}</th>`;
+        }).join("")).join("");
+
+        const rows = SCENARIOS.map((s, i) => {
+            const cells = groups.map((g) => g.ids.map((id, j) => {
+                const cls = j === 0 ? ' class="group-start"' : "";
+                return s.patterns.includes(id)
+                    ? `<td${cls}><button type="button" class="matrix-cell" aria-label="${s.title} uses ${PATTERNS[id].name}"><span aria-hidden="true">●</span></button></td>`
+                    : `<td${cls}></td>`;
+            }).join("")).join("");
+            return `<tr data-index="${i}"><th scope="row"><button type="button" class="matrix-scenario">${s.title}</button></th>${cells}</tr>`;
+        }).join("");
+
+        els.matrix.innerHTML = `
+            <thead>
+                <tr><td rowspan="2"></td>${groupRow}</tr>
+                <tr>${patternRow}</tr>
+            </thead>
+            <tbody>${rows}</tbody>`;
+
+        els.matrix.querySelector("tbody").addEventListener("click", (event) => {
+            const row = event.target.closest("tr");
+            if (!row) return;
+            selectScenario(Number(row.dataset.index));
+            els.scenario.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+        });
+    }
+
     function renderBrief() {
         const patterns = scenario.patterns.map((id) => {
             const p = PATTERNS[id];
@@ -71,7 +111,7 @@
             <blockquote class="brief-quote">“${scenario.brief}”</blockquote>
             <h3>Requirements that shape the design</h3>
             <ul class="brief-reqs">${scenario.requirements.map((r) => `<li>${r}</li>`).join("")}</ul>
-            <h3>Pattern this teaches</h3>
+            <h3>${scenario.patterns.length > 1 ? "Patterns" : "Pattern"} this teaches</h3>
             <ul class="brief-patterns">${patterns}</ul>`;
     }
 
@@ -216,6 +256,12 @@
     function selectScenario(i) {
         scenario = SCENARIOS[i];
         [...els.picker.children].forEach((button, j) => button.setAttribute("aria-pressed", String(i === j)));
+        // On narrow screens the picker scrolls sideways; keep the selected tab in view.
+        const tab = els.picker.children[i];
+        if (els.picker.scrollWidth > els.picker.clientWidth) {
+            els.picker.scrollLeft = tab.offsetLeft - (els.picker.clientWidth - tab.offsetWidth) / 2;
+        }
+        els.matrix.querySelectorAll("tbody tr").forEach((row, j) => row.classList.toggle("is-current", i === j));
         renderBrief();
         renderDiagram();
         renderStepDots();
@@ -232,5 +278,6 @@
     });
 
     renderPicker();
+    renderMatrix();
     selectScenario(0);
 })();

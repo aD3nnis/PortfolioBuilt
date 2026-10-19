@@ -46,6 +46,7 @@ body {
 
 /* Scenario picker */
 .scenario-picker {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
@@ -63,9 +64,120 @@ body {
     cursor: pointer;
 }
 
+.scenario-tab:hover {
+    background: rgba(19, 54, 112, 0.08);
+}
+
 .scenario-tab[aria-pressed="true"] {
     background: var(--blue);
     color: var(--paper);
+}
+
+/* Matrix */
+.matrix {
+    background: var(--paper);
+    border-radius: 12px;
+    padding: 14px 20px;
+    margin-bottom: 20px;
+}
+
+.matrix summary {
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--blue);
+}
+
+.matrix-hint {
+    margin: 0.6em 0 0.8em;
+    font-size: 0.95rem;
+}
+
+.matrix-wrap {
+    overflow-x: auto;
+}
+
+.matrix-table {
+    width: 100%;
+    min-width: 640px;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.matrix-table th,
+.matrix-table td {
+    padding: 6px 8px;
+    text-align: center;
+    border-bottom: 1px solid #e3ebf7;
+}
+
+.matrix-table thead th {
+    font-weight: 600;
+    color: var(--blue);
+    vertical-align: bottom;
+}
+
+.matrix-table thead tr:first-child th {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #5a6b85;
+    border-bottom: 2px solid var(--line);
+}
+
+.matrix-table .group-start {
+    border-left: 2px solid var(--line);
+}
+
+.matrix-table tbody tr {
+    cursor: pointer;
+}
+
+.matrix-table tbody tr:hover,
+.matrix-table tbody tr.is-current {
+    background: #eef4fd;
+}
+
+.matrix-table tbody tr.is-current th {
+    box-shadow: inset 4px 0 0 var(--accent);
+}
+
+/* The scenario column stays put while the pattern columns scroll. */
+.matrix-table tbody th,
+.matrix-table thead td {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background: var(--paper);
+    text-align: left;
+    min-width: 11em;
+}
+
+.matrix-table tbody tr:hover th,
+.matrix-table tbody tr.is-current th {
+    background: #eef4fd;
+}
+
+.matrix-scenario,
+.matrix-cell {
+    font: inherit;
+    border: none;
+    background: none;
+    color: var(--navy);
+    cursor: pointer;
+}
+
+.matrix-scenario {
+    font-weight: 600;
+    text-align: left;
+    padding: 2px 0;
+}
+
+.matrix-cell {
+    color: var(--blue);
+    font-size: 1.2rem;
+    line-height: 1;
+    padding: 4px 8px;
 }
 
 /* Brief + walkthrough */
@@ -118,6 +230,10 @@ body {
     padding: 0;
 }
 
+.brief-patterns li + li {
+    margin-top: 14px;
+}
+
 .pattern-name {
     display: inline-block;
     background: var(--navy);
@@ -168,6 +284,7 @@ body {
 .diagram .node-client rect { rx: 24px; }
 .diagram .node-store rect { rx: 3px; fill: #eef4fd; }
 .diagram .node-bus rect { stroke-dasharray: 6 4; }
+.diagram .node-port rect { stroke-dasharray: 3 3; fill: #f4f8fe; }
 
 .diagram .node text {
     font-size: 15px;
@@ -318,6 +435,9 @@ body {
 }
 
 .scenario-tab:focus-visible,
+.matrix summary:focus-visible,
+.matrix-scenario:focus-visible,
+.matrix-cell:focus-visible,
 .step-button:focus-visible,
 .step-dot:focus-visible,
 .why-not summary:focus-visible {
@@ -344,5 +464,32 @@ body {
 
     .step-hint {
         display: none;
+    }
+
+    /* Eight pills would wrap into a tall block; scroll them sideways instead. */
+    .scenario-picker {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x proximity;
+        margin: 0 -16px 20px;
+        padding: 0 16px 6px;
+    }
+
+    .scenario-tab {
+        flex: none;
+        scroll-snap-align: center;
+    }
+
+    .matrix {
+        padding: 12px 14px;
+    }
+
+    .matrix-table {
+        font-size: 0.85rem;
+    }
+
+    .matrix-table tbody th,
+    .matrix-table thead td {
+        min-width: 9em;
     }
 }

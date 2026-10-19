@@ -38,11 +38,13 @@ window.PATTERNS = {
     },
     "mvc": {
         name: "Model-View-Controller",
+        short: "MVC",
         category: "code",
         summary: "Model (data and rules), View (what the user sees) and Controller (handles input) are kept apart inside an app.",
     },
     "hexagonal": {
         name: "Hexagonal (Ports and Adapters)",
+        short: "Hexagonal",
         category: "code",
         summary: "Core logic sits in the middle and reaches the outside world (databases, payment providers, UIs) only through interfaces called ports, so adapters can be swapped.",
     },
