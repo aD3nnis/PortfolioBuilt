@@ -140,3 +140,63 @@
 #site-menu .nowrap {
     white-space: nowrap;
 }
+
+/* Below 850px the 20%-wide items can't fit their labels: size items to content and shrink type. */
+@media screen and (max-width: 850px) {
+    #site-menu #menuItems {
+        gap: 4px;
+        padding-left: 80px;
+        padding-right: 12px;
+        box-sizing: border-box;
+    }
+    #site-menu li.menu-list {
+        position: relative;
+        width: auto;
+        flex: 0 1 auto;
+        font-size: clamp(16px, 3.4vw, 27px);
+    }
+    #site-menu a {
+        padding: 10px 8px;
+    }
+    #site-menu .design {
+        overflow: visible;
+    }
+    /* Dropdowns overlay instead of widening the item on hover. */
+    #site-menu #menuItems li:hover ul {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        min-width: max-content;
+    }
+    #site-menu #menuItems li ul li {
+        font-size: clamp(16px, 3vw, 23px);
+    }
+}
+@media screen and (max-width: 520px) {
+    #site-menu .hyperlink {
+        margin-left: 10px;
+    }
+    #site-menu .logoMenu {
+        height: 48px;
+        margin-left: 0;
+    }
+    #site-menu .logoMenu:hover {
+        height: 54px;
+    }
+    #site-menu #menuItems {
+        gap: 0;
+        padding-left: 58px;
+        padding-right: 6px;
+    }
+    #site-menu a {
+        padding: 10px 5px;
+    }
+}
+@media screen and (max-width: 360px) {
+    #site-menu li.menu-list {
+        font-size: 14px;
+    }
+    #site-menu a {
+        padding: 10px 3px;
+    }
+}
