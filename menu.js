@@ -41,6 +41,12 @@
                         <li><a href="${link("Ventures/ventures.html")}">Ventures</a></li>
                     </ul>
                 </li>
+                <li class="menu-list">
+                    <a href="#" class="nowrap">AI Chats</a>
+                    <ul>
+                        <li><a href="${link("AIChats/system-design.html")}">System Design</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>`;
 

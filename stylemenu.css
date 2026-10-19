@@ -57,14 +57,17 @@
     justify-content: end;
     align-items: flex-start;
     margin: 1em 0;
-    padding-left: 40px;
+    padding-left: 120px;
     padding-right: 20px;
+    box-sizing: border-box;
 }
+/* Five items share the bar; type scales down before the 850px breakpoint takes over. */
 #site-menu li.menu-list {
     text-align: center;
     height: 100%;
     width: 20%;
-    font-size: 30px;
+    min-width: 0;
+    font-size: clamp(24px, 2.6vw, 30px);
     padding-top: 10px;
     text-decoration: none;
 }
@@ -188,15 +191,15 @@
         padding-left: 58px;
         padding-right: 6px;
     }
+    #site-menu li.menu-list {
+        font-size: clamp(11px, 3.5vw, 17px);
+    }
     #site-menu a {
-        padding: 10px 5px;
+        padding: 10px 4px;
     }
 }
 @media screen and (max-width: 360px) {
-    #site-menu li.menu-list {
-        font-size: 14px;
-    }
     #site-menu a {
-        padding: 10px 3px;
+        padding: 10px 2px;
     }
 }
