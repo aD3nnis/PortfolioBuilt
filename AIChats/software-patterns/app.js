@@ -103,18 +103,19 @@
         return `<span class="cost-meter cost-${level}" title="${label}">${mark}</span>`;
     }
 
-    // One card per pattern with its usual tools and cost, grouped by category.
-    function renderStack() {
+    function renderCostLegend() {
         els.legend.innerHTML = COST_LEVELS.map((c, level) =>
             `<li>${costMeter(level)} <span>${c.label}</span></li>`).join("");
+    }
 
-        els.stackGroups.innerHTML = Object.entries(PATTERN_CATEGORIES).map(([category, label]) => {
-            const cards = Object.entries(PATTERNS).filter(([, p]) => p.category === category).map(([id, p]) => `
-                <article class="stack-card" id="stack-${id}" data-pattern="${id}">
-                    <header class="stack-card-head">
-                        <h4>${p.name}</h4>
-                        <span class="stack-used">In this scenario</span>
-                    </header>
+    // One card for each pattern the current scenario uses: its usual tools and cost.
+    function renderStack() {
+        els.stackGroups.innerHTML = `<div class="stack-grid">${scenario.patterns.map((id) => {
+            const p = PATTERNS[id];
+            return `
+                <article class="stack-card" id="stack-${id}">
+                    <h3>${p.name}</h3>
+                    <p class="pattern-category">${PATTERN_CATEGORIES[p.category]}</p>
                     <dl class="stack-rows">
                         ${p.stack.map(([term, text]) => `<dt>${term}</dt><dd>${text}</dd>`).join("")}
                     </dl>
@@ -122,9 +123,8 @@
                         <p class="stack-cost-head">${costMeter(p.cost.level)} <strong>${p.cost.range}</strong></p>
                         <p>${p.cost.drivers}</p>
                     </div>
-                </article>`).join("");
-            return `<h3 class="stack-group-title">${label}</h3><div class="stack-grid">${cards}</div>`;
-        }).join("");
+                </article>`;
+        }).join("")}</div>`;
     }
 
     function renderBrief() {
@@ -296,9 +296,8 @@
             els.picker.scrollLeft = tab.offsetLeft - (els.picker.clientWidth - tab.offsetWidth) / 2;
         }
         els.matrix.querySelectorAll("tbody tr").forEach((row, j) => row.classList.toggle("is-current", i === j));
-        els.stackGroups.querySelectorAll(".stack-card").forEach((card) =>
-            card.classList.toggle("is-used", scenario.patterns.includes(card.dataset.pattern)));
         renderBrief();
+        renderStack();
         renderDiagram();
         renderStepDots();
         renderWhyNot();
@@ -315,7 +314,7 @@
 
     renderPicker();
     renderMatrix();
-    renderStack();
+    renderCostLegend();
     // #scenario-id deep links come from the design-philosophy chapter pages.
     selectScenario(Math.max(0, SCENARIOS.findIndex((s) => `#${s.id}` === location.hash)));
 })();

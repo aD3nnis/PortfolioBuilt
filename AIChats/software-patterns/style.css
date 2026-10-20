@@ -472,7 +472,7 @@ body {
     flex-wrap: wrap;
     gap: 8px 20px;
     list-style: none;
-    margin: 0 0 8px;
+    margin: 0 0 16px;
     padding: 0;
     font-size: 0.9rem;
 }
@@ -499,12 +499,6 @@ body {
 .cost-2 { background: #fff1d6; color: #7a4b00; }
 .cost-3 { background: #fbe1dc; color: #8a2414; }
 
-.stack-group-title {
-    font-size: 1rem;
-    color: var(--blue);
-    margin: 1.6em 0 0.6em;
-}
-
 .stack-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -517,39 +511,13 @@ body {
     background: var(--paper);
     border-radius: 12px;
     padding: 18px 20px;
-    border: 2px solid transparent;
     scroll-margin-top: 16px;
 }
 
-.stack-card.is-used {
-    border-color: var(--accent);
-}
-
-.stack-card-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 8px;
-}
-
-.stack-card h4 {
+.stack-card h3 {
     margin: 0;
     font-size: 1.15rem;
     color: var(--navy);
-}
-
-.stack-used {
-    display: none;
-    flex: none;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #7a4b00;
-}
-
-.stack-card.is-used .stack-used {
-    display: inline;
 }
 
 .stack-rows {
