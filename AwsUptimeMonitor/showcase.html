@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Uptime Monitor | Ava Portfolio</title>
+    <link rel="icon" type="image/png" href="../assets/images/logo1.png">
+    <link rel="apple-touch-icon" href="../assets/images/logo1.png">
+    <link rel="stylesheet" href="../About/style.css">
+    <link rel="stylesheet" href="../stylemenu.css">
+    <link rel="stylesheet" href="../globalstyles.css">
+    <style>
+        .showcase-backdrop { top: 100px;position: absolute;width: 100%;height: auto; background-color: #C8E0FE;}
+        .showcase-content {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+        .showcase-content h1 {
+            color: #133670;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+        .showcase-lead { font-size: 1.1rem; color: #212c3e; margin-bottom: 2rem; padding-bottom: 10px;}
+        .showcase-link-button {
+            display: inline-block;
+            background-color: #212c3e;
+            color: #e3e8f1;
+            padding: 0.65rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+            width: 40%;
+            display: flex;
+            justify-content: center;
+            justify-self: anchor-center;
+        }
+        .showcase-link-button:hover {
+            background-color: #0f2b59;
+        }
+        /* Override global About/style.css `p` (1.2rem serif) so body text + inline code read correctly */
+        .showcase-content code { background: rgba(0,0,0,.06); padding: 0.15em 0.4em; border-radius: 4px; }
+        .showcase-section { margin-bottom: 2rem; }
+        .showcase-section h2 { color: #212c3e; font-size: 1.35rem; margin-bottom: 0.5rem; padding: 0; background: transparent; }
+        .showcase-section p, .showcase-section ul { color: #212c3e; text-align: left; padding: 0 0 0.5rem; margin: 0; background: transparent; }
+        .showcase-section p code,
+        .showcase-section li code { font-size: 0.875rem; }
+        .showcase-section ul { padding-left: 1.5rem; }
+        .showcase-code {
+            background: #212c3e;
+            color: #e8e8e8;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 0.75rem 0;
+            font-size: 0.9rem;
+        }
+        .showcase-code code { background: transparent; padding: 0; color: inherit; font-size: inherit; }
+        .showcase-media-note { margin-bottom: 0.75rem; }
+        .showcase-media-image {
+            width: 80%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid rgba(19,54,112,0.2);
+            display: flex;
+            justify-self: center;
+        }
+        .showcase-links {
+            margin-top: 1.25rem;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="../menu.js"></script>
+    <div class="showcase-backdrop">
+        <main class="showcase-content">
+            <h1>AWS Uptime Monitor</h1>
+            <p class="showcase-lead">
+                A serverless uptime monitoring tool built on AWS. It checks one or more websites every 5 minutes, logs results to CloudWatch, and sends an email alert through SNS when a site is down or responding slowly.
+            </p>
+            <section class="showcase-section showcase-links">
+                <a
+                    class="showcase-link-button"
+                    href="https://github.com/aD3nnis/aws-uptime-monitor"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    View Project on GitHub
+                </a>
+            </section>
+
+            <section class="showcase-section">
+                <h2>What it does</h2>
+                <p>
+                    An EventBridge schedule triggers a Python Lambda function every 5 minutes. The function pings each configured URL and records its status, status code, and response time. Every result goes to CloudWatch Logs, and <code>SiteUp</code> and <code>ResponseTimeMs</code> metrics go to CloudWatch Metrics. If any site is <code>down</code> or <code>slow</code>, it sends one summary alert through SNS to email.
+                </p>
+            </section>
+
+            <section class="showcase-section">
+                <h2>Architecture</h2>
+                <pre class="showcase-code"><code>EventBridge (every 5 min)
+        |
+        v
+  AWS Lambda (Python)
+   |           |
+   v           v
+CloudWatch   SNS Topic
+  Logs &       |
+  Metrics      v
+            Email Alert</code></pre>
+            </section>
+
+            <section class="showcase-section">
+                <h2>Services used</h2>
+                <ul>
+                    <li><strong>AWS Lambda</strong>: runs the Python checker function with no server to manage.</li>
+                    <li><strong>Amazon EventBridge</strong>: triggers Lambda on a fixed <code>rate(5 minutes)</code> schedule.</li>
+                    <li><strong>Amazon SNS</strong>: sends email notifications when a site is down or slow.</li>
+                    <li><strong>CloudWatch Logs + Metrics</strong>: stores every check result and tracks uptime and response-time trends.</li>
+                    <li><strong>AWS IAM</strong>: grants Lambda permission to write to CloudWatch and publish to SNS.</li>
+                </ul>
+                <p>Everything runs within the AWS Free Tier.</p>
+            </section>
+
+            <section class="showcase-section">
+                <h2>What I learned</h2>
+                <ul>
+                    <li><strong>Serverless architecture</strong>: Lambda functions run on demand, and AWS manages the servers.</li>
+                    <li><strong>Event-driven design</strong>: EventBridge runs workloads on a schedule, much like a cron job.</li>
+                    <li><strong>Observability</strong>: logs show what happened, and metrics show trends in site reliability over time.</li>
+                    <li><strong>Alerting</strong>: SNS separates creating an alert from delivering it, so recipients can be added or removed without redeploying code.</li>
+                    <li><strong>IAM and least privilege</strong>: every AWS API call is checked against IAM policies, so every resource needs explicit permissions.</li>
+                </ul>
+            </section>
+
+            <section class="showcase-section">
+                <h2>Configuration</h2>
+                <p>
+                    The Lambda is configured through environment variables: <code>URLS</code> (comma-separated sites to monitor), <code>SNS_TOPIC_ARN</code>, <code>TIMEOUT_SECONDS</code>, and <code>SLOW_THRESHOLD_MS</code>. To test alerting, point a URL at a domain that doesn't exist and run the function from the Lambda console with an empty <code>{}</code> payload.
+                </p>
+            </section>
+
+            <section class="showcase-section">
+                <h2>Future improvements</h2>
+                <ul>
+                    <li>Provision all infrastructure as code with Terraform.</li>
+                    <li>Store the URL list in SSM Parameter Store so updates don't need a redeploy.</li>
+                    <li>Add multi-region checks and a CloudWatch dashboard for uptime history.</li>
+                    <li>Add SSL certificate expiry checks.</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

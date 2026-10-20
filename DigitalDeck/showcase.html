@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Deck | Ava Portfolio</title>
+    <link rel="icon" type="image/png" href="../assets/images/logo1.png">
+    <link rel="apple-touch-icon" href="../assets/images/logo1.png">
+    <link rel="stylesheet" href="../About/style.css">
+    <link rel="stylesheet" href="../stylemenu.css">
+    <link rel="stylesheet" href="../globalstyles.css">
+    <style>
+        .showcase-backdrop { top: 100px;position: absolute;width: 100%;height: auto; background-color: #C8E0FE;}
+        .showcase-content {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+        .showcase-content h1 {
+            color: #133670;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+        .showcase-lead { font-size: 1.1rem; color: #212c3e; margin-bottom: 2rem; padding-bottom: 10px;}
+        .showcase-link-button {
+            display: inline-block;
+            background-color: #212c3e;
+            color: #e3e8f1;
+            padding: 0.65rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+            width: 40%;
+            display: flex;
+            justify-content: center;
+            justify-self: anchor-center;
+        }
+        .showcase-link-button:hover {
+            background-color: #0f2b59;
+        }
+        /* Override global About/style.css `p` (1.2rem serif) so body text + inline code read correctly */
+        .showcase-content code { background: rgba(0,0,0,.06); padding: 0.15em 0.4em; border-radius: 4px; }
+        .showcase-section { margin-bottom: 2rem; }
+        .showcase-section h2 { color: #212c3e; font-size: 1.35rem; margin-bottom: 0.5rem; padding: 0; background: transparent; }
+        .showcase-section p, .showcase-section ul { color: #212c3e; text-align: left; padding: 0 0 0.5rem; margin: 0; background: transparent; }
+        .showcase-section p code,
+        .showcase-section li code { font-size: 0.875rem; }
+        .showcase-section ul { padding-left: 1.5rem; }
+        .showcase-code {
+            background: #212c3e;
+            color: #e8e8e8;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 0.75rem 0;
+            font-size: 0.9rem;
+        }
+        .showcase-code code { background: transparent; padding: 0; color: inherit; font-size: inherit; }
+        .showcase-media-note { margin-bottom: 0.75rem; }
+        .showcase-media-image {
+            width: 50%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid rgba(19,54,112,0.2);
+            display: flex;
+            justify-self: center;
+        }
+        .showcase-links {
+            margin-top: 1.25rem;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="../menu.js"></script>
+    <div class="showcase-backdrop">
+        <main class="showcase-content">
+            <h1>Digital Deck</h1>
+            <p class="showcase-lead">
+                A full-stack multiplayer app that simulates a shared physical card deck online. Players create or join a session with a short code, then draw, discard, and play from a server-authoritative deck in real time, so no client can see the shuffle or another player's hand.
+            </p>
+            <section class="showcase-section showcase-links">
+                <a
+                    class="showcase-link-button"
+                    href="https://github.com/aD3nnis/DigitalDeck"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    View Project on GitHub
+                </a>
+            </section>
+
+            <section class="showcase-section">
+                <h2>Tech stack</h2>
+                <ul>
+                    <li><strong>Backend</strong>: Java, Spring Boot, Spring Web (REST), Spring WebSocket (STOMP), Spring Data Redis, Spring Data JPA, Maven</li>
+                    <li><strong>Frontend</strong>: TypeScript, React 19, Next.js 16, Tailwind CSS 4, STOMP.js</li>
+                    <li><strong>Data</strong>: Redis for live session state; PostgreSQL connected through JPA for future durable data</li>
+                    <li><strong>Infra</strong>: Docker Compose</li>
+                </ul>
+            </section>
+
+            <section class="showcase-section">
+                <h2>Architecture</h2>
+                <pre class="showcase-code"><code>React / Next.js  --REST-->  Spring Boot  -->  Redis (live game state)
+        |                        |
+        +--STOMP / WebSocket-----+
+                                 +-->  PostgreSQL</code></pre>
+                <p>
+                    REST handles session creation, lobby settings, and card actions (draw, discard, play, keep). STOMP broadcasts events such as <code>PLAYER_JOINED</code>, <code>CARD_DRAWN</code>, and <code>TURN_CHANGED</code>, so every connected client stays in sync.
+                </p>
+            </section>
+
+            <section class="showcase-section">
+                <h2>Design decisions</h2>
+                <ul>
+                    <li>The server is authoritative. Spring Boot owns the deck, shuffle, deal, and turn rules, and clients never hold game state they could tamper with.</li>
+                    <li>Redis holds short-lived multiplayer state (roster, deck order, hands, play areas, turns) for fast reads and writes during play.</li>
+                    <li>Turn, discard, and play permissions go through a single unit-tested <code>TurnActionPolicy</code> instead of checks scattered across endpoints.</li>
+                </ul>
+            </section>
+
+            <section class="showcase-section">
+                <h2>What works today</h2>
+                <ul>
+                    <li>Join-code sessions with a live roster, host transfer, and disconnect grace handling.</li>
+                    <li>Host lobby settings: turn or free rotation, discard and play modes, 1–3 decks, and cards dealt per player.</li>
+                    <li>Draw, multi-card discard, play to face-up slots, a shared dealer board, and automatic reshuffle when the draw pile runs out.</li>
+                    <li>An SVG table for 1–6 players with viewer-relative seating and opponent hand counts.</li>
+                    <li>Sessions are restored after a page refresh, with the private hand fetched again from the server.</li>
+                </ul>
+            </section>
+
+            <section class="showcase-section showcase-media">
+                <h2>Gameplay</h2>
+                <p class="showcase-media-note">
+                    A four-player game from one player's seat: opponents' hand backs and face-up played cards around the table, the draw and discard piles, the shared dealer board, and the player's own hand at the bottom with the last drawn card highlighted.
+                </p>
+                <img
+                    class="showcase-media-image"
+                    src="../assets/images/digital-deck.png"
+                    alt="Digital Deck game table with cards played on opponents' boards, draw and discard piles, a dealer board, and a hand of six cards with the drawn card highlighted"
+                >
+            </section>
+
+            <section class="showcase-section">
+                <h2>How it was built</h2>
+                <p>
+                    I used AI (Cursor and Claude) only in ask mode, to explain options, sketch designs, and help debug. I wrote every code change myself. The repo's <code>ai-conversations/</code> folder logs those sessions as a record of the decisions behind the app.
+                </p>
+            </section>
+
+            <section class="showcase-section">
+                <h2>How to run locally</h2>
+                <p>
+                    Start Postgres and Redis, then the backend from <code>backend/</code> and the frontend from <code>frontend/</code>:
+                </p>
+                <pre class="showcase-code"><code>docker compose up -d
+cd backend &amp;&amp; ./mvnw spring-boot:run
+cd frontend &amp;&amp; npm install &amp;&amp; npm run dev</code></pre>
+                <p>
+                    Open <code>http://localhost:3000</code>, create a session, and share the join code with other players.
+                </p>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

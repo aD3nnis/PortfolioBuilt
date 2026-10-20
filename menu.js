@@ -30,6 +30,8 @@
                         <li><a href="${link("CppHouseGenerator/showcase.html")}">C++ House Generator</a></li>
                         <li><a href="https://stonkstracker.netlify.app/" rel="noopener noreferrer" target="_blank">Bitcoin Tracker</a></li>
                         <li><a href="${link("PythonSnake/showcase.html")}">Python Game</a></li>
+                        <li><a href="${link("AwsUptimeMonitor/showcase.html")}">AWS Uptime Monitor</a></li>
+                        <li><a href="${link("DigitalDeck/showcase.html")}">Digital Deck</a></li>
                     </ul>
                 </li>
                 <li class="menu-list">
