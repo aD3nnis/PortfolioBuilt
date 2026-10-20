@@ -449,6 +449,163 @@ body {
     outline-offset: 2px;
 }
 
+
+/* Tech stack and cost */
+.stack {
+    margin-top: 48px;
+}
+
+.stack h2 {
+    color: var(--blue);
+    font-size: clamp(24px, 4vw, 34px);
+    margin: 0 0 0.3em;
+}
+
+.stack-lead {
+    max-width: 720px;
+    margin: 0 0 1rem;
+    line-height: 1.5;
+}
+
+.cost-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    list-style: none;
+    margin: 0 0 8px;
+    padding: 0;
+    font-size: 0.9rem;
+}
+
+.cost-legend li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.cost-meter {
+    display: inline-block;
+    min-width: 2.6em;
+    padding: 1px 7px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-align: center;
+    letter-spacing: 0.05em;
+}
+
+.cost-0 { background: #e4f3e8; color: #1d5a31; }
+.cost-1 { background: #eef4fd; color: var(--blue); }
+.cost-2 { background: #fff1d6; color: #7a4b00; }
+.cost-3 { background: #fbe1dc; color: #8a2414; }
+
+.stack-group-title {
+    font-size: 1rem;
+    color: var(--blue);
+    margin: 1.6em 0 0.6em;
+}
+
+.stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+}
+
+.stack-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--paper);
+    border-radius: 12px;
+    padding: 18px 20px;
+    border: 2px solid transparent;
+    scroll-margin-top: 16px;
+}
+
+.stack-card.is-used {
+    border-color: var(--accent);
+}
+
+.stack-card-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.stack-card h4 {
+    margin: 0;
+    font-size: 1.15rem;
+    color: var(--navy);
+}
+
+.stack-used {
+    display: none;
+    flex: none;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #7a4b00;
+}
+
+.stack-card.is-used .stack-used {
+    display: inline;
+}
+
+.stack-rows {
+    margin: 12px 0 0;
+    line-height: 1.45;
+}
+
+.stack-rows dt {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--blue);
+    margin-top: 10px;
+}
+
+.stack-rows dt:first-child {
+    margin-top: 0;
+}
+
+.stack-rows dd {
+    margin: 2px 0 0;
+}
+
+.stack-cost {
+    margin-top: auto;
+    padding-top: 14px;
+}
+
+.stack-cost p {
+    margin: 0;
+    line-height: 1.45;
+}
+
+.stack-cost-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    border-top: 1px solid #e3ebf7;
+    padding-top: 12px;
+    margin-bottom: 6px !important;
+}
+
+.pattern-cost {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+.pattern-cost a {
+    color: var(--blue);
+    font-weight: 600;
+}
+
 @media (prefers-reduced-motion: reduce) {
     .diagram * {
         transition: none !important;
@@ -486,6 +643,10 @@ body {
 
     .matrix {
         padding: 12px 14px;
+    }
+
+    .stack-grid {
+        grid-template-columns: minmax(0, 1fr);
     }
 
     .matrix-table {

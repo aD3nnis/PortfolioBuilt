@@ -21,6 +21,8 @@
         next: $("step-next"),
         dots: $("step-dots"),
         whyNot: $("why-not"),
+        legend: $("cost-legend"),
+        stackGroups: $("stack-groups"),
     };
 
     let scenario = null;
@@ -96,6 +98,35 @@
         });
     }
 
+    function costMeter(level) {
+        const { mark, label } = COST_LEVELS[level];
+        return `<span class="cost-meter cost-${level}" title="${label}">${mark}</span>`;
+    }
+
+    // One card per pattern with its usual tools and cost, grouped by category.
+    function renderStack() {
+        els.legend.innerHTML = COST_LEVELS.map((c, level) =>
+            `<li>${costMeter(level)} <span>${c.label}</span></li>`).join("");
+
+        els.stackGroups.innerHTML = Object.entries(PATTERN_CATEGORIES).map(([category, label]) => {
+            const cards = Object.entries(PATTERNS).filter(([, p]) => p.category === category).map(([id, p]) => `
+                <article class="stack-card" id="stack-${id}" data-pattern="${id}">
+                    <header class="stack-card-head">
+                        <h4>${p.name}</h4>
+                        <span class="stack-used">In this scenario</span>
+                    </header>
+                    <dl class="stack-rows">
+                        ${p.stack.map(([term, text]) => `<dt>${term}</dt><dd>${text}</dd>`).join("")}
+                    </dl>
+                    <div class="stack-cost">
+                        <p class="stack-cost-head">${costMeter(p.cost.level)} <strong>${p.cost.range}</strong></p>
+                        <p>${p.cost.drivers}</p>
+                    </div>
+                </article>`).join("");
+            return `<h3 class="stack-group-title">${label}</h3><div class="stack-grid">${cards}</div>`;
+        }).join("");
+    }
+
     function renderBrief() {
         const patterns = scenario.patterns.map((id) => {
             const p = PATTERNS[id];
@@ -103,6 +134,7 @@
                 <span class="pattern-name">${p.name}</span>
                 <span class="pattern-category">${PATTERN_CATEGORIES[p.category]}</span>
                 <p>${p.summary}</p>
+                <p class="pattern-cost">${costMeter(p.cost.level)} <a href="#stack-${id}">Stack and cost</a></p>
             </li>`;
         }).join("");
 
@@ -264,6 +296,8 @@
             els.picker.scrollLeft = tab.offsetLeft - (els.picker.clientWidth - tab.offsetWidth) / 2;
         }
         els.matrix.querySelectorAll("tbody tr").forEach((row, j) => row.classList.toggle("is-current", i === j));
+        els.stackGroups.querySelectorAll(".stack-card").forEach((card) =>
+            card.classList.toggle("is-used", scenario.patterns.includes(card.dataset.pattern)));
         renderBrief();
         renderDiagram();
         renderStepDots();
@@ -281,6 +315,7 @@
 
     renderPicker();
     renderMatrix();
+    renderStack();
     // #scenario-id deep links come from the design-philosophy chapter pages.
     selectScenario(Math.max(0, SCENARIOS.findIndex((s) => `#${s.id}` === location.hash)));
 })();
