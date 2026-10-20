@@ -109,6 +109,52 @@
         }
         .chapter-card-title { display: block; font-weight: 700; line-height: 1.25; }
         .chapter-card-takeaway { display: block; margin-top: 4px; font-size: 0.85rem; line-height: 1.35; color: #3c4a60; }
+        .ai-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+            gap: 12px;
+            margin: 1rem 0 1.5rem;
+        }
+        .ai-card {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 14px 16px;
+            border-top: 4px solid #133670;
+        }
+        .showcase-section .ai-card h3 { color: #133670; font-size: 1.05rem; margin: 6px 0 8px; line-height: 1.3; }
+        .showcase-section .ai-card p { font-size: 0.92rem; line-height: 1.45; padding-bottom: 0.6rem; }
+        .ai-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            color: #133670;
+            background: #C8E0FE;
+            padding: 2px 8px;
+            border-radius: 999px;
+            text-decoration: none;
+        }
+        .ai-tag:hover { background: #a9cdfb; }
+        .ai-tag:focus-visible { outline: 3px solid #f29f05; outline-offset: 2px; }
+        .ai-label {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #6b778a;
+            margin-bottom: 2px;
+        }
+        .ai-label-now { color: #b86e00; }
+        .showcase-section .ai-subhead { color: #212c3e; font-size: 1.15rem; margin: 0.5rem 0; }
+        .showcase-section .ai-steps { color: #212c3e; padding-left: 1.5rem; margin: 0 0 1rem; }
+        .ai-steps li { margin-bottom: 0.4rem; line-height: 1.45; }
+        .showcase-section .ai-closing {
+            background: #212c3e;
+            color: #e3e8f1;
+            border-radius: 8px;
+            padding: 0.9rem 1rem;
+        }
     </style>
 </head>
 
@@ -118,7 +164,7 @@
         <main class="showcase-content">
             <h1>System Design</h1>
             <p class="showcase-lead">
-                Conversations with AI where I work through system design problems: requirements, trade-offs, and architecture.
+                Conversations with AI where I work through understanding system design problems and patterns: requirements, trade-offs, and architecture.
             </p>
 
             <section class="showcase-section">
@@ -136,6 +182,99 @@
                 </p>
                 <ol id="chapter-grid" class="chapter-grid"></ol>
                 <a class="showcase-link-button" href="design-philosophy/index.html">Explore the chapters</a>
+            </section>
+
+            <section class="showcase-section" id="ai-shift">
+                <h2>How AI Changes These Concepts</h2>
+                <p>
+                    When Claude writes most of the code, writing code stops being the slow part. Deciding what to build, where the boundaries go and whether the result is any good takes its place. Ousterhout's main warning, that complexity builds up one small decision at a time, matters even more now, because an AI can make those small decisions far faster than a person can. Below is how each idea shifts and what's recommended now.
+                </p>
+
+                <div class="ai-grid">
+                    <article class="ai-card">
+                        <a class="ai-tag" href="design-philosophy/index.html#ch-3">Ch 3 · Strategic vs. tactical</a>
+                        <h3>AI is the ultimate tactical programmer</h3>
+                        <p><span class="ai-label">What changes</span>Every prompt asks for the task at hand to work, so the agent delivers exactly that, quickly. Without a plan, you get tactical programming at machine speed.</p>
+                        <p><span class="ai-label ai-label-now">What's recommended</span>Put the time AI saves into design. Once a feature works, ask Claude to step back: "What would you restructure now that this exists?" Then do that cleanup before moving on.</p>
+                    </article>
+
+                    <article class="ai-card">
+                        <a class="ai-tag" href="design-philosophy/index.html#ch-4">Ch 4 · Deep modules</a>
+                        <h3>You own the interface, Claude fills it in</h3>
+                        <p><span class="ai-label">What changes</span>Generated code leans shallow: lots of small helpers, pass-through wrappers and config flags that push decisions back onto callers.</p>
+                        <p><span class="ai-label ai-label-now">What's recommended</span>Design the interface yourself (signatures, contracts, what callers never need to know) and have Claude implement behind it. In review, ask: "Could this interface be smaller and still do the same job?"</p>
+                    </article>
+
+                    <article class="ai-card">
+                        <a class="ai-tag" href="design-philosophy/index.html#ch-5">Ch 5 · Information hiding</a>
+                        <h3>Good boundaries are good context</h3>
+                        <p><span class="ai-label">What changes</span>A model only knows what fits in its context. Information leakage used to cost a human some reading time. Now it means the agent edits one file and misses the three others that share the same hidden assumption.</p>
+                        <p><span class="ai-label ai-label-now">What's recommended</span>Treat deep modules as context management. If a change only needs one module and its interface, the agent can get it right, and you can review it in one sitting.</p>
+                    </article>
+
+                    <article class="ai-card">
+                        <a class="ai-tag" href="design-philosophy/index.html#ch-11">Ch 11 · Design it twice</a>
+                        <h3>Designing it twice is nearly free now</h3>
+                        <p><span class="ai-label">What changes</span>Sketching a second or third design used to cost hours, so people skipped it. Now it takes minutes.</p>
+                        <p><span class="ai-label ai-label-now">What's recommended</span>Before any code, ask for two or three very different approaches, such as a queue versus a synchronous call or one service versus two, with their trade-offs. Pick one, or combine them, and write down why.</p>
+                    </article>
+
+                    <article class="ai-card">
+                        <a class="ai-tag" href="design-philosophy/index.html#ch-15">Ch 12–15 · Comments</a>
+                        <h3>Comments are now prompts</h3>
+                        <p><span class="ai-label">What changes</span>The agent reads comments, docs and <code>CLAUDE.md</code> as instructions. The "why" behind a design isn't visible in the code, so the model can't work it out on its own.</p>
+                        <p><span class="ai-label ai-label-now">What's recommended</span>Write the interface comment first, then have Claude implement to match it. Project decisions and "never do X here" rules go in <code>CLAUDE.md</code> so every session starts with them.</p>
+                    </article>
+
+                    <article class="ai-card">
+                        <a class="ai-tag" href="design-philosophy/index.html#ch-17">Ch 17 · Consistency</a>
+                        <h3>AI amplifies whatever patterns exist</h3>
+                        <p><span class="ai-label">What changes</span>Agents copy the code around them. A consistent codebase makes each new change consistent too, and a messy one spreads its mess into every new file.</p>
+                        <p><span class="ai-label ai-label-now">What's recommended</span>Clean up one clear reference example of each pattern and point Claude at it. Write conventions down instead of leaving them as tribal knowledge.</p>
+                    </article>
+
+                    <article class="ai-card">
+                        <a class="ai-tag" href="design-philosophy/index.html#ch-16">Ch 16 · Modifying code</a>
+                        <h3>Watch for the minimal patch</h3>
+                        <p><span class="ai-label">What changes</span>When asked to fix something, AI usually makes the smallest change that works: a special case here, an extra parameter there. Each patch is reasonable on its own, and together they make the design worse.</p>
+                        <p><span class="ai-label ai-label-now">What's recommended</span>Ask: "If the design had been built with this requirement in mind from the start, what would it look like?" Then review diffs for special cases and shims, not just for whether the tests pass.</p>
+                    </article>
+
+                    <article class="ai-card">
+                        <a class="ai-tag" href="design-philosophy/index.html#ch-10">Ch 10 · Define errors out</a>
+                        <h3>Push back on defensive noise</h3>
+                        <p><span class="ai-label">What changes</span>Generated code often wraps everything in try/catch, null checks and fallbacks for cases that can't happen. That adds error handling everywhere instead of designing errors away.</p>
+                        <p><span class="ai-label ai-label-now">What's recommended</span>Ask whether an error can be designed out entirely, for example with an idempotent operation, a sensible default or a narrower input type. Then remove the checks that don't protect anything real.</p>
+                    </article>
+
+                    <article class="ai-card">
+                        <a class="ai-tag" href="software-patterns/index.html">Patterns · Architecture</a>
+                        <h3>Architecture choices that work well with agents</h3>
+                        <p><span class="ai-label">What changes</span>A modular monolith keeps the whole system in one repo that an agent can search and test end to end. Microservices and event-driven systems hide the flow across network hops that the agent can't see.</p>
+                        <p><span class="ai-label ai-label-now">What's recommended</span>Default to a modular monolith. When you do split services, make the contracts explicit and machine-readable (OpenAPI, event schemas) and document event flows, so the agent can reason across boundaries.</p>
+                    </article>
+
+                    <article class="ai-card">
+                        <a class="ai-tag" href="design-philosophy/index.html#ch-21">Ch 21 · Decide what matters</a>
+                        <h3>Tests become the spec</h3>
+                        <p><span class="ai-label">What changes</span>An agent that can run tests can check its own work, so whoever writes the tests decides what "correct" means.</p>
+                        <p><span class="ai-label ai-label-now">What's recommended</span>Write or carefully review the tests that capture what matters, like behavior at the interface and edge cases from the requirements. Claude can iterate freely against them. Tests of implementation details just lock in whatever the AI happened to write.</p>
+                    </article>
+                </div>
+
+                <h3 class="ai-subhead">A recommended workflow when Claude is writing the code</h3>
+                <ol class="ai-steps">
+                    <li><strong>Frame it yourself.</strong> Requirements, constraints and what "done" means, in your own words.</li>
+                    <li><strong>Design it twice.</strong> Ask for competing designs with trade-offs, then pick one and record why.</li>
+                    <li><strong>Own the interfaces.</strong> Write the signatures and interface comments, or edit Claude's draft until they're deep and simple.</li>
+                    <li><strong>Delegate the implementation.</strong> Let Claude build behind the interface, with tests it can run.</li>
+                    <li><strong>Review for complexity, not just correctness.</strong> Look for shallow modules, leakage, special cases and defensive noise.</li>
+                    <li><strong>Make a strategic pass.</strong> Refactor while the context is fresh, before starting the next feature.</li>
+                    <li><strong>Write it down.</strong> Decisions and conventions go in <code>CLAUDE.md</code> and comments so the next session starts from them.</li>
+                </ol>
+                <p class="ai-closing">
+                    What doesn't change: the engineer is still responsible for the complexity. AI makes code cheaper to write, but the system still has to be understood, and that part is still a person's job.
+                </p>
             </section>
 
         </main>
