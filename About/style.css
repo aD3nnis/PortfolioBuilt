@@ -172,7 +172,6 @@ body {
     display: flex;
     flex-direction: column;
     padding: 22px;
-    border-radius: 10px;
     background: var(--ink);
     color: var(--cream);
 }
