@@ -81,6 +81,9 @@
             <p class="showcase-lead">
                 A full-stack multiplayer app that simulates a shared physical card deck online. Players create or join a session with a short code, then draw, discard, and play from a server-authoritative deck in real time, so no client can see the shuffle or another player's hand.
             </p>
+            <p class="showcase-lead">
+                <strong>Status:</strong> Phase 1 complete (playable locally) · Phase 2 in progress. Together, the two phases make up v1.
+            </p>
             <section class="showcase-section showcase-links">
                 <a
                     class="showcase-link-button"
@@ -123,7 +126,7 @@
             </section>
 
             <section class="showcase-section">
-                <h2>What works today</h2>
+                <h2>Phase 1: what works</h2>
                 <ul>
                     <li>Join-code sessions with a live roster, host transfer, and disconnect grace handling.</li>
                     <li>Host lobby settings: turn or free rotation, discard and play modes, 1–3 decks, and cards dealt per player.</li>
@@ -148,7 +151,11 @@
             <section class="showcase-section">
                 <h2>How it was built</h2>
                 <p>
-                    I used AI (Cursor and Claude) only in ask mode, to explain options, sketch designs, and help debug. I wrote every code change myself. The repo's <code>ai-conversations/</code> folder logs those sessions as a record of the decisions behind the app.
+                    <strong>Phase 1: hand-built (complete).</strong> I used AI (Cursor and Claude) only in ask mode, to explain options, sketch designs, and help debug. I wrote every code change myself. The repo's <code>ai-conversations/</code> folder logs those sessions as a record of the decisions behind the app.
+                    <a href="https://github.com/aD3nnis/DigitalDeck/tree/v1-phase1" target="_blank" rel="noopener noreferrer">See the phase 1 code</a>.
+                </p>
+                <p>
+                    <strong>Phase 2: finishing v1 with Claude Code (in progress).</strong> In the year since I left my last company, its stance on AI went from not allowed to developers being encouraged to use it as heavily as possible. I'd rather build the skills the job now requires than pretend it isn't changing. In phase 2, Claude Code writes the code while I own the requirements, interfaces, tests, and review. I'm grounding that in John Ousterhout's <em>A Philosophy of Software Design</em>, along with <a href="../AIChats/design-philosophy/index.html">AI-written notes I've been working through on how its ideas change when AI writes the code</a>.
                 </p>
             </section>
 
