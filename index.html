@@ -9,18 +9,98 @@
   <link rel="icon" type="image/png" href="assets/images/logo1.png">
   <link rel="apple-touch-icon" href="assets/images/logo1.png">
 
-  <link rel="stylesheet" href="globalstyles.css?v=9">
-  <link rel="stylesheet" href="About/style.css?v=9">
-  <link rel="stylesheet" href="stylemenu.css?v=9">
+  <link rel="stylesheet" href="globalstyles.css?v=10">
+  <link rel="stylesheet" href="About/style.css?v=10">
+  <link rel="stylesheet" href="stylemenu.css?v=10">
   <title>Ava Dennis — Portfolio</title>
 </head>
 
 <body>
-  <script src="menu.js?v=9"></script>
+  <script src="menu.js?v=10"></script>
 
   <main id="about_page" class="about-page">
+    <header class="home-hero">
+      <h1>Ava Dennis</h1>
+      <p class="home-role"><span>Software Engineer · Spokane, WA</span> <span>· Open to remote</span></p>
+      <p class="home-summary">
+        Full-stack engineer with a Computer Science degree in Human-Computer Interaction from Whitworth
+        University and a year of production frontend work. I build real-time apps, serverless tools,
+        and interfaces people enjoy using.
+      </p>
+      <nav class="home-actions" aria-label="Profile links">
+        <a class="home-btn home-btn-primary" href="About/resume.html">Resume</a>
+        <a class="home-btn" href="https://github.com/aD3nnis" rel="noopener noreferrer" target="_blank">GitHub</a>
+        <a class="home-btn" href="https://www.linkedin.com/in/ava-dennis117/" rel="noopener noreferrer" target="_blank">LinkedIn</a>
+      </nav>
+    </header>
+
+    <section class="home-projects" aria-labelledby="projects-heading">
+      <h2 id="projects-heading" class="home-section-title">Featured projects</h2>
+      <div class="project-grid">
+        <article class="project-card">
+          <h3><a href="DigitalDeck/showcase.html">Digital Deck</a></h3>
+          <p>
+            Real-time multiplayer card game. Players join by session code, and a Spring Boot server
+            controls the deck so no client can see the shuffle or another player's hand.
+          </p>
+          <ul class="project-tags">
+            <li>TypeScript</li><li>Next.js</li><li>Java</li><li>Spring Boot</li><li>WebSockets</li><li>Redis</li><li>Docker</li>
+          </ul>
+          <p class="project-links">
+            <a href="DigitalDeck/showcase.html">Details</a>
+            <a href="https://github.com/aD3nnis/DigitalDeck" rel="noopener noreferrer" target="_blank">GitHub</a>
+          </p>
+        </article>
+
+        <article class="project-card">
+          <h3><a href="AwsUptimeMonitor/showcase.html">AWS Uptime Monitor</a></h3>
+          <p>
+            Serverless monitor that checks sites every 5 minutes, logs response-time metrics to
+            CloudWatch, and sends email alerts through SNS when a site is down or slow.
+          </p>
+          <ul class="project-tags">
+            <li>Python</li><li>Lambda</li><li>EventBridge</li><li>CloudWatch</li><li>SNS</li><li>IAM</li>
+          </ul>
+          <p class="project-links">
+            <a href="AwsUptimeMonitor/showcase.html">Details</a>
+            <a href="https://github.com/aD3nnis/aws-uptime-monitor" rel="noopener noreferrer" target="_blank">GitHub</a>
+          </p>
+        </article>
+
+        <article class="project-card">
+          <h3><a href="https://stonkstracker.netlify.app/" rel="noopener noreferrer" target="_blank">Bitcoin Price Tracker</a></h3>
+          <p>
+            Deployed full-stack tracker with a Node.js/Express API on Render, a PostgreSQL database on
+            Neon, LiveCoinWatch data, and a React frontend on Netlify.
+          </p>
+          <ul class="project-tags">
+            <li>React</li><li>Node.js</li><li>Express</li><li>PostgreSQL</li><li>REST API</li>
+          </ul>
+          <p class="project-links">
+            <a href="https://stonkstracker.netlify.app/" rel="noopener noreferrer" target="_blank">Live site</a>
+            <a href="https://github.com/aD3nnis/stonks" rel="noopener noreferrer" target="_blank">GitHub</a>
+          </p>
+        </article>
+
+        <article class="project-card">
+          <h3><a href="https://ava-dennis-fe-dev-resource-library.netlify.app" rel="noopener noreferrer" target="_blank">FE Sites Library</a></h3>
+          <p>
+            Searchable directory of frontend resources with multi-criteria filters, list and card views,
+            sorting, and pagination. Demoed to stakeholders as an internal dev resource.
+          </p>
+          <ul class="project-tags">
+            <li>Vue 3</li><li>Vite</li><li>Vue Router</li><li>Axios</li><li>SASS</li>
+          </ul>
+          <p class="project-links">
+            <a href="https://ava-dennis-fe-dev-resource-library.netlify.app" rel="noopener noreferrer" target="_blank">Live site</a>
+            <a href="https://github.com/aD3nnis/Frontend-Dev-Resource-Library" rel="noopener noreferrer" target="_blank">GitHub</a>
+          </p>
+        </article>
+      </div>
+    </section>
+
     <header class="about-intro">
-      <h1>Introduction</h1>
+      <h2>Beyond the code</h2>
       <p class="about-subtitle">A short overview of the impact I've made as a person.</p>
     </header>
 

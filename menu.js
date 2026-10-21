@@ -14,6 +14,7 @@
                     <a href="#">About</a>
                     <ul>
                         <li><a href="${link("About/resume.html")}">Resume</a></li>
+                        <li><a href="https://github.com/aD3nnis" rel="noopener noreferrer" target="_blank">GitHub</a></li>
                         <li><a href="https://www.linkedin.com/in/ava-dennis117/" rel="noopener noreferrer" target="_blank">Linkedin</a></li>
                     </ul>
                 </li>
