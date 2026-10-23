@@ -141,6 +141,7 @@
         els.brief.innerHTML = `
             <p class="brief-who">${scenario.requester} asks:</p>
             <blockquote class="brief-quote">“${scenario.brief}”</blockquote>
+            ${scenario.project ? `<p class="brief-project"><a href="${scenario.project.href}">${scenario.project.label} →</a></p>` : ""}
             <h3>Requirements that shape the design</h3>
             <ul class="brief-reqs">${scenario.requirements.map((r) => `<li>${r}</li>`).join("")}</ul>
             <h3>${scenario.patterns.length > 1 ? "Patterns" : "Pattern"} this teaches</h3>
