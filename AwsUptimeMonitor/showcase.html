@@ -66,7 +66,9 @@
             border: 1px solid rgba(19,54,112,0.2);
             display: flex;
             justify-self: center;
+            margin-bottom: 1.25rem;
         }
+        .showcase-media-image.wide { width: 100%; }
         .showcase-links {
             margin-top: 1.25rem;
         }
@@ -95,13 +97,13 @@
             <section class="showcase-section">
                 <h2>What it does</h2>
                 <p>
-                    An EventBridge schedule triggers a Python Lambda function every 5 minutes. The function pings each configured URL and records its status, status code, and response time. Every result goes to CloudWatch Logs, and <code>SiteUp</code> and <code>ResponseTimeMs</code> metrics go to CloudWatch Metrics. If any site is <code>down</code> or <code>slow</code>, it sends one summary alert through SNS to email.
+                    An EventBridge Scheduler schedule triggers a Python Lambda function every 5 minutes. The function pings each configured URL and records its status, status code, and response time. Every result goes to CloudWatch Logs, and <code>SiteUp</code> and <code>ResponseTimeMs</code> metrics go to CloudWatch Metrics. If any site is <code>down</code> or <code>slow</code>, it sends one summary alert through SNS to email.
                 </p>
             </section>
 
             <section class="showcase-section">
                 <h2>Architecture</h2>
-                <pre class="showcase-code"><code>EventBridge (every 5 min)
+                <pre class="showcase-code"><code>EventBridge Scheduler (every 5 min)
         |
         v
   AWS Lambda (Python)
@@ -111,18 +113,90 @@ CloudWatch   SNS Topic
   Logs &       |
   Metrics      v
             Email Alert</code></pre>
+                <p class="showcase-media-note">The deployed function in the Lambda console, with its Scheduler trigger:</p>
+                <img
+                    class="showcase-media-image"
+                    src="../assets/images/aws-uptime-lambda-diagram.png"
+                    alt="AWS Lambda console function overview showing the Scheduler trigger connected to the uptime-monitor function"
+                >
             </section>
 
             <section class="showcase-section">
                 <h2>Services used</h2>
                 <ul>
                     <li><strong>AWS Lambda</strong>: runs the Python checker function with no server to manage.</li>
-                    <li><strong>Amazon EventBridge</strong>: triggers Lambda on a fixed <code>rate(5 minutes)</code> schedule.</li>
+                    <li><strong>Amazon EventBridge Scheduler</strong>: triggers Lambda on a fixed <code>rate(5 minutes)</code> schedule.</li>
                     <li><strong>Amazon SNS</strong>: sends email notifications when a site is down or slow.</li>
                     <li><strong>CloudWatch Logs + Metrics</strong>: stores every check result and tracks uptime and response-time trends.</li>
                     <li><strong>AWS IAM</strong>: grants Lambda permission to write to CloudWatch and publish to SNS.</li>
                 </ul>
                 <p>Everything runs within the AWS Free Tier.</p>
+            </section>
+
+            <section class="showcase-section showcase-media">
+                <h2>Results</h2>
+                <p>
+                    The monitor ran continuously from March 2 to September 2, 2026, checking my portfolio site and Workday's careers page every 5 minutes (288 checks per site per day).
+                </p>
+                <p class="showcase-media-note">
+                    Uptime and response time, March&ndash;September (daily averages). Both sites stayed up for well over 99.9% of checks. My portfolio (green) responds in well under 100&nbsp;ms because Netlify serves it from a CDN, while Workday (blue) averages around 500&ndash;600&nbsp;ms.
+                </p>
+                <img
+                    class="showcase-media-image wide"
+                    src="../assets/images/aws-uptime-overview.png"
+                    alt="CloudWatch graph of uptime and response time for two sites from March to September 2026"
+                >
+                <p class="showcase-media-note">
+                    The same uptime data with the right axis zoomed to 0.99&ndash;1. Each dip is a day where roughly 2&ndash;3 of the 288 checks failed.
+                </p>
+                <img
+                    class="showcase-media-image wide"
+                    src="../assets/images/aws-uptime-zoomed.png"
+                    alt="CloudWatch graph with the uptime axis zoomed to 0.99 to 1, showing occasional daily dips"
+                >
+                <p class="showcase-media-note">
+                    Individual 5-minute checks from August 25&ndash;27, showing periodic latency spikes on the portfolio and a single failed Workday check on August 26.
+                </p>
+                <img
+                    class="showcase-media-image wide"
+                    src="../assets/images/aws-uptime-closeup.png"
+                    alt="CloudWatch graph of individual 5-minute checks over three days in August"
+                >
+            </section>
+
+            <section class="showcase-section">
+                <h2>Investigating the latency spikes</h2>
+                <p>
+                    An AI assistant suggested Lambda cold starts as a possible cause, so I investigated that. On a cold start, the first URL in the list absorbs extra setup time. A test run right after a cold start supported this: Workday, checked first, took 1037&nbsp;ms, while my portfolio, checked second, took 61&nbsp;ms.
+                </p>
+                <p>
+                    Because the portfolio is always checked second, cold starts don't explain its spikes. The more likely cause is CDN cache misses on Netlify's side.
+                </p>
+            </section>
+
+            <section class="showcase-section showcase-media">
+                <h2>Alerting, end to end</h2>
+                <p class="showcase-media-note">
+                    A manual test run from the Lambda console, with both sites up:
+                </p>
+                <img
+                    class="showcase-media-image wide"
+                    src="../assets/images/aws-uptime-test-run.webp"
+                    alt="Lambda test run output showing both monitored sites returned status 200"
+                >
+                <p class="showcase-media-note">
+                    To test alerts, I added a domain that doesn't exist. The check failed, Lambda logged it and published to SNS, and the alert email arrived:
+                </p>
+                <img
+                    class="showcase-media-image wide"
+                    src="../assets/images/aws-uptime-log-events.webp"
+                    alt="CloudWatch log events for a run with one site down and an alert sent"
+                >
+                <img
+                    class="showcase-media-image"
+                    src="../assets/images/aws-uptime-alert-email.png"
+                    alt="Uptime alert email reporting one site down"
+                >
             </section>
 
             <section class="showcase-section">
@@ -150,6 +224,8 @@ CloudWatch   SNS Topic
                     <li>Store the URL list in SSM Parameter Store so updates don't need a redeploy.</li>
                     <li>Add multi-region checks and a CloudWatch dashboard for uptime history.</li>
                     <li>Add SSL certificate expiry checks.</li>
+                    <li>Replace the broad <code>FullAccess</code> IAM policies with a least-privilege custom policy.</li>
+                    <li>Report DNS failures with a clear message instead of Lambda's <code>[Errno 16] Device or resource busy</code>.</li>
                 </ul>
             </section>
         </main>
