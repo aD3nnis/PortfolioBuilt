@@ -55,6 +55,10 @@
             button.type = "button";
             button.className = "scenario-tab";
             button.textContent = s.title;
+            if (s.project) {
+                button.classList.add("is-mine");
+                button.insertAdjacentHTML("beforeend", `<span class="matrix-mine">I built this</span>`);
+            }
             button.addEventListener("click", () => selectScenario(i));
             els.picker.appendChild(button);
         });
@@ -80,7 +84,8 @@
                     ? `<td${cls}><button type="button" class="matrix-cell" aria-label="${s.title} uses ${PATTERNS[id].name}"><span aria-hidden="true">●</span></button></td>`
                     : `<td${cls}></td>`;
             }).join("")).join("");
-            return `<tr data-index="${i}"><th scope="row"><button type="button" class="matrix-scenario">${s.title}</button></th>${cells}</tr>`;
+            const mine = s.project ? `<span class="matrix-mine">I built this</span>` : "";
+            return `<tr data-index="${i}"${s.project ? ' class="is-mine"' : ""}><th scope="row"><button type="button" class="matrix-scenario">${s.title}</button>${mine}</th>${cells}</tr>`;
         }).join("");
 
         els.matrix.innerHTML = `

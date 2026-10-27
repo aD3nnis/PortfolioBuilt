@@ -73,6 +73,24 @@ body {
     color: var(--paper);
 }
 
+/* Scenarios based on my own projects, matching their rows in the matrix. */
+.scenario-tab.is-mine {
+    border-color: var(--accent);
+    background: #fff8ea;
+}
+
+.scenario-tab.is-mine:hover {
+    background: #ffefcc;
+}
+
+.scenario-tab.is-mine[aria-pressed="true"] {
+    background: var(--blue);
+}
+
+.scenario-tab .matrix-mine {
+    margin-left: 8px;
+}
+
 /* Matrix */
 .matrix {
     background: var(--paper);
@@ -133,6 +151,12 @@ body {
     cursor: pointer;
 }
 
+/* Scenarios based on my own projects. Hover and the current row still win. */
+.matrix-table tbody tr.is-mine,
+.matrix-table tbody tr.is-mine th {
+    background: #fff8ea;
+}
+
 .matrix-table tbody tr:hover,
 .matrix-table tbody tr.is-current {
     background: #eef4fd;
@@ -171,6 +195,22 @@ body {
     font-weight: 600;
     text-align: left;
     padding: 2px 0;
+}
+
+.matrix-mine {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--navy);
+    font-size: 0.75rem;
+    font-weight: 700;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.matrix-table .matrix-mine {
+    margin-left: 8px;
 }
 
 .matrix-cell {
