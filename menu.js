@@ -49,6 +49,7 @@
                     <ul>
                         <li><a href="${link("AIChats/system-design.html")}">System Design</a></li>
                         <li><a href="https://avadennis-ai-career-system-map.netlify.app/" rel="noopener noreferrer" target="_blank">Career Map</a></li>
+                        <li><a href="${link("AIChats/workflow-map/index.html")}">Workflow Map</a></li>
                     </ul>
                 </li>
             </ul>

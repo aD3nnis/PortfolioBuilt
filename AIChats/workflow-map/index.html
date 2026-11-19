@@ -1,0 +1,1763 @@
+<meta charset="utf-8">
+<title>Claude Workflow Map — Working Guide Draft</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: a phase-by-workflow grid. Columns are the shared phases, rows are task types,
+   an "enforced" band shows what Claude Code applies every time, amber markers are alternative routes.
+   Every claim carries source chips: Claude Code docs, the review article, your setup, or a design choice. */
+:root {
+  --bg: #F4F6F9;
+  --surface: #FFFFFF;
+  --fg: #172030;
+  --muted: #5C6577;
+  --line: #C4CBD7;
+  --line-strong: #39445A;
+  --accent: #2B57D6;
+  --accent-soft: #E2E9FB;
+  --shared: #EEF1F5;
+  --shared-cell: #E0EBFF; --shared-edge: #315FC0; --skip-stripe: #BAC3D1;
+  --hook: #0E7C86;
+  --hook-soft: #DDF1F2;
+  --branch: #A65F00;
+  --branch-soft: #FCEFD9;
+  --select: #4FAEE3;
+  --mine: #7A4BB8;
+  --mine-soft: #F1EAFA;
+  --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #10141B; --surface: #18202B; --fg: #E5E9EF; --muted: #98A2B3;
+    --line: #333D4D; --line-strong: #BAC3D1; --accent: #7EA1FF; --accent-soft: #1E2A47;
+    --shared: #141B25; --shared-cell: #203A60; --shared-edge: #84B8FF; --skip-stripe: #49566B; --hook: #3FC4CC; --hook-soft: #12313A;
+    --branch: #F2B550; --branch-soft: #3A2C12; --select: #9AD8FF;
+    --mine: #C9A6F5; --mine-soft: #2A2040;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #10141B; --surface: #18202B; --fg: #E5E9EF; --muted: #98A2B3;
+  --line: #333D4D; --line-strong: #BAC3D1; --accent: #7EA1FF; --accent-soft: #1E2A47;
+  --shared: #141B25; --shared-cell: #203A60; --shared-edge: #84B8FF; --skip-stripe: #49566B; --hook: #3FC4CC; --hook-soft: #12313A;
+  --branch: #F2B550; --branch-soft: #3A2C12; --select: #9AD8FF;
+  --mine: #C9A6F5; --mine-soft: #2A2040;
+  color-scheme: dark;
+}
+
+body { background: var(--bg); color: var(--fg); font-family: var(--font-sans); font-size: 15px; line-height: 1.5; }
+.wrap {
+  max-width: 1440px; margin: 0 auto;
+  padding-block: 24px 40px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 16px;
+}
+header h1 { margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -0.01em; text-wrap: balance; }
+header p { margin: 4px 0 0; color: var(--muted); max-width: 82ch; }
+a { color: var(--accent); }
+code { font-family: var(--font-mono); font-size: .9em; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 13px; color: var(--muted); }
+.legend .item { display: inline-flex; align-items: center; gap: 8px; }
+.legend .title { font-weight: 600; color: var(--fg); }
+.sw { width: 26px; height: 14px; border-radius: 3px; border: 1px solid var(--line); display: inline-block; }
+.sw.specific { background: var(--surface); border: 2px solid var(--line-strong); }
+.sw.shared { background: var(--shared-cell); border-color: var(--shared-edge); border-left: 5px solid var(--shared-edge); }
+.sw.skip { background: repeating-linear-gradient(135deg, var(--bg) 0 5px, var(--skip-stripe) 5px 8px); border-color: var(--line-strong); }
+.sw.hook { background: var(--hook-soft); border-color: var(--hook); }
+.sw.branch { width: 14px; height: 14px; border-radius: 50%; background: var(--branch); border: none; }
+
+/* ---------- Source chips ---------- */
+.srcs { display: flex; flex-wrap: wrap; gap: 3px; }
+.chip {
+  font-family: var(--font-mono); font-size: 10px; line-height: 1; letter-spacing: .02em;
+  padding: 3px 4px 2px; border-radius: 3px; border: 1px solid; white-space: nowrap; font-style: normal;
+}
+.k-docs { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
+.k-article { background: var(--surface); color: var(--fg); border-color: var(--line-strong); }
+.k-setup { background: transparent; color: var(--muted); border-color: var(--muted); border-style: dotted; }
+.k-mine { background: var(--mine-soft); color: var(--mine); border-color: var(--mine); border-style: dashed; }
+
+/* ---------- The map ---------- */
+.map-scroll { overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+.map {
+  display: grid;
+  grid-template-columns: 180px repeat(8, minmax(142px, 1fr));
+  min-width: 1330px;
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+.map > div { padding: 8px 9px; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); min-width: 0; }
+.rowhead {
+  position: sticky; left: 0; z-index: 2;
+  background: var(--surface);
+  display: grid; gap: 4px; align-content: start;
+}
+.phase {
+  font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+  background: var(--bg);
+  display: grid; gap: 4px; align-content: start;
+}
+.phase .n { font-family: var(--font-mono); color: var(--accent); margin-right: 4px; letter-spacing: 0; }
+.corner { background: var(--bg) !important; font-size: 11px; color: var(--muted); }
+.group {
+  grid-column: 1 / -1;
+  font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+  background: var(--bg); padding: 6px 10px !important; border-right: none !important;
+}
+.group span { position: sticky; left: 10px; }
+
+.wf-name {
+  font: inherit; font-size: 13.5px; font-weight: 600; color: var(--fg);
+  background: none; border: none; padding: 0; text-align: left; cursor: pointer;
+}
+.wf-name:hover { text-decoration: underline; }
+.wf-name:focus-visible { outline: 2px solid var(--select); outline-offset: 2px; }
+.wf-when { color: var(--muted); font-size: 11.5px; }
+
+.cell { background: var(--surface); color: var(--fg); display: grid; gap: 6px; align-content: start; }
+.cell.shared { background: var(--shared-cell); color: var(--fg); border-left: 5px solid var(--shared-edge); }
+.cell.skip { color: var(--fg); font-style: italic; background: repeating-linear-gradient(135deg, var(--bg) 0 8px, var(--skip-stripe) 8px 11px); }
+.cell.skip .cell-open { background: var(--bg); padding: 3px 6px; border-radius: 3px; }
+.cell.hook { background: var(--hook-soft); color: var(--fg); }
+.rowhead.hook { background: var(--hook-soft); }
+.rowhead.hook .wf-name { color: var(--hook); cursor: default; }
+.rowhead.hook .wf-name:hover { text-decoration: none; }
+
+.alt {
+  font: inherit; font-size: 11.5px; text-align: left; cursor: pointer;
+  display: flex; gap: 6px; align-items: baseline;
+  background: var(--branch-soft); color: var(--fg);
+  border: 1px solid var(--branch); border-radius: 6px; padding: 3px 6px;
+}
+.alt::before { content: ""; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--branch); transform: translateY(1px); }
+.alt:focus-visible { outline: 2px solid var(--select); outline-offset: 2px; }
+
+.map.focus .r:not(.on) { opacity: .38; }
+.map .r { transition: opacity .2s; }
+.map .r.on.rowhead { box-shadow: inset 4px 0 0 var(--select); }
+.alt.on { outline: 2.5px dashed var(--select); outline-offset: 2px; }
+
+/* ---------- Detail panel ---------- */
+.panel {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+  padding: 16px; display: grid; gap: 10px;
+}
+.panel.viewing {
+  --dash-h: repeating-linear-gradient(90deg, var(--select) 0 16px, transparent 16px 22px);
+  --dash-v: repeating-linear-gradient(180deg, var(--select) 0 16px, transparent 16px 22px);
+  border: 2.5px solid transparent; border-radius: 0;
+  background:
+    var(--dash-h) top / 100% 2.5px no-repeat border-box,
+    var(--dash-h) bottom / 100% 2.5px no-repeat border-box,
+    var(--dash-v) left / 2.5px 100% no-repeat border-box,
+    var(--dash-v) right / 2.5px 100% no-repeat border-box,
+    var(--surface) padding-box;
+}
+.panel h2 { margin: 0; font-size: 17px; font-weight: 600; }
+.label { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.panel p { margin: 0; max-width: 78ch; }
+.steps { margin: 0; padding-left: 0; list-style: none; display: grid; gap: 8px; }
+.steps li { display: grid; grid-template-columns: 7.5em minmax(0, 1fr); gap: 10px; font-size: 14px; }
+.steps .ph { color: var(--muted); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; padding-top: 2px; }
+.steps .body { display: grid; gap: 2px; }
+.cite { font-size: 12.5px; color: var(--muted); display: grid; gap: 1px; }
+.cite .row { display: flex; gap: 6px; align-items: baseline; }
+.cite .row .srcs { flex: none; }
+.cite .row .txt { min-width: 0; }
+.cite .why { font-style: italic; }
+.basis { border-left: 3px solid var(--accent); padding-left: 10px; display: grid; gap: 4px; }
+.alts { display: grid; gap: 10px; }
+.alt-row { display: grid; gap: 2px; border-left: 3px solid var(--branch); padding-left: 10px; }
+.alt-row .if { font-weight: 600; }
+.switch {
+  font: inherit; font-size: 13px; cursor: pointer; justify-self: start;
+  border: 1px solid var(--accent); color: var(--accent); background: transparent; border-radius: 999px; padding: 2px 10px; margin-top: 2px;
+}
+.switch:focus-visible, .clear:focus-visible { outline: 2px solid var(--select); outline-offset: 2px; }
+.clear {
+  font: inherit; font-size: 12.5px; cursor: pointer; justify-self: start;
+  border: 2px dashed var(--select); color: var(--fg); background: transparent; border-radius: 999px; padding: 2px 10px;
+}
+.hint { color: var(--muted); font-size: 14px; }
+
+/* ---------- Lower sections ---------- */
+section > h2 { margin: 0 0 8px; font-size: 15px; font-weight: 600; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 10px; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--branch);
+  border-radius: 6px; padding: 10px 12px; display: grid; gap: 6px; font-size: 14px; align-content: start;
+}
+.card .if { font-weight: 600; }
+
+.box { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: grid; gap: 10px; }
+.box p { margin: 0; max-width: 82ch; }
+.box ul, .box ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; max-width: 86ch; }
+.qs { display: grid; gap: 8px; }
+.q { border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; }
+.q > summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; align-items: center; gap: 8px; }
+.q > summary::-webkit-details-marker { display: none; }
+.q > summary::before { content: "\203A"; color: var(--accent); font-size: 18px; line-height: 1; transition: transform .15s; }
+.q[open] > summary::before { transform: rotate(90deg); }
+.q .qbody { display: grid; gap: 8px; margin-top: 8px; }
+.q h4 { margin: 0; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.q ul { margin: 2px 0 0; padding-left: 20px; }
+.say { border-left: 3px solid var(--accent); padding: 4px 0 4px 12px; font-size: 15px; }
+.cov { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 14px; }
+.cov .item { display: inline-flex; gap: 6px; align-items: center; }
+.cov b { font-family: var(--font-mono); font-weight: 500; }
+.bar { display: flex; height: 10px; border-radius: 5px; overflow: hidden; border: 1px solid var(--line); max-width: 640px; }
+.bar span { display: block; height: 100%; }
+.bar .docs { background: var(--accent); }
+.bar .article { background: var(--line-strong); }
+.bar .setup { background: var(--muted); opacity: .5; }
+.bar .mine { background: var(--mine); }
+.srclist { list-style: none; padding: 0 !important; }
+.srclist li { display: grid; grid-template-columns: 3.4em minmax(0, 1fr); gap: 8px; align-items: baseline; }
+
+@media (max-width: 640px) {
+  .steps li { grid-template-columns: 1fr; gap: 0; }
+  .map { grid-template-columns: 132px repeat(8, minmax(136px, 1fr)); min-width: 1240px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style><style>
+.cell-open{font:inherit;text-align:left;background:transparent;color:inherit;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}.cell-open:focus-visible{outline:3px solid var(--accent)}.checkpoint{font-size:11px;color:var(--muted);margin-top:10px}.cell .alt{font-size:11px}.guide-intro details{margin-top:12px}
+
+.guide-intro,.guide-detail{border:1px solid var(--line);border-radius:12px;padding:22px;margin:22px 0;background:var(--surface);color:var(--fg)}
+.guide-nav{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}.guide-nav button{font:inherit;padding:8px 12px;border:1px solid var(--line-strong);border-radius:6px;background:transparent;color:inherit;cursor:pointer}.guide-nav button[aria-pressed=true]{background:var(--accent-soft);color:var(--accent)}
+.guide-detail dl{display:grid;grid-template-columns:minmax(120px,180px) 1fr;gap:12px 20px}.guide-detail dt{font-weight:700}.guide-detail dd{margin:0;line-height:1.6}.guide-example{overflow:auto;padding:16px;background:var(--shared);color:var(--fg);border-radius:8px;white-space:pre-wrap}.guide-note{font-size:.9em;color:var(--muted)}.phase{cursor:pointer}.phase:focus-visible{outline:3px solid #c98032}
+@media(max-width:640px){.guide-detail dl{grid-template-columns:1fr}.guide-detail dd{margin-bottom:10px}}
+</style>
+
+<div class="wrap">
+  <header><h1>Claude Workflow Map · Working Guide</h1><p>Choose a workflow, then click a cell for its actions, checkpoint, evidence, and return points.</p><p class="guide-note">Design draft · All nine rows await individual review against the current skills. Shared checkpoints are draft guidance. <a href="claude-workflow-map-reference.html">Research and original map history</a></p></header>
+
+<section class="guide-intro" aria-label="Using this guide">
+<p><strong>Short route:</strong> for a contained, understood change: confirm the approach, change, verify, inspect the diff, deliver. Skip the spec and plan files only by telling Claude so.</p>
+<details><summary>Full route, shared phases, and saved outputs</summary><p><strong>Full route:</strong> for unclear or wide-reaching changes, investigate more and record the requirements, approach and risks.</p><p>Skills, in order: existing repo, /map → /spec → /plan → build → /walkthrough → /code-review (/setup alongside /map); new project, /spec → /plan → build → /setup → /walkthrough, then /code-review from the first PR on (the skeleton's first commit is local, so there is no PR to review yet). /walkthrough comes first because it is your own review: you answer before Claude does. /code-review comes last, after the branch's final commit and before the PR opens: it reviews the branch's changes against the base branch, you fix or decide on each finding, and the findings go in the PR's Review section. Run it again if the fixes changed code. It replaces automated PR review in CI. Each cell says where its skill fits; using them is a general recommendation, not yet confirmed as required. Files in docs/workflow/ are committed; /handoff is a local note, usable at any phase.</p><p>If something fails, revisit the affected decision and repeat the checks.</p><div class="guide-nav" id="guide-nav" aria-label="Phase guidance"></div><div class="guide-detail" id="guide-detail" aria-live="polite"></div></details></section>
+  <div class="legend">
+    <span class="item"><span class="sw specific"></span>workflow action · click for details</span>
+    <span class="item"><span class="sw shared"></span>shared phase action</span>
+    <span class="item"><span class="sw skip"></span>phase not used in this row</span>
+    <span class="item"><span class="sw branch"></span>Route: condition · click to jump to details</span>
+  </div>
+
+
+  <div class="map-scroll">
+    <div class="map" id="map" role="table" aria-label="Workflows by phase"></div>
+  </div>
+
+  <section class="panel" id="panel" tabindex="-1" aria-live="polite"></section>
+
+  <details class="box"><summary>How Claude follows a workflow · detours, switches, recaps, the decisions file</summary>
+<p><strong>Type.</strong> You name the workflow, or Claude proposes one from your description and you confirm. A small, obvious task needs no type and no file.</p>
+<p><strong>A phase is a position, not a permission.</strong> Claude never refuses an edit because of the phase, and never says "you can't go back". Quick changes are always allowed.</p>
+<p><strong>Detour</strong> (a small change that fits another type, such as a visual tweak during a bug fix): Claude does it, says so in one line, and adds a note under Detours and switches in the decisions file. No interview.</p>
+<p><strong>Switch</strong> (the next steps would change: a new spec, a new risk, a different checkpoint): Claude pauses and asks short questions, each with a purpose line, such as "Do you need more understanding first? Use this if you're unsure what the code does." It may skip questions that don't apply, but says which and that going back is an option.</p>
+<p><strong>Every phase transition</strong> gets a four-part recap: what happened; evidence the checkpoint was met; why it's fine to move on; what you should understand now. Claude names the finished and the next phase, suggests the command that fits best (this setup's or a built-in), and waits for your OK.</p>
+<p><strong>Decisions file.</strong> <code>docs/workflow/&lt;topic&gt;-decisions.md</code> is committed and carries Branch, Type, Phase and Detours and switches. Claude creates it when the task gets a branch or the first decision worth keeping comes up, whichever is first, and says so. At session start Claude reads the decisions files whose Branch equals the current git branch and tells you if that task is mid-phase.</p>
+<p class="guide-note">Claude reads these from <code>.claude/rules/workflow-types.md</code> and the <code>workflow-types</code> skill, which are installed with the template. This guide is not copied into other repos.</p>
+</details>
+  <details class="box"><summary>Shared situations and session controls</summary><div class="cards" id="anywhere"></div></details>
+<details class="box"><summary>Automatic checks and restrictions · reusable template</summary><p>Checked against this repo on 17 November 2026. Project-specific command placeholders are intentional. /map only discovers and reports the commands and any configuration gaps; /setup runs the commands itself and fills the placeholders in CLAUDE.md and the hooks when this setup is installed in a project. If no suitable command exists, the placeholder stays and the gap is reported. These are configuration findings, not proof of a live Claude Code hook run.</p><div id="setup-details"></div></details>
+
+
+
+
+
+
+
+  <details class="box" id="sources"><summary>Sources</summary>
+
+    <ul class="srclist" id="srclist"></ul>
+  </details>
+</div>
+
+<script type="application/json" id="map-data">
+{
+  "sources": {
+    "HW": {
+      "kind": "docs",
+      "name": "How Claude Code works",
+      "url": "https://code.claude.com/docs/en/how-claude-code-works"
+    },
+    "CW": {
+      "kind": "docs",
+      "name": "Common workflows",
+      "url": "https://code.claude.com/docs/en/common-workflows"
+    },
+    "BP": {
+      "kind": "docs",
+      "name": "Best practices",
+      "url": "https://code.claude.com/docs/en/best-practices"
+    },
+    "EX": {
+      "kind": "docs",
+      "name": "Extend Claude Code",
+      "url": "https://code.claude.com/docs/en/features-overview"
+    },
+    "PC": {
+      "kind": "docs",
+      "name": "How Claude Code uses prompt caching",
+      "url": "https://code.claude.com/docs/en/prompt-caching"
+    },
+    "MM": {
+      "kind": "docs",
+      "name": "How Claude remembers your project",
+      "short": "Memory",
+      "url": "https://code.claude.com/docs/en/memory"
+    },
+    "QS": {
+      "kind": "docs",
+      "name": "Quickstart",
+      "url": "https://code.claude.com/docs/en/quickstart"
+    },
+    "RA": {
+      "kind": "article",
+      "name": "How the Claude Code team does code review",
+      "short": "Review article",
+      "url": "https://claude.dev/blog/solving-code-review-at-anthropic/"
+    },
+    "VS": {
+      "kind": "setup",
+      "name": "Your setup (Mac_Vault rules)",
+      "note": "Your own conventions, not Claude Code's."
+    },
+    "ME": {
+      "kind": "mine",
+      "name": "Design choice",
+      "note": "Not in the sources. The reason is given each time."
+    },
+    "DT": {
+      "kind": "docs",
+      "name": "Claude Code Desktop",
+      "short": "Desktop",
+      "url": "https://code.claude.com/docs/en/desktop"
+    }
+  },
+  "phases": [
+    "Start",
+    "Understand",
+    "Plan",
+    "Change",
+    "Verify",
+    "Review",
+    "Ship",
+    "Close"
+  ],
+  "phaseSrc": [
+    [
+      "HW|Work with sessions"
+    ],
+    [
+      "HW|The agentic loop (gather context)"
+    ],
+    [
+      "CW|Plan before editing"
+    ],
+    [
+      "HW|The agentic loop (take action)"
+    ],
+    [
+      "HW|The agentic loop (verify results)"
+    ],
+    [
+      "RA|Layer by layer",
+      "BP|Give Claude a check to run"
+    ],
+    [
+      "RA|6\u20137. Flags, gradual release and fast rollback",
+      "CW|Create pull requests"
+    ],
+    [
+      "HW|Work with sessions",
+      "CW|Resume previous conversations",
+      "BP|Steer the session",
+      "VS|Handoff rule"
+    ]
+  ],
+  "shared": {
+    "Start": {
+      "t": "Launch in the repo so its CLAUDE.md, rules and settings apply. Name the session.",
+      "src": [
+        "HW|What Claude can access",
+        "BP|Choose who a rule applies to",
+        "BP|Steer the session"
+      ]
+    },
+    "Close": {
+      "t": "Name the session so it can be resumed, and move anything lasting into CLAUDE.md. A repeated mistake or review comment becomes a setup change. Your setup adds a handoff file.",
+      "src": [
+        "BP|Steer the session",
+        "CW|Resume previous conversations",
+        "HW|Work with sessions",
+        "EX|Build your setup over time (a repeated mistake is a CLAUDE.md edit)",
+        "VS|Handoff rule"
+      ]
+    }
+  },
+  "hooks": {
+    "name": "Automatic checks and restrictions",
+    "when": "Reusable configuration: /setup fills project-specific lint and test commands (/map only reports them). Placeholders intentionally skip checks until configured.",
+    "src": [
+      "BP|Deterministic and non-deterministic instructions"
+    ],
+    "cells": [
+      null,
+      null,
+      null,
+      {
+        "t": "Configured in this template: Read/Edit deny rules for .env and .env.*. After Edit or Write, a hook invokes lint.sh. Its lint command is deliberately project-specific: /setup fills it from the project after running it (/map only reports it). Until then, the placeholder exits without running a check. No protected-path hook or automatic formatter is configured here.",
+        "src": [
+          "VS|.claude/settings.json; .claude/hooks/lint.sh; .claude/skills/setup/SKILL.md"
+        ]
+      },
+      {
+        "t": "The Stop hook invokes check-tests.sh. /setup fills its project-specific test command after running it (/map only reports it); the placeholder intentionally exits without running tests. If no suitable command exists, /setup leaves the placeholder and reports it. Once configured, a failing test run blocks stopping once; a repeated stop is allowed to prevent an endless loop. This template does not configure a separate typecheck.",
+        "src": [
+          "VS|.claude/settings.json; .claude/hooks/check-tests.sh; .claude/skills/setup/SKILL.md"
+        ]
+      },
+      null,
+      {
+        "t": "Configured in this template: an ask rule for git push. GitHub branch protection is separate and unverified: this checkout has no Git remote. Local Claude review workflow files exist but are untracked; deployment, credentials, and successful runs have not been verified.",
+        "src": [
+          "VS|.claude/settings.json; .github/workflows/; local git state checked 17 November 2026"
+        ]
+      },
+      null
+    ]
+  },
+  "groups": [
+    {
+      "name": "Begin",
+      "ids": [
+        "newproject"
+      ]
+    },
+    {
+      "name": "Build",
+      "ids": [
+        "feature",
+        "bug",
+        "refactor",
+        "tests"
+      ]
+    },
+    {
+      "name": "Learn",
+      "ids": [
+        "explore"
+      ]
+    },
+    {
+      "name": "Operate",
+      "ids": [
+        "hotfix",
+        "migration"
+      ]
+    },
+    {
+      "name": "Improve",
+      "ids": [
+        "setup"
+      ]
+    }
+  ],
+  "workflows": [
+    {
+      "id": "newproject",
+      "name": "New project",
+      "when": "An empty folder that will become a repo: no code, no CLAUDE.md, no commits.",
+      "basis": {
+        "t": "The docs have no from-scratch recipe: Quickstart lists a code project as something you need before you begin. This row uses the docs' steps that still work in an empty folder. Their order is my design. Verify to Close is the Claude-ready baseline: a passing check, a trimmed CLAUDE.md, deny rules for secrets and a commit. A repo that already has code joins the row there.",
+        "src": [
+          "QS|Before you begin",
+          "BP|Brainstorm with Claude first",
+          "EX|Build your setup over time",
+          "ME|No docs page covers an empty folder, so the order is mine: spec, skeleton, one check, CLAUDE.md, commit"
+        ]
+      },
+      "cells": [
+        {
+          "t": "Make the folder in ~/Developer, run git init, and launch Claude there. Only your user CLAUDE.md applies: the project has none yet.",
+          "src": [
+            "MM|Choose where to put CLAUDE.md files",
+            "VS|Code repos live in ~/Developer, outside the vault",
+            "ME|git init first, so every later step can be committed"
+          ]
+        },
+        {
+          "short": "Use /spec to write down what the skeleton must do.",
+          "t": "Use /spec to pin down what the skeleton must do and what counts as done: Claude asks you questions until it can write docs/workflow/<topic>-spec.md covering what it's for, which technology choices are made and which are still open, what's out of scope, what done looks like. There is nothing to map yet. Then start a fresh session.",
+          "src": [
+            "BP|Brainstorm with Claude first",
+            "VS|Spec rule: known, unknown, assumed, out of scope, done"
+          ]
+        },
+        {
+          "short": "Use /plan to propose the layout, tools and one proving check.",
+          "t": "Plan mode: Claude proposes the folder layout, the tools, and the one check that will prove the skeleton works. Nothing is created until you approve. Use /plan to decide how the skeleton will be built: the stack and structure are labelled as proposals, and you choose wherever there is a real choice.",
+          "src": [
+            "CW|Plan before editing",
+            "BP|Give Claude a check to run"
+          ]
+        },
+        {
+          "short": "Claude builds the smallest skeleton that runs.",
+          "t": "Claude builds the smallest skeleton that runs: test and lint commands, build files, and CI if the project needs it. Add .gitignore and deny rules for secrets before any secret exists.",
+          "src": [
+            "BP|Limit access with permission rules and the sandbox",
+            "ME|The skeleton only has to run one check. Everything after that is a feature"
+          ]
+        },
+        {
+          "t": "Claude runs the app, the tests and the linter, and shows each command with its output. One real test passes. Use /setup once the skeleton exists, to make the checks real: it runs the real test and lint commands, fills the placeholders in CLAUDE.md and the hooks, and reports which hooks are active.",
+          "src": [
+            "BP|Give Claude a check to run"
+          ]
+        },
+        {
+          "short": "Use /walkthrough to review the skeleton; /init if CLAUDE.md needs work.",
+          "t": "Once the skeleton exists, run /init if CLAUDE.md needs creating or improving: it can suggest changes to an existing file, and the built-in command is enough when it covers the job. Skip it when the installed instructions are already sufficient (/setup fills the commands, /map writes the architecture reference). Use /walkthrough to review the skeleton: you review it first, Claude breaks the code to prove the check catches it, and the decisions are recorded. Once the code checks are done it asks you to run /map for the first map, and records the outcome before the review closes. Check the skeleton against the spec.",
+          "src": [
+            "MM|Set up a project CLAUDE.md",
+            "BP|Keep CLAUDE.md short",
+            "BP|Review against your spec",
+            "VS|The guide, Project 1: start CLAUDE.md with /init, then trim it"
+          ]
+        },
+        {
+          "t": "First commit, local only: the skeleton, CLAUDE.md and .claude/settings.json. No remote yet.",
+          "src": [
+            "CW|Run parallel sessions with worktrees (a worktree needs at least one commit)",
+            "BP|Choose who a rule applies to",
+            "ME|A remote, branch protection and a PR template can wait for the first PR"
+          ]
+        },
+        {
+          "t": "Write the handoff. The next session is a Feature, built from the spec in the repo that now exists.",
+          "src": [
+            "BP|Brainstorm with Claude first",
+            "VS|Handoff rule"
+          ]
+        }
+      ],
+      "alts": [
+        {
+          "phase": 0,
+          "if": "The folder already has code",
+          "then": "It isn't a new project. Start by exploring what's there.",
+          "to": "explore",
+          "src": [
+            "CW|Understand new codebases"
+          ],
+          "label": "Folder has code"
+        },
+        {
+          "phase": 1,
+          "if": "You can't choose a stack or an approach",
+          "then": "Try it in a throwaway folder first, then come back and finish the spec.",
+          "to": "explore",
+          "src": [
+            "VS|Spec rule: unknowns that change the plan get answered before planning",
+            "ME|A throwaway trial costs less than a skeleton built on the wrong stack"
+          ],
+          "label": "Stack undecided"
+        },
+        {
+          "phase": 3,
+          "if": "The skeleton keeps growing",
+          "then": "Stop at one passing check. Anything more is a feature with its own spec.",
+          "to": "feature",
+          "src": [
+            "BP|Keep cost and context down",
+            "ME|A small first commit is easy to check by reading it"
+          ],
+          "label": "Skeleton growing"
+        },
+        {
+          "phase": 5,
+          "if": "/init finds little to read",
+          "then": "Set CLAUDE_CODE_NEW_INIT=1 so /init asks you questions, or write the few lines yourself: the commands, and what Claude can't see in the code.",
+          "src": [
+            "MM|Set up a project CLAUDE.md",
+            "BP|Tell Claude what it can't see"
+          ],
+          "label": "Little for /init to read"
+        },
+        {
+          "phase": 6,
+          "if": "You want hooks, a reviewer agent or a PR template now",
+          "then": "Wait for the trigger. Add each one through Improve your setup when it's needed.",
+          "to": "setup",
+          "src": [
+            "EX|Build your setup over time"
+          ],
+          "label": "Add setup tools now"
+        },
+        {
+          "phase": 6,
+          "if": "The repo isn't yours",
+          "then": "Keep your notes in CLAUDE.local.md and leave it out of git. Don't commit setup files to someone else's repo.",
+          "src": [
+            "MM|Import additional files (CLAUDE.local.md)",
+            "ME|Setup files in a shared repo are the owners' decision"
+          ],
+          "label": "Repo belongs to others"
+        },
+        {
+          "phase": 7,
+          "if": "The code already existed",
+          "then": "Make the first change a small one: add a test for code you now understand, or fix a small bug.",
+          "to": "tests",
+          "src": [
+            "ME|A small first change tests your understanding and the new check at low risk"
+          ],
+          "label": "Code existed before setup"
+        }
+      ]
+    },
+    {
+      "id": "feature",
+      "name": "Feature",
+      "when": "Adding new behavior someone asked for.",
+      "basis": {
+        "t": "Best practices walks through a feature this way: a spec first, a check to pass, then a review against the spec.",
+        "src": [
+          "BP|Brainstorm with Claude first",
+          "BP|Review against your spec"
+        ]
+      },
+      "cells": [
+        "=",
+        {
+          "short": "Use /map if unfamiliar, then /spec to write down the task.",
+          "t": "Use /map if the repo is unfamiliar or has no map: it writes down the components, how they connect, the technologies used, and how to run and check the project, so you know what exists before changing it. \"Unfamiliar\" means you couldn't yet say where the change belongs or what else it touches. It creates the map, then keeps it current. Then use /spec to write docs/workflow/<topic>-spec.md: what is needed, what counts as done, and what else the change could break. Not sure what you want yet? Have Claude interview you for the spec. Build from it in a fresh session.",
+          "src": [
+            "BP|Brainstorm with Claude first"
+          ]
+        },
+        {
+          "t": "Plan mode: Claude reads and proposes, and edits nothing until you approve. Use /plan once the spec is approved, to decide how it will be built: it writes docs/workflow/<topic>-plan.md with an approach checked against what the repo already does, split into small tasks with the parallel ones marked.",
+          "src": [
+            "CW|Plan before editing"
+          ]
+        },
+        {
+          "t": "Give Claude a check to pass, such as tests for the spec's requirements, then write the code. The plan's \"Running this plan\" section says how to split it: one controller session, with independent tasks going to subagents that stay inside their own files.",
+          "src": [
+            "BP|Give Claude a check to run"
+          ]
+        },
+        {
+          "t": "Claude runs the check and shows the command and its output. /verify runs the app. If the test and lint commands in CLAUDE.md are still placeholders, use /setup (before or after /map) so the hooks check for real.",
+          "src": [
+            "BP|Give Claude a check to run"
+          ]
+        },
+        {
+          "short": "Use /walkthrough to review the diff and prove the tests catch breakage; /code-review before the PR.",
+          "t": "Use /walkthrough to review the change: you review the diff before Claude does, Claude breaks the code to prove each test catches it, and the decisions go in docs/workflow/<topic>-decisions.md. It also checks whether the change moved a fact the map documents and asks you to run /map. A reviewer subagent that checks the diff against the spec and skips style can add a second look. After the branch's last commit, run /code-review on the branch's changes against the base branch, and fix or decide on each finding before opening the PR.",
+          "src": [
+            "BP|Review against your spec",
+            "BP|Know what subagents cost"
+          ]
+        },
+        {
+          "t": "Claude opens the PR, with the /code-review findings and what was done about each under Review. Ask it to point out the risks. Risky changes ship behind a flag. Then merge and clean up: once you approve, set the decisions file to Close on the branch, squash-merge (or the repo's allowed method), pull the base branch, move the session out of the worktree, remove it, and delete the local and remote branch. The workflow-types skill has the order and the checks, including what to do if the merge fails.",
+          "src": [
+            "CW|Create pull requests",
+            "RA|6\u20137. Flags, gradual release and fast rollback",
+            "ME|A merged branch drops out of the session-start read, so the cleanup needs its own step"
+          ]
+        },
+        "="
+      ],
+      "alts": [
+        {
+          "phase": 1,
+          "if": "The spec has big unknowns",
+          "then": "Explore first and come back with answers.",
+          "to": "explore",
+          "src": [
+            "CW|Understand new codebases",
+            "VS|Spec rule: unknowns that change the plan get answered before planning"
+          ],
+          "label": "Spec has unknowns"
+        },
+        {
+          "phase": 2,
+          "if": "The plan is wrong, or the scope keeps growing",
+          "then": "Reject the plan, or split the work into smaller features, each in its own session.",
+          "src": [
+            "CW|Plan before editing",
+            "BP|Keep cost and context down",
+            "ME|Smaller pieces keep each plan and review small enough to check"
+          ],
+          "label": "Plan or scope changed"
+        },
+        {
+          "phase": 5,
+          "if": "Review is still finding things after 3 rounds",
+          "then": "Stop fixing comments one by one. Step back and rethink the approach.",
+          "src": [
+            "RA|How we make the reviewer better (Review has to converge)"
+          ],
+          "label": "Review keeps finding issues"
+        }
+      ]
+    },
+    {
+      "id": "bug",
+      "name": "Bug fix",
+      "when": "Something that should work doesn't.",
+      "basis": {
+        "t": "Common workflows has a bug-fix recipe, and Best practices' example prompt asks for a failing test that reproduces the bug.",
+        "src": [
+          "CW|Fix bugs efficiently",
+          "BP|Write a specific prompt"
+        ]
+      },
+      "cells": [
+        "=",
+        {
+          "t": "Give Claude the command that reproduces it, and the stack trace. In an unfamiliar repo, use /map first to see what exists.",
+          "src": [
+            "CW|Fix bugs efficiently"
+          ]
+        },
+        {
+          "t": "Find the root cause, not the symptom. Raise /effort for code you didn't write. For a contained, understood fix you may take the short route: say so explicitly and skip /spec and /plan. Otherwise use them.",
+          "src": [
+            "RA|Layer by layer (bug review)",
+            "BP|Change the model and effort"
+          ]
+        },
+        {
+          "t": "Write a failing test that reproduces it, then fix it.",
+          "src": [
+            "BP|Write a specific prompt"
+          ]
+        },
+        {
+          "t": "The test goes from failing to passing. Rerun the original command.",
+          "src": [
+            "BP|Give Claude a check to run",
+            "CW|Fix bugs efficiently"
+          ]
+        },
+        {
+          "short": "Use /walkthrough to review the diff and prove the test catches the bug; /code-review before the PR.",
+          "t": "Use /walkthrough to review the diff yourself first; then Claude breaks the fix to prove the test catches the bug. It also asks whether the map needs updating. After the branch's last commit, run /code-review on the branch's changes against the base branch before opening the PR; on a bug fix it looks for the root cause. Fix or decide on each finding.",
+          "src": [
+            "BP|Give Claude a check to run",
+            "RA|Layer by layer (bug review)"
+          ]
+        },
+        {
+          "t": "PR. Put the reproduce command under Testing and the /code-review findings under Review. Then merge and clean up: once you approve, set the decisions file to Close on the branch, squash-merge (or the repo's allowed method), pull the base branch, move the session out of the worktree, remove it, and delete the local and remote branch. The workflow-types skill has the order and the checks, including what to do if the merge fails.",
+          "src": [
+            "CW|Create pull requests",
+            "ME|The command is the reviewer's proof the bug existed and is gone",
+            "ME|A merged branch drops out of the session-start read, so the cleanup needs its own step"
+          ]
+        },
+        "="
+      ],
+      "alts": [
+        {
+          "phase": 1,
+          "if": "It's intermittent, or you can't reproduce it",
+          "then": "Tell Claude so. Don't guess a fix: add logging or get exact steps, then reproduce.",
+          "src": [
+            "CW|Fix bugs efficiently",
+            "ME|A fix you can't reproduce can't be verified"
+          ],
+          "label": "Cannot reproduce"
+        },
+        {
+          "phase": 2,
+          "if": "It's missing behavior, not broken behavior",
+          "then": "It's a feature. Write a spec and switch workflows.",
+          "to": "feature",
+          "src": [
+            "ME|Missing behavior needs a spec, which the bug path skips"
+          ],
+          "label": "Missing behavior"
+        },
+        {
+          "phase": 3,
+          "if": "Two fixes in a row didn't work",
+          "then": "/clear and write a better prompt, or Esc Esc to rewind.",
+          "src": [
+            "BP|Steer the session"
+          ],
+          "label": "Two fixes failed"
+        }
+      ]
+    },
+    {
+      "id": "refactor",
+      "name": "Refactor",
+      "when": "Changing structure without changing behavior.",
+      "basis": {
+        "t": "Common workflows has a refactor recipe. How Claude Code works notes that a refactor may need a lot of verification.",
+        "src": [
+          "CW|Refactor code",
+          "HW|The agentic loop"
+        ]
+      },
+      "cells": [
+        "=",
+        {
+          "t": "Find the code to change, and check that tests cover it. In an unfamiliar repo, use /map first to see what exists.",
+          "src": [
+            "CW|Refactor code",
+            "ME|Without tests there's no proof the behavior stayed the same"
+          ]
+        },
+        {
+          "t": "Split it into small steps you can test one at a time. Use /spec to capture the scope and /plan to write the steps (docs/workflow/<topic>-plan.md).",
+          "src": [
+            "CW|Refactor code"
+          ]
+        },
+        {
+          "t": "One step at a time, keeping the same behavior.",
+          "src": [
+            "CW|Refactor code"
+          ]
+        },
+        {
+          "t": "Run the tests for the refactored code after each step.",
+          "src": [
+            "CW|Refactor code"
+          ]
+        },
+        {
+          "short": "Use /walkthrough to review the diff and prove the tests catch changes; /code-review before the PR.",
+          "t": "Use /walkthrough to review the diff yourself first; then Claude breaks the code to show the tests catch a behavior change. After the branch's last commit, run /code-review on the branch's changes against the base branch before opening the PR: it checks nothing observable changed. Fix or decide on each finding. /simplify for cleanup.",
+          "src": [
+            "BP|Give Claude a check to run",
+            "ME|/simplify is a bundled skill, but none of the pages checked cover it"
+          ]
+        },
+        {
+          "t": "PR that says \"no behavior change\" and how to revert, with the /code-review findings under Review. Then merge and clean up: once you approve, set the decisions file to Close on the branch, squash-merge (or the repo's allowed method), pull the base branch, move the session out of the worktree, remove it, and delete the local and remote branch. The workflow-types skill has the order and the checks, including what to do if the merge fails.",
+          "src": [
+            "CW|Create pull requests",
+            "RA|6\u20137. Flags, gradual release and fast rollback",
+            "ME|A merged branch drops out of the session-start read, so the cleanup needs its own step"
+          ]
+        },
+        "="
+      ],
+      "alts": [
+        {
+          "phase": 1,
+          "if": "The code has no tests",
+          "then": "Add tests first, then refactor.",
+          "to": "tests",
+          "src": [
+            "ME|Tests are the only proof a refactor kept behavior"
+          ],
+          "label": "No tests"
+        },
+        {
+          "phase": 3,
+          "if": "A test has to change what it expects",
+          "then": "That's a behavior change. Split it out as its own bug fix or feature.",
+          "to": "bug",
+          "src": [
+            "ME|A refactor promises the same behavior, so a changed expectation breaks that promise"
+          ],
+          "label": "Expected behavior changes"
+        }
+      ]
+    },
+    {
+      "id": "tests",
+      "name": "Tests & docs",
+      "when": "Adding coverage or documentation without changing behavior.",
+      "basis": {
+        "t": "Common workflows has separate recipes for tests and for documentation, with the same four steps.",
+        "src": [
+          "CW|Work with tests",
+          "CW|Handle documentation"
+        ]
+      },
+      "cells": [
+        "=",
+        {
+          "t": "Find untested functions or undocumented code. In an unfamiliar repo, use /map first to see what exists.",
+          "src": [
+            "CW|Work with tests",
+            "CW|Handle documentation"
+          ]
+        },
+        {
+          "t": "Ask Claude for the edge cases: errors, boundaries, odd input.",
+          "src": [
+            "CW|Work with tests"
+          ]
+        },
+        {
+          "t": "Claude writes tests or docs in the project's existing style.",
+          "src": [
+            "CW|Work with tests",
+            "CW|Handle documentation"
+          ]
+        },
+        {
+          "t": "Run the new tests and fix failures. Check docs against project standards: docs fail by lying.",
+          "src": [
+            "CW|Work with tests",
+            "CW|Handle documentation",
+            "RA|How we make the reviewer better"
+          ]
+        },
+        {
+          "t": "For a larger set of new tests, use /walkthrough first: Claude breaks the code to prove each new test fails when it should. After the branch's last commit, run /code-review on the branch's changes against the base branch before opening the PR, and fix or decide on each finding.",
+          "src": [
+            "BP|Give Claude a check to run"
+          ]
+        },
+        {
+          "t": "PR, with the /code-review findings under Review. Then merge and clean up: once you approve, set the decisions file to Close on the branch, squash-merge (or the repo's allowed method), pull the base branch, move the session out of the worktree, remove it, and delete the local and remote branch. The workflow-types skill has the order and the checks, including what to do if the merge fails.",
+          "src": [
+            "CW|Create pull requests",
+            "ME|A merged branch drops out of the session-start read, so the cleanup needs its own step"
+          ]
+        },
+        "="
+      ],
+      "alts": [
+        {
+          "phase": 4,
+          "if": "A new test fails on the existing code",
+          "then": "You found a bug. Keep the failing test and switch workflows.",
+          "to": "bug",
+          "src": [
+            "ME|A test that fails on unchanged code is a bug report"
+          ],
+          "label": "Test exposes a failure"
+        }
+      ]
+    },
+    {
+      "id": "explore",
+      "name": "Explore / spike",
+      "when": "You don't know enough yet: a repo that's new to you, open unknowns, or \"should we even build this?\"",
+      "basis": {
+        "t": "Common workflows has recipes for understanding a new codebase and for handing research to a subagent.",
+        "src": [
+          "CW|Understand new codebases",
+          "CW|Delegate research to subagents"
+        ]
+      },
+      "cells": [
+        "=",
+        {
+          "t": "In order: an overview, then the architecture, then the data models, then the area you care about. A subagent does the reading. Use @ to include files.",
+          "src": [
+            "CW|Understand new codebases",
+            "CW|Delegate research to subagents",
+            "CW|Reference files and directories"
+          ]
+        },
+        {
+          "t": "Plan mode: Claude explores without editing.",
+          "src": [
+            "HW|Control what Claude can do"
+          ]
+        },
+        null,
+        {
+          "t": "Check answers against the code: ask for file and line as evidence.",
+          "src": [
+            "RA|How we make the reviewer better",
+            "ME|The same evidence rule the reviewer uses"
+          ]
+        },
+        null,
+        {
+          "t": "An explainer, a spec, or a decision record.",
+          "src": [
+            "RA|Sharing context across the team",
+            "BP|Brainstorm with Claude first",
+            "VS|Decision records in _system/decisions"
+          ]
+        },
+        "="
+      ],
+      "alts": [
+        {
+          "phase": 6,
+          "if": "The repo isn't set up for Claude",
+          "then": "No CLAUDE.md, no deny rules or no known check command? Add deny rules for secrets, then join New project at Verify for the Claude-ready baseline.",
+          "to": "newproject",
+          "src": [
+            "MM|Set up a project CLAUDE.md",
+            "BP|Give Claude a check to run",
+            "ME|The baseline is written once, in the New project row, so other rows route to it"
+          ],
+          "label": "Claude setup missing"
+        },
+        {
+          "phase": 6,
+          "if": "The answer is \"build it\"",
+          "then": "Write the spec and build it in a fresh Feature session.",
+          "to": "feature",
+          "src": [
+            "BP|Brainstorm with Claude first"
+          ],
+          "label": "Build it"
+        },
+        {
+          "phase": 6,
+          "if": "The answer is \"don't\"",
+          "then": "Record the decision and stop.",
+          "src": [
+            "VS|Decision records",
+            "ME|A recorded \"no\" stops the same question coming back"
+          ],
+          "label": "Stop here"
+        }
+      ]
+    },
+    {
+      "id": "hotfix",
+      "name": "Hotfix / incident",
+      "when": "Something is broken for users right now.",
+      "basis": {
+        "t": "The docs have no incident recipe. This row follows the review article's after-the-merge practice. The order of the steps is my design.",
+        "src": [
+          "RA|6\u20137. Flags, gradual release and fast rollback",
+          "ME|No docs page covers incidents"
+        ]
+      },
+      "cells": [
+        {
+          "t": "Launch in the repo. Name the session for the incident.",
+          "src": [
+            "BP|Steer the session"
+          ]
+        },
+        {
+          "t": "Find the change that broke it: recent merges and flags.",
+          "src": [
+            "ME|A flag or revert only helps once you know which change to undo"
+          ]
+        },
+        {
+          "t": "Decide: turn the flag off or roll back first, or fix forward.",
+          "src": [
+            "RA|6\u20137. Flags, gradual release and fast rollback"
+          ]
+        },
+        {
+          "t": "Flip the flag, revert, or make the smallest fix.",
+          "src": [
+            "RA|6\u20137. Flags, gradual release and fast rollback"
+          ]
+        },
+        {
+          "t": "Confirm the symptom is gone.",
+          "src": [
+            "HW|The agentic loop (verify results)"
+          ]
+        },
+        {
+          "t": "After the branch's last commit, run /code-review on the branch's changes against the base branch before opening the PR, and fix or decide on each finding. It does not replace approval: a person approves. Some paths always need one, and a bot's approval never counts as a person's.",
+          "src": [
+            "RA|5. Human approval, scaled by risk"
+          ]
+        },
+        {
+          "t": "Ship it, with the /code-review findings under Review in the PR. Merge and clean up: once you approve, set the decisions file to Close on the branch, squash-merge (or the repo's allowed method), pull the base branch, move the session out of the worktree, remove it, and delete the local and remote branch. The workflow-types skill has the order and the checks, including what to do if the merge fails. Then open a Bug fix for the real cause.",
+          "src": [
+            "ME|The quick fix stops the harm; the bug fix removes the cause",
+            "ME|A merged branch drops out of the session-start read, so the cleanup needs its own step"
+          ]
+        },
+        {
+          "t": "Turn the incident into a check. The team makes every past incident an eval case.",
+          "src": [
+            "RA|How we make the reviewer better",
+            "EX|Build your setup over time (a repeated mistake is a CLAUDE.md edit)"
+          ]
+        }
+      ],
+      "alts": [
+        {
+          "phase": 2,
+          "if": "A rollback is possible",
+          "then": "Roll back first. Fix the cause calmly afterwards in a Bug fix.",
+          "to": "bug",
+          "src": [
+            "RA|6\u20137. Flags, gradual release and fast rollback"
+          ],
+          "label": "Rollback possible"
+        },
+        {
+          "phase": 7,
+          "if": "A check would have caught it",
+          "then": "Add it: a CLAUDE.md line, a reviewer checklist item, a hook or a test.",
+          "to": "setup",
+          "src": [
+            "EX|Build your setup over time",
+            "RA|How we make the reviewer better"
+          ],
+          "label": "Add a preventive check"
+        }
+      ]
+    },
+    {
+      "id": "migration",
+      "name": "Large migration",
+      "when": "The same kind of change across many files.",
+      "basis": {
+        "t": "Best practices covers this directly: /batch for one big mechanical change, and try a few files before the rest.",
+        "src": [
+          "BP|Run sessions in parallel",
+          "BP|Run Claude from a script"
+        ]
+      },
+      "cells": [
+        "=",
+        {
+          "t": "Find every place affected. Broad searches go to the built-in Explore agent. Use /map first so the components and connections are written down.",
+          "src": [
+            "BP|Know what subagents cost"
+          ]
+        },
+        {
+          "t": "Try the change on about three files, fix the prompt, then do the rest. Use /spec and /plan to record the pattern and the units, with the parallel units marked.",
+          "src": [
+            "BP|Run Claude from a script"
+          ]
+        },
+        {
+          "t": "/batch splits the work into 5 to 30 units, each in its own worktree.",
+          "src": [
+            "BP|Run sessions in parallel"
+          ]
+        },
+        {
+          "t": "Tests per unit. A dynamic workflow can have a second set of agents cross-check results.",
+          "src": [
+            "EX|Compare similar features (Subagent vs Dynamic workflow)"
+          ]
+        },
+        {
+          "t": "Review the pattern once, then spot-check units. Use /walkthrough to review the pattern, and ask for /map to be updated if components or connections moved. Before each unit's PR opens, run /code-review on that unit's branch against the base branch, and fix or decide on each finding.",
+          "src": [
+            "RA|Match review effort to risk",
+            "ME|Every unit follows the approved pattern, so review effort goes there"
+          ]
+        },
+        {
+          "t": "Each unit opens its own PR, with its /code-review findings under Review. Then merge and clean up: once you approve, set the decisions file to Close on the branch (only on the last unit's PR; earlier units leave it at Ship), squash-merge (or the repo's allowed method), pull the base branch, move the session out of the worktree, remove it, and delete the local and remote branch. The workflow-types skill has the order and the checks, including what to do if the merge fails.",
+          "src": [
+            "BP|Run sessions in parallel",
+            "ME|A merged branch drops out of the session-start read, so the cleanup needs its own step"
+          ]
+        },
+        "="
+      ],
+      "alts": [
+        {
+          "phase": 2,
+          "if": "The sample doesn't work",
+          "then": "Fix the prompt or pattern before scaling it up.",
+          "src": [
+            "BP|Run Claude from a script"
+          ],
+          "label": "Sample failed"
+        },
+        {
+          "phase": 3,
+          "if": "Units start editing the same files",
+          "then": "One worktree per unit, so edits can't collide.",
+          "src": [
+            "CW|Run parallel sessions with worktrees"
+          ],
+          "label": "File boundaries overlap"
+        }
+      ]
+    },
+    {
+      "id": "setup",
+      "name": "Improve your setup",
+      "when": "Claude repeats a mistake, or you repeat yourself.",
+      "basis": {
+        "t": "Extend Claude Code lists a trigger for each feature, and says a repeated mistake is a file edit, not another correction in chat.",
+        "src": [
+          "EX|Build your setup over time"
+        ]
+      },
+      "cells": [
+        {
+          "t": "Spot the trigger: wrong twice, the same prompt again, or \"must happen every time\".",
+          "src": [
+            "EX|Build your setup over time"
+          ]
+        },
+        {
+          "t": "Pick the layer: CLAUDE.md, a rule, a skill, a hook or a subagent.",
+          "src": [
+            "EX|Match features to your goal"
+          ]
+        },
+        {
+          "t": "Write only what Claude can't find by reading the repo.",
+          "src": [
+            "BP|Tell Claude what it can't see"
+          ]
+        },
+        {
+          "t": "Edit the md file, or write the hook or skill.",
+          "src": [
+            "EX|Build your setup over time"
+          ]
+        },
+        {
+          "t": "CLAUDE.md edits apply after /clear, /compact or a restart. Then retry the task.",
+          "src": [
+            "PC|Editing CLAUDE.md mid-session"
+          ]
+        },
+        {
+          "t": "Keep CLAUDE.md under 200 lines. /doctor suggests cuts.",
+          "src": [
+            "EX|Context cost by feature",
+            "BP|Keep CLAUDE.md short"
+          ]
+        },
+        {
+          "t": "Commit it. Committed settings and hooks apply to everyone in the repo. If it goes through a PR, merge and clean up as in Feature: once you approve, set the decisions file to Close on the branch, squash-merge (or the repo's allowed method), pull the base branch, move the session out of the worktree, remove it, and delete the local and remote branch. The workflow-types skill has the order and the checks, including what to do if the merge fails.",
+          "src": [
+            "BP|Choose who a rule applies to"
+          ]
+        },
+        "="
+      ],
+      "alts": [
+        {
+          "phase": 1,
+          "if": "It must never happen",
+          "then": "Use a hook or a deny rule. A line in an md file is only a request.",
+          "src": [
+            "BP|Enforce the rules that can't have exceptions",
+            "EX|Compare similar features (Hook vs Skill)"
+          ],
+          "label": "Must always be blocked"
+        },
+        {
+          "phase": 4,
+          "if": "The edit didn't seem to apply",
+          "then": "CLAUDE.md is read once at session start. Run /clear or start a new session.",
+          "src": [
+            "PC|Editing CLAUDE.md mid-session"
+          ],
+          "label": "Edit did not apply"
+        }
+      ]
+    }
+  ],
+  "anywhere": [
+    {
+      "if": "Context fills up mid-task",
+      "then": "Run /compact with a focus, or keep a Compact Instructions section in CLAUDE.md. Then re-read the region CLAUDE.md and newest handoff.",
+      "src": [
+        "HW|When context fills up",
+        "VS|Your Compact Instructions action item"
+      ]
+    },
+    {
+      "if": "Claude heads the wrong way",
+      "then": "Press Esc to stop and redirect, or Esc Esc to rewind to an earlier point.",
+      "src": [
+        "HW|Interrupt and steer",
+        "BP|Steer the session"
+      ]
+    },
+    {
+      "if": "Two corrections didn't fix it",
+      "then": "Run /clear and write a better prompt instead of a third correction.",
+      "src": [
+        "BP|Steer the session"
+      ]
+    },
+    {
+      "if": "The area is risky (Human-led region)",
+      "then": "A person approves, whatever the workflow. A bot's approval never counts as a person's.",
+      "src": [
+        "RA|5. Human approval, scaled by risk",
+        "VS|Human-led tier"
+      ]
+    },
+    {
+      "if": "You need two things done at once",
+      "then": "Give each its own session in its own worktree so the edits can't collide.",
+      "src": [
+        "CW|Run parallel sessions with worktrees",
+        "BP|Run sessions in parallel"
+      ]
+    },
+    {
+      "if": "A different request comes up mid-task",
+      "then": "Give it its own session, or /clear first. Otherwise every later turn pays for the unrelated history.",
+      "src": [
+        "BP|Keep cost and context down"
+      ]
+    },
+    {
+      "if": "It will run without you watching",
+      "then": "Answer five questions first: what done looks like, how it checks itself, what it can touch, what stops it, and who signs off.",
+      "src": [
+        "BP|Let Claude run without you"
+      ]
+    },
+    {
+      "if": "A built-in skill misses something",
+      "then": "Then write a custom skill for what only your team knows.",
+      "src": [
+        "BP|Put team procedures in skills",
+        "ME|Built-ins first means less to maintain (from the starter-guide comparison)"
+      ]
+    }
+  ],
+  "shipProcess": {
+    "rows": [
+      "feature",
+      "bug",
+      "refactor",
+      "tests",
+      "hotfix",
+      "migration"
+    ],
+    "q": "If a check fails or a reviewer comments",
+    "steps": [
+      {
+        "t": "Notice it on the PR: a failing check, a merge conflict or a review comment."
+      },
+      {
+        "t": "Read the failing check's log, not just its red status."
+      },
+      {
+        "t": "Classify it.",
+        "sub": [
+          "Code failure: a test, lint or type check fails on your change.",
+          "Setup failure: something outside the code is missing, such as an app, secret or permission.",
+          "Flaky: it passes on a rerun, or fails on code you didn't touch."
+        ]
+      },
+      {
+        "t": "Decide where it goes.",
+        "sub": [
+          "Code failure: back to Change. If the approach was wrong, back to Plan; if the requirement was wrong, back to Understand.",
+          "Setup failure: fix the configuration here. No route change.",
+          "Flaky: rerun and note it."
+        ]
+      },
+      {
+        "t": "Fix with a check: have Claude fix it, run the check, and push."
+      },
+      {
+        "t": "If two corrections don't fix it, run /clear and write a better prompt."
+      },
+      {
+        "t": "If it keeps happening (flaky CI, many comments, a long-lived PR), consider Auto-fix. It watches the PR and wakes Claude on failing CI, merge conflicts and review comments so it can investigate and push fixes. It is off by default. Skip it on small docs-only PRs."
+      }
+    ],
+    "src": [
+      "BP|Give Claude a check to run",
+      "BP|Steer the session",
+      "DT|Monitor pull request status",
+      "ME|Assembled from these pages: the docs give the pieces, not one PR-failure process"
+    ]
+  },
+  "gitStatus": {
+    "q": "Check git state: git status -sb",
+    "phases": {
+      "Start": [
+        "Run `git status -sb` to see the branch, whether you are ahead of or behind the remote copy, and any uncommitted files.",
+        "If you are behind, pull before building."
+      ],
+      "Ship": [
+        "Run `git status -sb` before committing, to check which files go in.",
+        "Run it again after pushing or merging: nothing should be ahead or behind, and local main is back in sync."
+      ],
+      "Close": [
+        "Run `git status -sb` before a handoff, to check for uncommitted or unpushed work."
+      ]
+    },
+    "fetch": "Ahead and behind compare against your last fetch, so run `git fetch` first for a current answer.",
+    "readIn": "Start",
+    "read": [
+      "`## main...origin/main` means you are on `main`, compared against its remote bookmark: your clone's last-known copy of GitHub's main.",
+      "`[ahead 2]` means 2 local commits have not been pushed.",
+      "`[behind 3]` means GitHub has 3 commits you don't have, so run `git pull`.",
+      "Lines starting with `M` or `??` below the header are changed or untracked files. A clean tree prints no such lines."
+    ]
+  }
+}
+</script>
+
+<script>
+(function () {
+  "use strict";
+  var data = JSON.parse(document.getElementById("map-data").textContent);
+  var phases = data.phases;
+  var guidance = [["Start", "Establish the task and starting state.", "Check the request, branch, uncommitted work, and relevant notes.", "We have the right task and a known starting point.", "A clear request and an accurate working state.", "Resolve conflicting state or unclear scope before editing."], ["Understand", "Establish current behavior, expected behavior, and important unknowns.", "Trace relevant code and show a concrete current-versus-expected example. For a bug, reproduce it.", "I can explain the problem and recognize a correct result.", "An example supported by code or observed behavior; assumptions clearly marked.", "Stay here to investigate or ask about the expected behavior."], ["Plan", "Choose an approach that fits the requirement and the repo.", "Separate Required, Already established, and Proposed choice. Identify affected files, risks, and checks.", "I understand the approach and the choices I am approving.", "An agreed approach and a way to check the result. A short conversation can be enough.", "Missing facts \u2192 Understand. Unsuitable approach \u2192 revise Plan."], ["Change", "Implement the agreed approach within scope.", "Make the change and relevant tests. For bugs, establish a failing regression test before the fix where possible. Surface unexpected choices.", "The agreed change is ready to verify.", "A scoped implementation, with new findings made explicit.", "Implementation mistake \u2192 stay here. New approach needed \u2192 Plan. Misunderstood behavior \u2192 Understand."], ["Verify", "Check behavior against the requirement.", "Run relevant checks and show actual results. For a bug, show that the test detects the defect and passes with the fix.", "The evidence supports the expected behavior, and I know its limits.", "Meaningful test results, reproduction output, or other checks appropriate to the task.", "Inspect the failure: code error \u2192 Change; flawed approach \u2192 Plan; wrong requirement \u2192 Understand. Environment failures need diagnosis before judging the code."], ["Review", "Judge whether the change is sound and understood.", "Explain the diff, connect assertions to the promises they check, and surface risks or omissions.", "I can explain the cause, solution, choices, and what the evidence does and does not prove.", "Your own explanation supported by the diff and checks; unresolved concerns addressed or recorded.", "Explanation gap \u2192 inspect that part. Missing evidence \u2192 Verify. Code concern \u2192 Change or Plan. This does not automatically restart the task."], ["Ship", "Deliver the work in the required form.", "Prepare the appropriate commit, PR, or submission with verification evidence and limitations.", "The recipient can assess the change and its remaining risks.", "The required deliverable and applicable checks or approvals.", "Delivery issue \u2192 resolve here. Feedback \u2192 revisit the phase affected."], ["Close", "Leave an accurate stopping point.", "Summarize what is complete and what remains. Write a handoff when continuation needs it.", "The stopping point and any follow-up work are clear.", "An accurate outcome; continuation details when needed.", "Clarify unfinished work rather than describing it as complete."]];
+  var SRC = data.sources;
+  var KIND_ORDER = ["docs", "article", "setup", "mine"];
+  var KIND_LABEL = { docs: "Claude Code docs", article: "Review article", setup: "Your setup", mine: "Design choice" };
+  var byId = {};
+  data.workflows.forEach(function (w) { byId[w.id] = w; });
+  var map = document.getElementById("map");
+  var panel = document.getElementById("panel");
+  var selected = null;
+  var rowEls = {};
+  var altEls = [];
+
+  function div(cls, text) {
+    var d = document.createElement("div");
+    if (cls) d.className = cls;
+    if (text !== undefined) d.textContent = text;
+    return d;
+  }
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined) e.textContent = text;
+    return e;
+  }
+  function parse(s) {
+    var i = s.indexOf("|");
+    return { key: i < 0 ? s : s.slice(0, i), sec: i < 0 ? "" : s.slice(i + 1) };
+  }
+  function abbr(key) { return key === "ME" ? "Mine" : key === "VS" ? "Setup" : key; }
+
+  // Chips: one per source key, in docs > article > setup > mine order
+  function chips(list) {
+    var box = div("srcs");
+    var seen = {};
+    (list || []).map(parse)
+      .filter(function (p) { if (seen[p.key]) return false; seen[p.key] = true; return !!SRC[p.key]; })
+      .sort(function (a, b) { return KIND_ORDER.indexOf(SRC[a.key].kind) - KIND_ORDER.indexOf(SRC[b.key].kind); })
+      .forEach(function (p) {
+        var c = el("span", "chip k-" + SRC[p.key].kind, abbr(p.key));
+        c.setAttribute("aria-label", SRC[p.key].name);
+        box.appendChild(c);
+      });
+    return box;
+  }
+  // Full citation lines for the panel
+  function cites(list) {
+    var box = div("cite");
+    (list || []).forEach(function (s) {
+      var p = parse(s); var src = SRC[p.key]; if (!src) return;
+      var row = div("row");
+      row.appendChild(chips([s]));
+      var txt = el("span", "txt");
+      if (src.kind === "mine") {
+        txt.className = "txt why"; txt.textContent = "Design choice: " + p.sec;
+      } else if (src.kind === "setup") {
+        txt.textContent = "Your setup: " + p.sec;
+      } else if (src.url) {
+        var a = el("a", "", src.name); a.href = src.url; a.target = "_blank"; a.rel = "noopener";
+        txt.appendChild(a);
+        if (p.sec) txt.appendChild(document.createTextNode(" § " + p.sec));
+      } else {
+        txt.textContent = (src.short || src.name) + (p.sec ? " § " + p.sec : "");
+      }
+      row.appendChild(txt);
+      box.appendChild(row);
+    });
+    return box;
+  }
+  function cellOf(w, j) {
+    var c = w.cells[j];
+    if (c === "=") { var s = data.shared[phases[j]]; return { cls: "shared", text: s.t, src: s.src }; }
+    if (c === null) return { cls: "skip", text: "Skipped", src: null };
+    return { cls: "", text: c.t, short: c.short, src: c.src };
+  }
+  function ifText(s) { return "If " + s.charAt(0).toLowerCase() + s.slice(1); }
+
+  // ---------- Grid ----------
+  map.appendChild(div("corner", "Workflow ↓  Phase →"));
+  phases.forEach(function (p, j) {
+    var h = div("phase");
+    var t = div("");
+    var n = el("span", "n", String(j + 1));
+    t.appendChild(n); t.appendChild(document.createTextNode(p));
+    h.appendChild(t);
+
+    map.appendChild(h);
+  });
+
+  data.hooks.cells.forEach(function(c,j){if(!c)return;var box=document.getElementById('setup-details');box.appendChild(el('h3','',phases[j]));box.appendChild(el('p','',c.t));box.appendChild(cites(c.src));});
+
+  data.groups.forEach(function (g) {
+    var gr = div("group"); gr.appendChild(el("span", "", g.name));
+    map.appendChild(gr);
+    g.ids.forEach(function (id) {
+      var w = byId[id];
+      var els = [];
+      var head = div("rowhead r");
+      var btn = el("button", "wf-name", w.name);
+      btn.type = "button";
+      btn.setAttribute("aria-controls", "panel");
+      btn.addEventListener("click", function () {
+        select({ type: "wf", id: id });
+        if (selected) {
+          panel.scrollIntoView({ block: "start", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+          panel.focus({ preventScroll: true });
+        }
+      });
+      head.appendChild(btn);
+      head.appendChild(div("wf-when", w.when));
+
+      map.appendChild(head); els.push(head);
+
+      phases.forEach(function (p, j) {
+        var ct = cellOf(w, j);
+        var d = div("cell r " + ct.cls);
+        var action = ct.short || ct.text.split(/(?<=[.!?])\s+/)[0]; // short: optional summary for the grid; the full text stays in the details panel
+        var open = el('button','cell-open',action); open.type='button';
+        open.setAttribute('aria-label',w.name+' · '+p+' details');
+        open.onclick=function(){select({type:'cell',id:id,i:j});panel.scrollIntoView({block:'nearest',behavior:'smooth'});};
+        d.appendChild(open);
+        if(ct.cls!=='skip')d.appendChild(div('checkpoint','Checkpoint: '+guidance[j][3]));
+        (w.alts || []).forEach(function (a, i) {
+          if (a.phase !== j) return;
+          var b = el("button", "alt", ifText(a.if));
+          b.type = "button";
+          b.addEventListener("click", function () { select({ type: "alt", id: id, i: i }); if(selected) { panel.scrollIntoView({block:"start",behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"}); panel.focus({preventScroll:true}); } });
+          b.textContent="Route: " + a.label; b.title=ifText(a.if); b.setAttribute("aria-label", "Route: " + a.label + ". " + ifText(a.if)); b.setAttribute("aria-controls", "panel"); d.appendChild(b);
+          altEls.push({ id: id, i: i, el: b });
+        });
+        map.appendChild(d); els.push(d);
+      });
+      rowEls[id] = els;
+    });
+  });
+
+  // ---------- Anywhere ----------
+  var any = document.getElementById("anywhere");
+  data.anywhere.forEach(function (a) {
+    var c = div("card");
+    c.appendChild(div("if", ifText(a.if)));
+    c.appendChild(div("", a.then));
+    c.appendChild(cites(a.src));
+    any.appendChild(c);
+  });
+
+  // Ship failure process: one collapsible numbered list, shown in the Ship cell
+  // details of rows whose Ship cell is the PR step. Steps may carry sub-bullets.
+  function shipProcess() {
+    var x = data.shipProcess;
+    var d = el("details", "q");
+    d.appendChild(el("summary", "", x.q));
+    var body = div("qbody");
+    var ol = el("ol", "");
+    x.steps.forEach(function (st) {
+      var li = el("li", "", st.t);
+      if (st.sub) {
+        var ul = el("ul", "");
+        st.sub.forEach(function (t) { ul.appendChild(el("li", "", t)); });
+        li.appendChild(ul);
+      }
+      ol.appendChild(li);
+    });
+    body.appendChild(ol);
+    body.appendChild(cites(x.src));
+    d.appendChild(body);
+    return d;
+  }
+
+  // Git state check: one collapsible shown in the Start, Ship and Close cell details.
+  // The "How to read it" block appears once (Start); the other phases point back to it.
+  // Backticks in the data text become <code>.
+  function rich(tag, text) {
+    var n = el(tag, "");
+    text.split("`").forEach(function (part, i) {
+      n.appendChild(i % 2 ? el("code", "", part) : document.createTextNode(part));
+    });
+    return n;
+  }
+  function gitStatus(phase) {
+    var g = data.gitStatus;
+    var d = el("details", "q");
+    d.appendChild(el("summary", "", g.q));
+    var body = div("qbody");
+    var ul = el("ul", "");
+    g.phases[phase].forEach(function (t) { ul.appendChild(rich("li", t)); });
+    body.appendChild(ul);
+    body.appendChild(rich("p", g.fetch));
+    if (phase === g.readIn) {
+      body.appendChild(el("h4", "", "How to read it"));
+      var rl = el("ul", "");
+      g.read.forEach(function (t) { rl.appendChild(rich("li", t)); });
+      body.appendChild(rl);
+    } else {
+      body.appendChild(rich("p", "How to read the output: see the " + g.readIn + " details."));
+    }
+    d.appendChild(body);
+    return d;
+  }
+
+  // ---------- Source list ----------
+  var sl = document.getElementById("srclist");
+  Object.keys(SRC).forEach(function (k) {
+    var s = SRC[k];
+    var li = el("li");
+    li.appendChild(chips([k]));
+    var body = el("span");
+    if (s.url) {
+      var a = el("a", "", s.name); a.href = s.url; a.target = "_blank"; a.rel = "noopener";
+      body.appendChild(a);
+      body.appendChild(document.createTextNode(" · " + s.url.replace("https://", "")));
+    } else {
+      body.appendChild(document.createTextNode(s.name + (s.note ? ". " + s.note : "")));
+    }
+    li.appendChild(body);
+    sl.appendChild(li);
+  });
+
+  // ---------- Selection + panel ----------
+  function sameSel(a, b) { return a && b && a.type === b.type && a.id === b.id && a.i === b.i; }
+  function select(sel) { selected = sameSel(selected, sel) ? null : sel; render(); }
+  function switchBtn(to) {
+    var b = el("button", "switch", "Switch to " + byId[to].name + " →");
+    b.type = "button";
+    b.addEventListener("click", function () {
+      selected = { type: "wf", id: to };
+      render();
+      var head = rowEls[to] && rowEls[to][0];
+      if (head && head.scrollIntoView) head.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "smooth" });
+    });
+    return b;
+  }
+  function clearBtn() {
+    var b = el("button", "clear", "Deselect");
+    b.type = "button";
+    b.addEventListener("click", function () { selected = null; render(); });
+    return b;
+  }
+
+  function render() {
+    var focusId = selected ? selected.id : null;
+    map.classList.toggle("focus", !!focusId);
+    Object.keys(rowEls).forEach(function (id) {
+      rowEls[id].forEach(function (e) { e.classList.toggle("on", id === focusId); });
+    });
+    altEls.forEach(function (a) {
+      a.el.classList.toggle("on", !!selected && selected.type === "alt" && selected.id === a.id && selected.i === a.i);
+    });
+
+    while (panel.firstChild) panel.removeChild(panel.firstChild);
+    panel.classList.toggle("viewing", !!selected);
+
+    if (!selected) {
+      panel.appendChild(el("span", "label", "Details"));
+      panel.appendChild(el("p", "hint", "Click a cell for full details, a workflow name for the whole row, or an amber marker for an alternative route. Press Esc to deselect."));
+      return;
+    }
+    var w = byId[selected.id];
+    if (selected.type === "cell") {
+      var j=selected.i, ct=cellOf(w,j), g=guidance[j];
+      panel.appendChild(el('h2','',w.name+' · '+phases[j]));
+      panel.appendChild(el('p','hint','Row content awaiting review. Checkpoints below are shared draft guidance.'));
+      [['Claude’s actions',ct.text],['Your checkpoint',ct.cls==='skip'?'This phase is currently marked skipped; confirm during row review.':g[3]],['Output / evidence',ct.cls==='skip'?'None specified.':g[4]],['Return points',g[5]]].forEach(function(pair){panel.appendChild(el('h3','',pair[0]));panel.appendChild(el('p','',pair[1]));});
+      (w.alts||[]).filter(function(a){return a.phase===j;}).forEach(function(a){panel.appendChild(el('p','',ifText(a.if)+': '+a.then));panel.appendChild(cites(a.src));if(a.to)panel.appendChild(switchBtn(a.to));});
+      if(data.gitStatus.phases[phases[j]]&&ct.cls!=='skip')panel.appendChild(gitStatus(phases[j]));
+      if(j===6&&data.shipProcess.rows.indexOf(w.id)>-1)panel.appendChild(shipProcess());
+      var sources=el('details');sources.appendChild(el('summary','','Sources for original action'));sources.appendChild(cites(ct.src));panel.appendChild(sources);
+      if(w.id==='bug') { var example=document.createElement('div');example.innerHTML="<details><summary><strong>Bug fix example: connect code to tests</strong></summary>\n<p><strong>Understand:</strong> 1,000 cents split three ways produced [333, 333, 333], totaling 999. Integer division discarded the remainder.</p>\n<p><strong>Required:</strong> preserve the total. <strong>Already established:</strong> the sandbox uses whole cents. <strong>Proposed choices:</strong> keep shares as even as possible, and assign leftover cents to the first people. Confirm these policies rather than silently assuming them.</p>\n<pre class=\"guide-example\">1,000 cents \u00f7 3 people\n        \u2193 divmod(1000, 3)\nbase share = 333     remainder = 1\n        \u2193 distribute the remainder\n[334, 333, 333]\n        \u251c\u2500 sum == 1000 \u2192 checks that no money is lost\n        \u2514\u2500 exact list \u2192 checks the chosen allocation policy</pre>\n<p>[333, 333, 334] preserves the total but uses a different allocation policy. A failed assertion needs interpretation: which promise was broken?</p>\n<p><strong>Regression evidence:</strong> the same meaningful test fails with the old logic and passes with the fix. This shows it detects the original defect; keeping and running it helps catch recurrence. It does not guarantee the bug can never return.</p>\n<p><strong>Scope:</strong> unrelated findings can become follow-up work. Decide whether they undermine this fix before expanding the task.</p>\n<p><strong>Tools:</strong> /map describes a repository\u2019s structure; this close examination of a function and its tests belongs in Review. /spec and /plan can record complex decisions; /walkthrough supports your understanding; /handoff supports continuation.</p>\n</details>";panel.appendChild(example); }
+    } else if (selected.type === "wf") {
+      panel.appendChild(el("span", "label", "Workflow"));
+      panel.appendChild(el("h2", "", w.name));
+      panel.appendChild(el("p", "", "Use when: " + w.when));
+      var basis = div("basis");
+      basis.appendChild(el("span", "label", "Why this workflow exists"));
+      basis.appendChild(el("p", "", w.basis.t));
+      basis.appendChild(cites(w.basis.src));
+      panel.appendChild(basis);
+      var ol = el("ol", "steps");
+      phases.forEach(function (p, j) {
+        var li = el("li");
+        li.appendChild(el("span", "ph", p));
+        var ct = cellOf(w, j);
+        var body = div("body");
+        body.appendChild(el("span", ct.cls === "skip" ? "hint" : "", ct.cls === "shared" ? ct.text + " (shared)" : ct.text));
+        if (ct.src) body.appendChild(cites(ct.src));
+        li.appendChild(body);
+        ol.appendChild(li);
+      });
+      panel.appendChild(ol);
+      if (w.alts && w.alts.length) {
+        panel.appendChild(el("span", "label", "Alternative routes"));
+        var box = div("alts");
+        w.alts.forEach(function (a) {
+          var r = div("alt-row");
+          r.appendChild(el("span", "if", phases[a.phase] + " · " + ifText(a.if)));
+          r.appendChild(el("span", "", a.then));
+          r.appendChild(cites(a.src));
+          if (a.to) r.appendChild(switchBtn(a.to));
+          box.appendChild(r);
+        });
+        panel.appendChild(box);
+      }
+    } else {
+      var a = w.alts[selected.i];
+      panel.appendChild(el("span", "label", "Alternative route · " + w.name + " · " + phases[a.phase]));
+      panel.appendChild(el("h2", "", ifText(a.if)));
+      panel.appendChild(el("p", "", a.then));
+      if (a.questions) panel.appendChild(shipQuestions());
+      panel.appendChild(cites(a.src));
+      if (a.to) panel.appendChild(switchBtn(a.to));
+    }
+    panel.appendChild(clearBtn());
+  }
+
+  // Click-away dismissal supplements the explicit control and Escape.
+  // Ignore controls and text-selection gestures so reading/copying stays usable.
+  var dismissPointer = null;
+  document.addEventListener("pointerdown", function (e) {
+    dismissPointer = { x: e.clientX, y: e.clientY };
+  }, true);
+  document.addEventListener("click", function (e) {
+    if (!selected || e.defaultPrevented || e.button !== 0) return;
+    if (e.target.closest('a, button, input, select, textarea, label, summary, [role="button"], [role="link"], [contenteditable="true"]')) return;
+    if (dismissPointer && Math.hypot(e.clientX - dismissPointer.x, e.clientY - dismissPointer.y) > 5) return;
+    var textSelection = window.getSelection();
+    if (textSelection && !textSelection.isCollapsed) return;
+    selected = null;
+    render();
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && selected) { selected = null; render(); }
+  });
+
+  render();
+})();
+</script>
+
+<script>
+(function(){
+const guidance=[["Start", "Establish the task and starting state.", "Check the request, branch, uncommitted work, and relevant notes.", "We have the right task and a known starting point.", "A clear request and an accurate working state.", "Resolve conflicting state or unclear scope before editing."], ["Understand", "Establish current behavior, expected behavior, and important unknowns.", "Trace relevant code and show a concrete current-versus-expected example. For a bug, reproduce it.", "I can explain the problem and recognize a correct result.", "An example supported by code or observed behavior; assumptions clearly marked.", "Stay here to investigate or ask about the expected behavior."], ["Plan", "Choose an approach that fits the requirement and the repo.", "Separate Required, Already established, and Proposed choice. Identify affected files, risks, and checks.", "I understand the approach and the choices I am approving.", "An agreed approach and a way to check the result. A short conversation can be enough.", "Missing facts \u2192 Understand. Unsuitable approach \u2192 revise Plan."], ["Change", "Implement the agreed approach within scope.", "Make the change and relevant tests. For bugs, establish a failing regression test before the fix where possible. Surface unexpected choices.", "The agreed change is ready to verify.", "A scoped implementation, with new findings made explicit.", "Implementation mistake \u2192 stay here. New approach needed \u2192 Plan. Misunderstood behavior \u2192 Understand."], ["Verify", "Check behavior against the requirement.", "Run relevant checks and show actual results. For a bug, show that the test detects the defect and passes with the fix.", "The evidence supports the expected behavior, and I know its limits.", "Meaningful test results, reproduction output, or other checks appropriate to the task.", "Inspect the failure: code error \u2192 Change; flawed approach \u2192 Plan; wrong requirement \u2192 Understand. Environment failures need diagnosis before judging the code."], ["Review", "Judge whether the change is sound and understood.", "Explain the diff, connect assertions to the promises they check, and surface risks or omissions.", "I can explain the cause, solution, choices, and what the evidence does and does not prove.", "Your own explanation supported by the diff and checks; unresolved concerns addressed or recorded.", "Explanation gap \u2192 inspect that part. Missing evidence \u2192 Verify. Code concern \u2192 Change or Plan. This does not automatically restart the task."], ["Ship", "Deliver the work in the required form.", "Prepare the appropriate commit, PR, or submission with verification evidence and limitations.", "The recipient can assess the change and its remaining risks.", "The required deliverable and applicable checks or approvals.", "Delivery issue \u2192 resolve here. Feedback \u2192 revisit the phase affected."], ["Close", "Leave an accurate stopping point.", "Summarize what is complete and what remains. Write a handoff when continuation needs it.", "The stopping point and any follow-up work are clear.", "An accurate outcome; continuation details when needed.", "Clarify unfinished work rather than describing it as complete."]];
+const nav=document.getElementById('guide-nav');const detail=document.getElementById('guide-detail');
+function show(i,scroll){const g=guidance[i];detail.replaceChildren();const h=document.createElement('h2');h.textContent=(i+1)+'. '+g[0];detail.append(h);const dl=document.createElement('dl');['Why am I here?','What does Claude do?','What do I need to decide or understand?','What evidence lets us move forward?','If stuck, where do we go?'].forEach((label,j)=>{const dt=document.createElement('dt');dt.textContent=label;const dd=document.createElement('dd');dd.textContent=g[j+1];dl.append(dt,dd)});detail.append(dl);nav.querySelectorAll('button').forEach((b,j)=>b.setAttribute('aria-pressed',String(i===j)));if(scroll)detail.parentElement.open=true;if(scroll)detail.scrollIntoView({block:'nearest',behavior:'smooth'});}
+guidance.forEach((g,i)=>{const b=document.createElement('button');b.textContent=g[0];b.type='button';b.onclick=()=>show(i,false);nav.append(b)});
+document.querySelectorAll('#map > .phase').forEach((h,i)=>{h.tabIndex=0;h.setAttribute('role','button');h.setAttribute('aria-label','Explain '+guidance[i][0]);h.onclick=()=>show(i,true);h.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show(i,true)}}});show(1,false);
+})();
+</script>
